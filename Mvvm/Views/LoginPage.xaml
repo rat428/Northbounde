@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Northboundei.Mobile.Mvvm.Views.LoginPage"
+             xmlns:controls="clr-namespace:Northboundei.Mobile.Controls"
+             Title="">
+    <Grid>
+        <VerticalStackLayout Padding="20">
+            <Image
+         Source="logo.png"
+         HeightRequest="185"
+         Aspect="AspectFit"
+         SemanticProperties.Description="Logo" />
+
+            <Label Text="Welcome" HorizontalOptions="Center" TextColor="Black" FontSize="20" FontAttributes="Bold" />
+
+            <Frame CornerRadius="16" Padding="4,2" Margin="4">
+                <Entry  Placeholder="User ID"  Text="{Binding Username}" PlaceholderColor="Gray" >
+                    <Entry.Background>
+                        <SolidColorBrush Color="#00000000"  />
+                    </Entry.Background>
+                </Entry>
+            </Frame>
+
+            <Frame CornerRadius="16" Padding="4,2" Margin="4">
+                <Entry  Placeholder="Password" Text="{Binding Password}" PlaceholderColor="Gray"  >
+                    <Entry.Background>
+                        <SolidColorBrush Color="#00000000"  />
+                    </Entry.Background>
+                </Entry>
+            </Frame>
+
+            <Label Text="Keep me logged in" HorizontalOptions="Start" TextColor="Black"  />
+            <CheckBox IsChecked="{Binding KeepMeLogged}" HorizontalOptions="Start" />
+            <Button Text="Login" Command="{Binding LoginCommand}" Background="#212529" Margin="4"  />
+        </VerticalStackLayout>
+        <ActivityIndicator x:Name="loadingIndicator"
+                           IsRunning="{Binding IsLoading}" 
+                           IsVisible="{Binding IsLoading}"
+                           VerticalOptions="CenterAndExpand" 
+                           HorizontalOptions="CenterAndExpand" />
+    </Grid>
+</ContentPage>
