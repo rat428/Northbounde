@@ -5,6 +5,7 @@ using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
 using Northboundei.Mobile.IServices;
 using Northboundei.Mobile.Mvvm.ViewModels;
+using Northboundei.Mobile.Services;
 using System;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -36,7 +37,7 @@ public partial class SplashScreenPage : ContentPage
 
     private async Task NavigateToMainPage()
     {
- 
+
         if (await CanLogin())
         {
             App.Current.MainPage = _serviceProvider.GetService<AppShell>();
@@ -52,7 +53,22 @@ public partial class SplashScreenPage : ContentPage
 
     public async Task<bool> CanLogin()
     {
+        string? storedDate = await SecureStorage.Default.GetAsync("storedDate");
+        if (storedDate == null || !DateTime.TryParse(storedDate, out DateTime firstDate) || firstDate.Date != DateTime.Today)
+        {
+            await SecureStorage.Default.SetAsync("storedDate", DateTime.Today.ToString("o"));
+            SessionManager.ClearSession();
+          // todo return false;
+        }
+
+
+#if DEBUG
+        return true;
+#endif
         IEnumerable<UserEntity> users = await DatabaseService.GetAllDataAsync<UserEntity>();
+        if (!users.Any())
+            return false;
+
 
         try
         {
@@ -90,7 +106,7 @@ public partial class SplashScreenPage : ContentPage
     private async Task<bool> CheckPermissions()
     {
         _homeViewModel.Settings = new Models.SettingsModel();
-        
+
         _homeViewModel!.Settings.LocationSharingAllowed = await _locationPermissionService.IsLocationPermissionGrantedAsync();
         _homeViewModel.Settings.AirplaneMode = await _locationPermissionService.IsAirplaneModeEnabled();
         _homeViewModel.Settings.GPSOn = await _locationPermissionService.IsGpsEnabled();

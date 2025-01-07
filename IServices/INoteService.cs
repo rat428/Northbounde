@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Northboundei.Mobile.IServices
 {
-    public interface IUserService
+    public interface INoteService
     {
-        Task<LoginResponse> LoginAsync(LoginRequest login);
-        Task<LoginResponse> AuhtAsync(string token);
-        string AuthToken { get; }
+        Task<IEnumerable<SessionNoteResponse>> GetNotesAsync();
     }
 }

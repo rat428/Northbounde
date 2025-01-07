@@ -12,6 +12,7 @@ namespace Northboundei.Mobile.Dto
         public string Warning {  get; set; }  
         public string Error {  get; set; }  
         public string Username {  get; set; }  
+        public string Key {  get; set; }  
         public DateTime ExpirationDate {  get; set; }  
     }
 }

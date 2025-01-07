@@ -17,9 +17,9 @@ namespace Northboundei.Mobile
             InitializeComponent();
             _splashScreen = serviceProvider.GetService<SplashScreenPage>();
             MainPage = _splashScreen;
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF5cXmBCf1FpR2VGfV5ycEVEalhVTnRWUj0eQnxTdEFiW35XcXBRQmJVWUFxXA==");
         }
-
-        protected async override void OnStart()
+         protected async override void OnStart()
         {
             base.OnStart();
             await _splashScreen.OnStart();

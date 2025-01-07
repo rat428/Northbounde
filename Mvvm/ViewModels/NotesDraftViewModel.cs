@@ -20,6 +20,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
         private void OnSaveDraftAction(object obj)
         {
+            
         }
     }
 }

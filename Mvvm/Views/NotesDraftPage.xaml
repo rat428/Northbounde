@@ -4,15 +4,69 @@
              x:Class="Northboundei.Mobile.Mvvm.Views.NotesDraftPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:sections="clr-namespace:Northboundei.Mobile.Mvvm.Views.Sections"
+             xmlns:syncfusion="clr-namespace:Syncfusion.Maui.DataGrid;assembly=Syncfusion.Maui.DataGrid"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              FlyoutItem.IsVisible="True"
              Title="">
     <ScrollView>
         <VerticalStackLayout x:Name="MainPanel" Margin="16">
+            <VerticalStackLayout>
+                <!-- Syncfusion DataGrid -->
+                <syncfusion:SfDataGrid x:Name="RecordsDataGrid"
+                                ItemsSource="{Binding Records}"
+                                AutoGenerateColumnsMode="None"
+                                AllowEditing="True"
+                                GridLinesVisibility="Both"
+                                SelectionMode="Single">
+                    <!-- Service Location Column -->
+                    <syncfusion:SfDataGrid.Columns>
+                        <syncfusion:DataGridTemplateColumn MappingName="ServiceLocation" HeaderText="Service Location">
+                            <syncfusion:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Picker ItemsSource="{Binding DataContext.ServiceLocations, Source={x:Reference RecordsDataGrid}}"
+                                    SelectedItem="{Binding ServiceLocation}" />
+                                </DataTemplate>
+                            </syncfusion:DataGridTemplateColumn.CellTemplate>
+                        </syncfusion:DataGridTemplateColumn>
 
+                        <!-- Other Location Column -->
+                        <syncfusion:DataGridTemplateColumn MappingName="OtherLocation" HeaderText="Other Location">
+                            <syncfusion:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Entry Text="{Binding OtherLocation}" Placeholder="Enter custom location" />
+                                </DataTemplate>
+                            </syncfusion:DataGridTemplateColumn.CellTemplate>
+                        </syncfusion:DataGridTemplateColumn>
+
+                        <!-- Session Details Column -->
+                        <syncfusion:DataGridTemplateColumn MappingName="SessionDetails" HeaderText="Session Details">
+                            <syncfusion:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Entry Text="{Binding SessionDetails}" Placeholder="Enter session details" />
+                                </DataTemplate>
+                            </syncfusion:DataGridTemplateColumn.CellTemplate>
+                        </syncfusion:DataGridTemplateColumn>
+
+                        <!-- Attendance Signature Column -->
+                        <syncfusion:DataGridTemplateColumn MappingName="AttendanceSignature" HeaderText="Signature">
+                            <syncfusion:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Entry Text="{Binding AttendanceSignature}" Placeholder="Enter signature" />
+                                </DataTemplate>
+                            </syncfusion:DataGridTemplateColumn.CellTemplate>
+                        </syncfusion:DataGridTemplateColumn>
+                    </syncfusion:SfDataGrid.Columns>
+                </syncfusion:SfDataGrid>
+
+                <!-- Action Buttons -->
+                <HorizontalStackLayout Margin="0,16">
+                    <Button Text="Save Changes" Command="{Binding SaveChangesCommand}" Margin="4" />
+                    <Button Text="Refresh" Command="{Binding RefreshCommand}" Margin="4" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
             <!--First Section-->
-            <Frame>
+            <Border>
                 <toolkit:Expander IsExpanded="{Binding IsExpanded1Visible,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text=" To replace with section Name" FontSize="20" />
@@ -21,10 +75,10 @@
                         <sections:FirstSection BindingContext="{Binding .,Mode=TwoWay}"  />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
+            </Border>
 
             <!--Second Section-->
-            <Frame>
+            <Border>
                 <toolkit:Expander IsExpanded="{Binding IsExpanded2Visible,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text=" To replace with section Name" FontSize="20" />
@@ -33,10 +87,10 @@
                         <sections:SecondSection BindingContext="{Binding .,Mode=TwoWay}"  />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
+            </Border>
 
             <!--Third Section-->
-            <Frame>
+            <Border>
                 <toolkit:Expander IsExpanded="{Binding IsExpanded3Visible,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text=" To replace with section Name" FontSize="20" />
@@ -45,7 +99,7 @@
                         <sections:ThirdSection BindingContext="{Binding .,Mode=TwoWay}"  />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

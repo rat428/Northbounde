@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.FirstSection">
     <VerticalStackLayout>
 
@@ -9,7 +10,13 @@
                 <Label Text="Childs name" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                <Picker />
+                <Picker  ItemsSource="{Binding FirstSectionViewModel.ChildName}"  ItemDisplayBinding="{Binding DisplayName}"  SelectedItem="{Binding FirstSectionViewModel.SelectedChild}"  Title="Select Child Name" >
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior 
+                            EventName="SelectedIndexChanged" 
+                            Command="{Binding FirstSectionViewModel.OnChildSelectedCommand}" />
+                    </Picker.Behaviors>
+                </Picker>
             </Border>
          </Grid>
 
@@ -18,7 +25,7 @@
                 <Label Text="Session date" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                <Entry />
+                <Entry  Text="{Binding SessionDate}"  IsEnabled="False" />
             </Border>
         </Grid>
 
@@ -27,7 +34,13 @@
                 <Label Text="Service type" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                <Picker />
+                <Picker  ItemsSource="{Binding FirstSectionViewModel.ServiceType}"    SelectedItem="{Binding FirstSectionViewModel.SelectedServiceType}"  Title="Select Child Name" >
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior 
+                           EventName="SelectedIndexChanged" 
+                           Command="{Binding FirstSectionViewModel.OnChildSelectedCommand}" />
+                    </Picker.Behaviors>
+                </Picker>
             </Border>
         </Grid>
         
@@ -36,7 +49,7 @@
                 <Label Text="Remaining Units/Authorization" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                <Entry />
+                <Entry Text="{Binding }" />
             </Border>
         </Grid>
 

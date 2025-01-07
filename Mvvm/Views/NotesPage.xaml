@@ -10,15 +10,15 @@
              >
     <ScrollView>
         <VerticalStackLayout x:Name="MainPanel" Margin="16">
-
+ 
             <!--First Section-->
             <Frame>
                 <toolkit:Expander IsExpanded="{Binding IsExpanded1Visible,Mode=TwoWay}">
                     <toolkit:Expander.Header>
-                        <Label Text=" To replace with section Name" FontSize="20" />
+                        <Label Text="Initial Selection" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:FirstSection BindingContext="{Binding .,Mode=TwoWay}"  />
+                        <sections:FirstSection  />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
             </Frame>
@@ -27,10 +27,10 @@
             <Frame>
                 <toolkit:Expander IsExpanded="{Binding IsExpanded2Visible,Mode=TwoWay}" >
                     <toolkit:Expander.Header>
-                        <Label Text=" To replace with section Name" FontSize="20" />
+                        <Label Text="Attendance Type" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:SecondSection BindingContext="{Binding .,Mode=TwoWay}"  />
+                        <sections:SecondSection   />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
             </Frame>
@@ -42,7 +42,7 @@
                         <Label Text=" To replace with section Name" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:ThirdSection BindingContext="{Binding .,Mode=TwoWay}"  />
+                        <sections:ThirdSection   />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
             </Frame>

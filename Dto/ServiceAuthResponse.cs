@@ -1,4 +1,6 @@
-﻿namespace Northboundei.Mobile.Dto
+﻿using System.Xml.Linq;
+
+namespace Northboundei.Mobile.Dto
 {
     public partial class ServiceAuthResponse
     {
@@ -71,6 +73,8 @@
         public string? DxCode4 { get; set; }
 
         public string? DxCode5 { get; set; }
+        public string DisplayName { get => $"{FirstName} {LastName}"; }
+
     }
 
 }

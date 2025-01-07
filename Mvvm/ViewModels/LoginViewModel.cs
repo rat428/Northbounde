@@ -6,6 +6,7 @@ using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
 using Northboundei.Mobile.Dto;
 using Northboundei.Mobile.IServices;
+using Northboundei.Mobile.Services;
 using Refit;
 using System.Windows.Input;
 
@@ -163,6 +164,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             userEntity.DeviceInfo = DeviceInfo.Name;
             userEntity.KeepMeLoggedIn = KeepMeLogged;
             userEntity.IsLoggedIn = true;
+            userEntity.EncryptionKey = user.Key ?? " DebugKey";
+            SessionManager.UserContext = userEntity;
             try
             {
                 IEnumerable<UserEntity> users = await DatabaseService.GetAllDataAsync<UserEntity>();

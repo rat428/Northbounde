@@ -1,9 +1,9 @@
 namespace Northboundei.Mobile.Mvvm.Views.Sections;
 
-public partial class ThirdSection : ContentView
+public partial class Section4 : ContentView
 {
-	public ThirdSection()
+	public Section4()
 	{
 		InitializeComponent();
-    }
+	}
 }

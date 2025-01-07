@@ -1,23 +1,34 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json;
 using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
 using Northboundei.Mobile.IServices;
 using Northboundei.Mobile.Mvvm.Models;
+using Northboundei.Mobile.Mvvm.ViewModels.Sections;
 using Northboundei.Mobile.Mvvm.Views;
+using Northboundei.Mobile.Services;
 using System.Windows.Input;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels
 {
     public partial class HomeViewModel : ObservableObject
     {
+
+
         private SettingsModel _settings;
         IPermissionService _permissionService;
         IServiceProvider _serviceProvider;
+        INoteService _noteService;
+        IChildService _childService;
 
         private System.Timers.Timer _statusTimer;
         private bool _isBusy;
 
+        [ObservableProperty]
+        FirstSectionViewModel _firstSectionViewModel;
+        [ObservableProperty]
+        SecondSectionViewModel _secondSectionViewModel;
         [ObservableProperty]
         bool isHomeVisible = true;
         //[ObservableProperty]
@@ -60,9 +71,12 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             set => SetProperty(ref _isStartVisible, value);
         }
 
-        public HomeViewModel(IPermissionService permissionService, IServiceProvider serviceProvider)
+        public HomeViewModel(
+            IPermissionService permissionService,
+            INoteService noteService,
+            IChildService childService,
+            IServiceProvider serviceProvider)
         {
-
             _permissionService = permissionService;
             _serviceProvider = serviceProvider;
             _statusTimer = new System.Timers.Timer(1000); // Check every 5 seconds
@@ -71,6 +85,28 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             _permissionService.GpsStatusChanged += _permissionService_GpsStatusChanged;
             _permissionService.TimeZoneChanged += _permissionService_TimeZoneChanged;
             _permissionService.AutoDateChanged += _permissionService_AutoDateChanged;
+            _firstSectionViewModel = new FirstSectionViewModel();
+            _secondSectionViewModel = new SecondSectionViewModel();
+            _noteService = noteService;
+            _childService = childService;
+            InitializeData().ConfigureAwait(false);
+        }
+
+        private async Task InitializeData()
+        {
+            if (!SessionManager.IsNotesSync)
+            {
+                var notes = await _noteService.GetNotesAsync();
+                await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + nameof(INoteService), JsonConvert.SerializeObject(notes)).ConfigureAwait(false); ;
+                SessionManager.IsNotesSync = true;
+            }
+            if (!SessionManager.IsAuthSync)
+            {
+                var children = await _childService.GetChildrenAsync();
+                await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + nameof(IChildService), JsonConvert.SerializeObject(children)).ConfigureAwait(false);
+                SessionManager.IsAuthSync = true;
+            }
+            await _firstSectionViewModel.InitilizeData();
         }
 
         private void _permissionService_AutoDateChanged(object? sender, bool? e)
@@ -156,7 +192,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         {
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
-              var viewModel=  _serviceProvider.GetRequiredService<LoginViewModel>();
+                var viewModel = _serviceProvider.GetRequiredService<LoginViewModel>();
                 Application.Current.MainPage = new LoginPage(viewModel);
             });
         }

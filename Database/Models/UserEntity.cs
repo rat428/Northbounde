@@ -9,6 +9,7 @@ namespace Northboundei.Mobile.Database.Models
         public string UserName { get; set; }
         public string Password { get; set; }
         public string Token { get; set; }
+        public string EncryptionKey { get; set; } = "DebugKey";
         /// <summary>
         /// Expiration time is UTC from the backend 
         /// </summary>

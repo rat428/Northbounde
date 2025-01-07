@@ -5,7 +5,7 @@ namespace Northboundei.Mobile.APIs
 {
     public interface ServiceAuthAPI
     {
-        [Post("/Api/Authentication/Login")]
+        [Get("/Api/Authentication/service-auth")]
 
         Task<IEnumerable<ServiceAuthResponse>> GetServicesAsync();
     }

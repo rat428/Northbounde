@@ -115,6 +115,7 @@
         public TimeOnly? TimeSpent { get; set; }
 
         public string? License { get; set; }
+
     }
 
 }
