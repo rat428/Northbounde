@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="colorPrimary">@color/m3_ref_palette_white</color>
-    <color name="colorPrimaryDark">@color/m3_ref_palette_black</color>
-    <color name="colorAccent">@android:color/darker_gray</color>
-</resources>

@@ -1,0 +1,116 @@
+[
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.AuthenticationController",
+    "Method": "Auth",
+    "RelativePath": "api/Authentication/auth",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.AuthenticationController",
+    "Method": "ChangePassword",
+    "RelativePath": "api/Authentication/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "changePasswordDto",
+        "Type": "NorthboundeiAPI.DTO.ChangePasswordDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.AuthenticationController",
+    "Method": "GenerateKey",
+    "RelativePath": "api/Authentication/generate-key",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.AuthenticationController",
+    "Method": "Login",
+    "RelativePath": "api/Authentication/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "NorthboundeiAPI.DTO.LoginDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.AuthenticationController",
+    "Method": "Register",
+    "RelativePath": "api/Authentication/register",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "registerDto",
+        "Type": "NorthboundeiAPI.DTO.RegisterDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.AuthenticationController",
+    "Method": "ServieAuth",
+    "RelativePath": "api/Authentication/service-auth",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.SessionNoteController",
+    "Method": "Notes",
+    "RelativePath": "api/SessionNote/Notes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.StatusController",
+    "Method": "GetUserStatus",
+    "RelativePath": "api/Status/userstatus",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "username",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "NorthboundeiAPI.Controllers.UserInfoController",
+    "Method": "Users",
+    "RelativePath": "api/UserInfo/Users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]

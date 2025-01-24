@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.ThirdSection">
+    <VerticalStackLayout>
+        <VerticalStackLayout>
+            <!--<Grid ColumnDefinitions="auto,*" Margin="0,8">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Service Location" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Picker ItemsSource="{Binding ServiceLocations}" 
+                    SelectedItem="{Binding SelectedServiceLocation}" 
+                    Title="Select Service Location">
+                        <Picker.Behaviors>
+                            <toolkit:EventToCommandBehavior 
+                        EventName="SelectedIndexChanged" 
+                        Command="{Binding OnServiceLocationSelectedCommand}" />
+                        </Picker.Behaviors>
+                    </Picker>
+                </Border>
+            </Grid>
+
+            <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding IsOtherLocationSelected}">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Other Location" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Entry Text="{Binding OtherLocation}" Placeholder="Enter custom location" />
+                </Border>
+            </Grid>
+
+            <ContentView IsVisible="{Binding IsTelehealthSelected}">
+                <Label Text="Telehealth Note: 2nd party signatures are not required." 
+               FontAttributes="Italic" TextColor="Gray" Margin="0,8" />
+            </ContentView>
+
+            <StackLayout IsVisible="{Binding IsNonTelehealthSelected}">
+                <Grid ColumnDefinitions="auto,*" Margin="0,8">
+                    <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                        <Label Text="Session Details" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                        <Entry Text="{Binding SessionDetails}" Placeholder="Enter session details" />
+                    </Border>
+                </Grid>
+
+                <Grid ColumnDefinitions="auto,*" Margin="0,8">
+                    <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                        <Label Text="User Signature" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                        <Entry Text="{Binding UserSignature}" Placeholder="Enter user signature" />
+                    </Border>
+                </Grid>
+                <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding IsTelehealthSelectedUnSelected}">
+                    <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                        <Label Text="2nd Party Signature" HorizontalOptions="Center" VerticalOptions="Center" />
+                    </Border>
+                    <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                        <Entry Text="{Binding SecondPartySignature}" Placeholder="Enter 2nd party signature" />
+                    </Border>
+                </Grid>
+            </StackLayout>-->
+
+        </VerticalStackLayout>
+
+        <HorizontalStackLayout>
+            <Button Text="Back" Command="{Binding HomeCommand}" Margin="4" />
+            <Button Text="Save as Draft"  Command="{Binding SaveDraftCommand}"  Margin="4" />
+            <Button Text="Next" Command="{Binding Section3Command}" Margin="4" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentView>

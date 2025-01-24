@@ -1,0 +1,39 @@
+@NorthboundeiAPI_HostAddress = https://localhost:7254
+
+GET {{NorthboundeiAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+POST {{NorthboundeiAPI_HostAddress}}/api/authentication/register
+Content-Type: application/json
+
+{
+  "username": "testUser",
+  "email": "test@example.com",
+  "password": "YourPassword123!",
+  "timezone" :"est"
+}
+
+########
+
+
+POST {{NorthboundeiAPI_HostAddress}}/api/authentication/register
+Content-Type: application/json
+{
+  "username": "test",
+  "email": "test@email.com",
+  "password": "TestP@ssw0rd",
+  "timeZone": "eastern standard time"
+}
+###
+POST {{NorthboundeiAPI_HostAddress}}/api/Authentication/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "@Up@2024@"
+}
+{
+  "username": "test",
+  "password": "TestP@ssw0rd"
+}
