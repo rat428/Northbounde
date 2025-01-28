@@ -3,16 +3,18 @@
     x:Class="Northboundei.Mobile.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels"
     xmlns:local="clr-namespace:Northboundei.Mobile"
     xmlns:views="clr-namespace:Northboundei.Mobile.Mvvm.Views"
     Shell.NavBarIsVisible="True"
-    Shell.FlyoutBehavior="Flyout"    
+    Shell.FlyoutBehavior="Flyout"
+    x:DataType="vms:HomeViewModel"
     Title="Northboundei.Mobile">
     <Shell.FlyoutHeader>
         <Image
          Margin="4"
          Source="logo.png"
-         HeightRequest="36"
+         HeightRequest="100"
          VerticalOptions="Center"
          Aspect="AspectFit"
          SemanticProperties.Description="Logo" />
@@ -33,7 +35,7 @@
     <MenuItem Text="Logout" Command="{Binding LogoutCommand}"  />
 
     <ShellContent Route="ActionPage" ContentTemplate="{DataTemplate views:ActionPage}" FlyoutItemIsVisible="False" />
-    <ShellContent Route="BlankPage1" ContentTemplate="{DataTemplate views:NotesPage}" FlyoutItemIsVisible="False" />
+    <ShellContent Route="NotesPage" ContentTemplate="{DataTemplate views:NotesPage}" FlyoutItemIsVisible="False" />
     <ShellContent Route="BlankPage2" ContentTemplate="{DataTemplate views:NotesDraftPage}" FlyoutItemIsVisible="False" />
     <ShellContent Route="SyncPage"   ContentTemplate="{DataTemplate views:SyncPage}" FlyoutItemIsVisible="False" />
 

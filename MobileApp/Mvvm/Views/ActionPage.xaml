@@ -1,51 +1,95 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels"
              x:Class="Northboundei.Mobile.Mvvm.Views.ActionPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
+             x:DataType="vms:HomeViewModel"
              Title="">
     <ContentPage.Resources>
-        <Style TargetType="Button" x:Key="ButtonStyle">
+        <Style TargetType="Border" x:Key="ButtonGridStyle">
             <Setter Property="BackgroundColor" Value="#007bff" />
+            <Setter Property="Padding" Value="12,20" />
+            <Setter Property="HorizontalOptions" Value="Fill" />
+            <Setter Property="VerticalOptions" Value="Fill" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="StrokeShape" Value="RoundRectangle 15"/>
+        </Style>
+        <Style TargetType="Label" x:Key="ButtonTextStyle">
             <Setter Property="TextColor" Value="White" />
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="FontSize" Value="18" />
             <Setter Property="FontAttributes" Value="Bold" />
-            <Setter Property="Padding" Value="12,8" />
-            <Setter Property="CornerRadius" Value="8" />
-            <Setter Property="HeightRequest" Value="50" />
-            <Setter Property="WidthRequest" Value="200" />
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="VerticalOptions" Value="Center" />
-            <Setter Property="BorderColor" Value="#007bff" />
-            <Setter Property="BorderWidth" Value="1" />
-            <Setter Property="Shadow" Value="0,4,6,0 #007bff" />
-            <Setter Property="Margin" Value="4" />
+        </Style>
+        <!--Image Size-->
+        <Style TargetType="Image" x:Key="ButtonIconStyle">
+            <Setter Property="HeightRequest" Value="100"/>
+            <Setter Property="Aspect" Value="AspectFit"/>
+            <Setter Property="HorizontalOptions" Value="Center"/>
+            <Setter Property="VerticalOptions" Value="Center"/>
         </Style>
     </ContentPage.Resources>
-    <VerticalStackLayout>
+    <Grid ColumnDefinitions="*,*" RowDefinitions="*,*,*">
 
-        <Button Text="Start Note"
-            Style="{StaticResource ButtonStyle}"
-             Command="{Binding NotesPageCommand}" />
+        <Border Style="{StaticResource ButtonGridStyle}">
+            <Grid RowDefinitions="*,Auto">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding NotesPageCommand}"/>
+                </Grid.GestureRecognizers>
+                <Image Source="add_note.png" Style="{StaticResource ButtonIconStyle}" />
+                <Label Text="Start Note" Style="{StaticResource ButtonTextStyle}" Grid.Row="1" />
+            </Grid>
+        </Border>
 
-        <Button Text="Continue Note"
-            Style="{StaticResource ButtonStyle}"
-           Command="{Binding DraftPageCommand}" />
+        <Border Style="{StaticResource ButtonGridStyle}" Grid.Column="1">
 
-        <Button Text="Sync"
-            Style="{StaticResource ButtonStyle}"
-           Command="{Binding SyncPageCommand}"  />
+            <Grid RowDefinitions="*,Auto">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding DraftPageCommand}"/>
+                </Grid.GestureRecognizers>
+                <Image Source="edit_note.png" Style="{StaticResource ButtonIconStyle}" />
+                <Label Text="Continue Note" Style="{StaticResource ButtonTextStyle}" Grid.Row="1" />
+            </Grid>
+        </Border>
 
-        <Button Text="Logout"
-            Style="{StaticResource ButtonStyle}"
-            Command="{Binding LogoutCommand}"  />
+        <Border Style="{StaticResource ButtonGridStyle}" Grid.Row="1">
+            <Grid  RowDefinitions="*,Auto">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding SyncPageCommand}"/>
+                </Grid.GestureRecognizers>
+                <Image Source="sync.png" Style="{StaticResource ButtonIconStyle}" />
+                <Label Text="Sync" Style="{StaticResource ButtonTextStyle}" Grid.Row="1" />
+            </Grid>
+        </Border>
 
-        <Label 
-            Text="Last time a sync occurred 11/23/2024 00:00:00"
-            Margin="16"        
-            LineBreakMode="WordWrap"
-               />
-    </VerticalStackLayout>
+        <Border Style="{StaticResource ButtonGridStyle}" Grid.Row="1" Grid.Column="1">
+            <Grid RowDefinitions="*,Auto">
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+                </Grid.GestureRecognizers>
+                <Image Source="logout.png" Style="{StaticResource ButtonIconStyle}" />
+                <Label Text="Logout" Style="{StaticResource ButtonTextStyle}" Grid.Row="1" />
+            </Grid>
+        </Border>
+
+        <Grid
+            ColumnDefinitions="Auto,Auto"
+            Grid.Row="2"
+            Grid.ColumnSpan="2"
+            VerticalOptions="End"
+            HorizontalOptions="Center"
+            Margin="16">
+
+            <Label
+                Text="Last time a sync occurred "
+                LineBreakMode="WordWrap"/>
+            <Label
+                Grid.Column="1"
+                Text="{Binding LastSyncDate}"
+                LineBreakMode="WordWrap"/>
+        </Grid>
+    </Grid>
 </ContentPage>

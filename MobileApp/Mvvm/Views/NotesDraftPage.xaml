@@ -72,7 +72,7 @@
                         <Label Text=" To replace with section Name" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:FirstSection BindingContext="{Binding .,Mode=TwoWay}"  />
+                        <sections:Section1 BindingContext="{Binding .,Mode=TwoWay}"  />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
             </Border>
@@ -84,7 +84,7 @@
                         <Label Text=" To replace with section Name" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:SecondSection BindingContext="{Binding .,Mode=TwoWay}"  />
+                        <sections:Section2 BindingContext="{Binding .,Mode=TwoWay}"  />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
             </Border>
@@ -96,7 +96,7 @@
                         <Label Text=" To replace with section Name" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:ThirdSection BindingContext="{Binding .,Mode=TwoWay}"  />
+                        <sections:Section3 BindingContext="{Binding .,Mode=TwoWay}"  />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
             </Border>

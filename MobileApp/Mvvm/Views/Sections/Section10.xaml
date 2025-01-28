@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section10">
+    <VerticalStackLayout>
+        <Label
+            Text="Describe what happened during today’s session and the progress made toward the IFSP outcome(s). Include the routine activity and the strategies used in the session. When available, include the parent/caregiver feedback on how they incorporated the strategies between sessions." />
+        <Editor
+            Text="{Binding SessionDescription}"
+            Placeholder="Enter description..."
+            HeightRequest="100"
+            TextChanged="OnEditorTextChanged" />
+        <Label
+            x:Name="ValidationLabel"
+            TextColor="Red"
+            IsVisible="False"
+            Text="Description must be at least 100 characters." />
+    </VerticalStackLayout>
+</ContentView>

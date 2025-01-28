@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 
 namespace NorthboundeiAPI.Models;
 
+// TODO: TEST Primary KEY Function
+[PrimaryKey(nameof(SessionId))]
 public partial class SessionNoteTbl
 {
     public string SessionId { get; set; } = null!;

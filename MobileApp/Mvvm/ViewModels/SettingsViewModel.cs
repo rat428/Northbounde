@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels
 {
-    public class SettingsViewModel:BaseViewModel
+    public class SettingsViewModel: BaseViewModel
     {
         public SettingsModel Settings { get; set; } = new SettingsModel();
 

@@ -13,7 +13,7 @@ namespace Northboundei.Mobile.Services
             _serviceAuth = service;
         }
 
-        public async Task<IEnumerable<ServiceAuthResponse>> GetChildrenAsync()
+        public async Task<IEnumerable<ChildDataResponse>> GetChildrenAsync()
         {
             try
             {

@@ -23,7 +23,7 @@ namespace Northboundei.Mobile
 {
     public static class MauiProgram
     {
-        static Uri _apiUri = new Uri("https://192.168.1.2");
+        static Uri _apiUri = new Uri("https://10.0.2.2:7254");
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -53,6 +53,8 @@ namespace Northboundei.Mobile
             builder.Services.AddSingleton<HomeViewModel>();
             builder.Services.AddSingleton<HomePage>();
             builder.Services.AddSingleton<SplashScreenPage>();
+            builder.Services.AddSingleton<SyncViewModel>();
+            builder.Services.AddSingleton<SyncPage>();
             builder.Services.AddSingleton<AuthHttpDelegatingHandler>();
 
             builder.Services.AddSingleton<AppShell>();

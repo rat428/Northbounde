@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels"
+             x:DataType="vms:HomeViewModel"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section1">
+    <VerticalStackLayout>
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <Label Text="Childs name" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Picker  ItemsSource="{Binding Section1ViewModel.ChildName}"  ItemDisplayBinding="{Binding DisplayName}"  SelectedItem="{Binding Section1ViewModel.SelectedChild}"  Title="Select Child Name" >
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior 
+                                    EventName="SelectedIndexChanged" 
+                                    Command="{Binding Section1ViewModel.OnChildSelectedCommand}" />
+                    </Picker.Behaviors>
+                </Picker>
+            </Border>
+        </Grid>
+
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <Label Text="Session date" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Entry  Text="{Binding Section1ViewModel.SessionDate}"  IsEnabled="False" />
+            </Border>
+        </Grid>
+
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <Label Text="Service type" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Picker  ItemsSource="{Binding Section1ViewModel.ServiceType}"    SelectedItem="{Binding Section1ViewModel.SelectedServiceType}"  Title="Select Child Name" >
+                    <Picker.Behaviors>
+                        <toolkit:EventToCommandBehavior 
+                                   EventName="SelectedIndexChanged" 
+                                   Command="{Binding Section1ViewModel.OnChildSelectedCommand}" />
+                    </Picker.Behaviors>
+                </Picker>
+            </Border>
+        </Grid>
+
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <Label Text="Remaining Units/Authorization" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Entry Text="{Binding }" />
+            </Border>
+        </Grid>
+
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <Label Text="Remaining Units/Week" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Entry />
+            </Border>
+        </Grid>
+
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <Label Text="Child Age" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Entry />
+            </Border>
+        </Grid>
+        <HorizontalStackLayout>
+            <Button Text="Back" Command="{Binding HomeCommand}" Margin="4" />
+            <Button Text="Save as Draft"  Command="{Binding SaveDraftCommand}"  Margin="4" />
+            <Button Text="Next" Command="{Binding Section1Command}" Margin="4" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentView>

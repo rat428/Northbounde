@@ -28,7 +28,7 @@ public partial class SplashScreenPage : ContentPage
 
     public async Task OnStart()
     {
-        if (!await CheckPermissions())
+        while (!await CheckPermissions())
         {
             await RequestPermissions();
         }
@@ -37,7 +37,6 @@ public partial class SplashScreenPage : ContentPage
 
     private async Task NavigateToMainPage()
     {
-
         if (await CanLogin())
         {
             App.Current.MainPage = _serviceProvider.GetService<AppShell>();
@@ -47,8 +46,6 @@ public partial class SplashScreenPage : ContentPage
             var loginPage = _serviceProvider.GetService<LoginPage>();
             App.Current.MainPage = loginPage;
         }
-
-
     }
 
     public async Task<bool> CanLogin()
@@ -58,17 +55,13 @@ public partial class SplashScreenPage : ContentPage
         {
             await SecureStorage.Default.SetAsync("storedDate", DateTime.Today.ToString("o"));
             SessionManager.ClearSession();
-          // todo return false;
+            // todo: return false;
+            return false;
         }
 
-
-#if DEBUG
-        return true;
-#endif
         IEnumerable<UserEntity> users = await DatabaseService.GetAllDataAsync<UserEntity>();
         if (!users.Any())
             return false;
-
 
         try
         {
@@ -82,17 +75,17 @@ public partial class SplashScreenPage : ContentPage
             if (!userEntity.KeepMeLoggedIn)
                 return false;
 
-
-            if ((userEntity.ExpirationTime.Date == DateTime.UtcNow.Date.AddDays(2)) &&
-                userEntity.ExpirationTime.TimeOfDay != TimeSpan.Zero)
+            // Check if the token is expired or not
+            if (userEntity.ExpirationTime < DateTime.Now.ToUniversalTime())
+            {
+                // Show alert that the token is expired
+                await DisplayAlert("Token Expired", "Please login again", "OK");
                 return false;
-
-
+            }
         }
         catch (Exception ex)
         {
             return false;
-
         }
 
         return true;
@@ -114,8 +107,6 @@ public partial class SplashScreenPage : ContentPage
         _homeViewModel.Settings.InternetAccessAvailable = await _locationPermissionService.IsInternetAvailable();
         _homeViewModel.Settings.AllowRunInBackground = await _locationPermissionService.CanRunInBackground();
 
-
-
         return _homeViewModel.IsValid();
     }
 
@@ -123,7 +114,7 @@ public partial class SplashScreenPage : ContentPage
     {
         if (_homeViewModel.Settings.LocationSharingAllowed is false)
         {
-            await DisplayAlert("Sharing Location must be enabled", "", "OK");
+            await DisplayAlert("Sharing Location must be enabled", "", "Done!");
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 PermissionStatus locationInUser = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
@@ -132,17 +123,16 @@ public partial class SplashScreenPage : ContentPage
         }
 
         if (_homeViewModel!.Settings.AirplaneMode is true)
-            await DisplayAlert("", "Airplane mode must be turned off", "Ok");
+            await DisplayAlert("", "Airplane mode must be turned off", "Done!");
 
         if (_homeViewModel!.Settings.GPSOn is false)
-            await DisplayAlert("", "Gps must be turned on", "OK");
+            await DisplayAlert("", "Location(GPS) must be turned on", "Done!");
 
+#if !DEBUG
         if (_homeViewModel!.Settings.DeveloperToolsEnabled is false)
-            await DisplayAlert("", "Developer mode must be turned off", "OK");
-
+            await DisplayAlert("", "Developer mode must be turned off", "Done!");
+#endif
         if (_homeViewModel!.Settings.AllowRunInBackground is false)
-            await DisplayAlert("", "Running service in background must be turned On", "OK");
-
+            await DisplayAlert("", "Running service in background must be turned On", "Done!");
     }
-
 }

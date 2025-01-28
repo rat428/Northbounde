@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section9">
+    <VerticalStackLayout>
+        <CollectionView ItemsSource="{Binding Section9ViewModel.Outcomes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Spacing="8">
+                        <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                <CheckBox IsChecked="{Binding IsChecked}"></CheckBox>
+                                <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                            </HorizontalStackLayout>
+                            <CollectionView IsVisible="{Binding  IsObjectiveVisible}" Margin="10,0,0,0" ItemsSource="{Binding Objectives}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout>
+                                            <HorizontalStackLayout>
+                                                <CheckBox IsChecked="{Binding IsChecked}"></CheckBox>
+                                                <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </VerticalStackLayout>
+</ContentView>

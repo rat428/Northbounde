@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section11">
+    <VerticalStackLayout>
+        <Label
+            Text="How did you work with the parent/caregiver?" />
+        <CheckBox
+            Content="Observed parent/Caregiver and the child during routines"
+            IsChecked="{Binding IsObservedChecked}" />
+        <CheckBox
+            Content="Parent/Caregiver tried Activity, feedback exchanged"
+            IsChecked="{Binding IsTriedActivityChecked}" />
+        <CheckBox
+            Content="Demonstrated activity to parent/caregiver"
+            IsChecked="{Binding IsDemonstratedChecked}" />
+        <CheckBox
+            Content="Reviewed communication tool with parent/caregiver"
+            IsChecked="{Binding IsReviewedChecked}" />
+        <CheckBox
+            Content="Other(s)"
+            IsChecked="{Binding IsOtherChecked}" />
+        <Editor
+            Text="{Binding OtherDescription}"
+            Placeholder="Enter other description..."
+            HeightRequest="100"
+            IsVisible="{Binding IsOtherChecked}" />
+        <Label
+            x:Name="OtherValidationLabel"
+            TextColor="Red"
+            IsVisible="{Binding IsOtherValidationVisible}"
+            Text="Other description is required." />
+    </VerticalStackLayout>
+</ContentView>

@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels
 {
-    public partial class LoginViewModel : ObservableObject
+    public partial class LoginViewModel : BaseViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IUserService _userService;
@@ -129,11 +129,11 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             }
             catch (ApiException ex)
             {
-                await App.Current.MainPage.DisplayAlert("api", "Username / Password combination is either Incorrect or Expired", "OK");
+                await App.Current.MainPage.DisplayAlert("ERROR", "Username / Password combination is either Incorrect or Expired", "OK");
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("api", ex.Message, "OK");
+                await App.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
             }
             IsLoading = false;
 

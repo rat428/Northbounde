@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels"
+             xmlns:model="clr-namespace:Northboundei.Mobile.Database.Models"
              x:Class="Northboundei.Mobile.Mvvm.Views.SyncPage"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
+             x:DataType="vm:SyncViewModel"
              Title="">
-    <VerticalStackLayout>
-        <Button Text="Sync Data" HorizontalOptions="Center" VerticalOptions="Center" />
-    </VerticalStackLayout>
+    <Grid RowDefinitions="Auto,Auto,*">
+        <Button Text="Sync Data" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding SyncNowCommand}"/>
+
+        <!--CollectionView to display the Sync History-->
+        <CollectionView Grid.Row="1" ItemsSource="{Binding SyncRecords}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:SyncRecord">
+                    <Label Grid.Column="1" Text="{Binding SyncDate}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

@@ -1,0 +1,23 @@
+
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section12">
+    <VerticalStackLayout>
+        <Label
+            Text="What strategies/activities did you and the parent/caregiver collaboratively agree to do to support their child's learning and development between visits?"
+            FontSize="Medium" />
+        <Editor
+            Text="{Binding CarryOverDescription}"
+            Placeholder="Enter strategies/activities..."
+            HeightRequest="100"
+            TextChanged="OnEditorTextChanged" />
+        <Label
+            x:Name="ValidationLabel"
+            TextColor="Red"
+            IsVisible="False"
+            Text="Description must be at least 100 characters." />
+    </VerticalStackLayout>
+</ContentView>

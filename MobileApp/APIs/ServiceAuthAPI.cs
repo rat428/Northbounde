@@ -7,7 +7,7 @@ namespace Northboundei.Mobile.APIs
     {
         [Get("/Api/Authentication/service-auth")]
 
-        Task<IEnumerable<ServiceAuthResponse>> GetServicesAsync();
+        Task<IEnumerable<ChildDataResponse>> GetServicesAsync();
     }
 
 }

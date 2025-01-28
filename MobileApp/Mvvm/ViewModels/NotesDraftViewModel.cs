@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels
 {
-    public class NotesDraftViewModel : ObservableObject
+    public class NotesDraftViewModel : BaseViewModel
     {
         public ICommand SaveDraftCommand => new Command(OnSaveDraftAction);
 

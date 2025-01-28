@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+                xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section2">
+    <VerticalStackLayout x:Name="AttendanceTypePanel" Margin="8">
+        <VerticalStackLayout>
+            <!-- Attendance Type Section -->
+            <Grid ColumnDefinitions="auto,*" Margin="0,8">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Attendance Type" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Picker ItemsSource="{Binding Section2ViewModel.AttendanceTypes}" 
+                            SelectedItem="{Binding Section2ViewModel.SelectedAttendanceType}" 
+                            Title="Select Attendance Type">
+                        <Picker.Behaviors>
+                            <toolkit:EventToCommandBehavior 
+                                EventName="SelectedIndexChanged" 
+                                Command="{Binding Section2ViewModel.OnAttendanceTypeSelectedCommand}" />
+                        </Picker.Behaviors>
+                    </Picker>
+                </Border>
+            </Grid>
+
+            <!-- Attended Section -->
+            <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding Section2ViewModel.IsAttended}">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Attended Section" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Label Text="CV1" VerticalOptions="Center" HorizontalOptions="Start" />
+                </Border>
+            </Grid>
+
+            <!-- Make-Up Section -->
+            <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding Section2ViewModel.IsMakeup}">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Make-Up Section" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Picker ItemsSource="{Binding Section2ViewModel.AvailableMakeupNotes}" 
+                            SelectedItem="{Binding Section2ViewModel.SelectedMakeupNote}" 
+                            Title="Select Missed Note" />
+                </Border>
+            </Grid>
+            <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding Section2ViewModel.IsMakeup}">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Authorized Make-Ups" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Label Text="{Binding Section2ViewModel.AuthorizedMakeups}" VerticalOptions="Center" HorizontalOptions="Start" />
+                </Border>
+            </Grid>
+
+            <!-- Covisit Section -->
+            <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding Section2ViewModel.IsCovisit}">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Covisit Section" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Entry Placeholder="Who else was present" Text="{Binding Section2ViewModel.CovisitParticipant}" />
+                </Border>
+            </Grid>
+            <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding Section2ViewModel.IsCovisit}">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Authorized Covisits" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Label Text="{Binding Section2ViewModel.AuthorizedCovisits}" VerticalOptions="Center" HorizontalOptions="Start" />
+                </Border>
+            </Grid>
+
+            <!-- Missed Section -->
+            <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding Section2ViewModel.IsMissed}">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Missed Section" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Picker ItemsSource="{Binding Section2ViewModel.MissedReasons}" 
+                            SelectedItem="{Binding Section2ViewModel.SelectedMissedReason}" 
+                            Title="Select Reason" />
+                </Border>
+            </Grid>
+
+            <!-- Remaining Units/Authorization -->
+            <Grid ColumnDefinitions="auto,*" Margin="0,8">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Remaining Units/Authorization" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Label Text="{Binding Section2ViewModel.RemainingUnitsAuthorization}" VerticalOptions="Center" HorizontalOptions="Start" />
+                </Border>
+            </Grid>
+
+            <!-- Remaining Units/Week -->
+            <Grid ColumnDefinitions="auto,*" Margin="0,8">
+                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                    <Label Text="Remaining Units/Week" HorizontalOptions="Center" VerticalOptions="Center" />
+                </Border>
+                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                    <Label Text="{Binding Section2ViewModel.RemainingUnitsWeek}" VerticalOptions="Center" HorizontalOptions="Start" />
+                </Border>
+            </Grid>
+
+            <!-- Buttons -->
+            <HorizontalStackLayout>
+                <Button Text="Back" Command="{Binding Section2ViewModel.HomeCommand}" Margin="4" />
+                <Button Text="Save as Draft" Command="{Binding Section2ViewModel.SaveDraftCommand}" Margin="4" />
+                <Button Text="Next" Command="{Binding Section2ViewModel.Section1Command}" Margin="4" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentView>

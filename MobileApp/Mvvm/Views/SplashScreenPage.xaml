@@ -4,23 +4,20 @@
              x:Class="Northboundei.Mobile.Mvvm.Views.SplashScreenPage"
              Title="SplashScreenPage">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition />
-            <RowDefinition />
-            <RowDefinition />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
         <Image
-         Grid.Row="1"
-         Grid.Column="1"
-         Source="logo.png"
-         HeightRequest="185"
-         VerticalOptions="Center"
-         Aspect="AspectFit"
-         SemanticProperties.Description="Logo" />
+             Source="logo.png"
+             HeightRequest="128"
+             VerticalOptions="Center"
+             HorizontalOptions="Center"
+             Aspect="AspectFit"
+             SemanticProperties.Description="Logo" />
+        
+        <!--Spinner at the bottom with a good margin-->
+        <ActivityIndicator
+            IsRunning="True"
+            VerticalOptions="End"
+            HorizontalOptions="Center"
+            Scale="2"
+            Margin="0,0,0,100"/>
     </Grid>
 </ContentPage>

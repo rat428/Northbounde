@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section8"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:Name="Section8View">
+    <VerticalStackLayout Padding="16" Spacing="12">
+
+        <!-- Participants Label -->
+        <Label Text="Participants"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,8" />
+
+        <!-- Checkbox List -->
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox x:Name="ParentCaregiverCheckBox"
+            IsChecked="{Binding Section8ViewModel.IsParentCaregiverSelected}" />
+                <Label Text="Parent/Caregiver"
+                               VerticalOptions="Center" 
+                               FontSize="14" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="true" IsEnabled="false" />
+                <Label Text="Child (Required)"
+                               VerticalOptions="Center" 
+                               FontSize="14" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding Section8ViewModel.IsOtherSelected}" />
+                <Label Text="Other"
+                               VerticalOptions="Center" 
+                               FontSize="14" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <!-- Other Text Box -->
+        <Entry Placeholder="Please specify 'Other'"
+               IsVisible="{Binding  Section8ViewModel.IsOtherTextBoxVisible}" 
+               Text="{Binding Section8ViewModel.OtherText}" />
+
+        <!-- Communication Section -->
+        <VerticalStackLayout IsVisible="{Binding Section8ViewModel.IsCommunicationSectionVisible}">
+            <Label Text="If the parent/caregiver was unavailable, how did you communicate with them about the session?"
+                           FontSize="14" />
+            <Entry Placeholder="Enter communication details (Required*)"
+                   Text="{Binding Section8ViewModel.CommunicationDetails}" />
+        </VerticalStackLayout>
+
+        <!-- Navigation Buttons -->
+        <HorizontalStackLayout Spacing="10" Margin="0,16">
+            <Button Text="Back"
+                            Command="{Binding BackCommand}" />
+            <Button Text="Save"
+                            Command="{Binding SaveCommand}" />
+            <Button Text="Next"
+                            Command="{Binding NextCommand}" />
+        </HorizontalStackLayout>
+
+    </VerticalStackLayout>
+</ContentView>

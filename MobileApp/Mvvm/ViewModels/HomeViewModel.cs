@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Maui.Alerts;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
@@ -12,10 +13,8 @@ using System.Windows.Input;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels
 {
-    public partial class HomeViewModel : ObservableObject
+    public partial class HomeViewModel : BaseViewModel
     {
-
-
         private SettingsModel _settings;
         IPermissionService _permissionService;
         IServiceProvider _serviceProvider;
@@ -26,17 +25,32 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         private bool _isBusy;
 
         [ObservableProperty]
-        FirstSectionViewModel _firstSectionViewModel;
+        Section1ViewModel _Section1ViewModel;
         [ObservableProperty]
-        SecondSectionViewModel _secondSectionViewModel;
+        Section2ViewModel _Section2ViewModel;
         [ObservableProperty]
-        ThirdSectionViewModel _thirdSectionViewModel;
+        Section3ViewModel _Section3ViewModel;
         [ObservableProperty]
-        ForthSectionViewModel _forthSectionViewModel;
+        Section4ViewModel _Section4ViewModel;
         [ObservableProperty]
-        FifthSectionViewModel _fifthSectionViewModel;
+        Section5ViewModel _Section5ViewModel;
         [ObservableProperty]
-        SixthSectionViewModel _sixthSectionViewModel;
+        Section6ViewModel _Section6ViewModel;
+        [ObservableProperty]
+        Section7ViewModel _Section7ViewModel;
+        [ObservableProperty]
+        Section8ViewModel _Section8ViewModel;
+        [ObservableProperty]
+        Section9ViewModel _Section9ViewModel;
+        [ObservableProperty]
+        Section10ViewModel _Section10ViewModel;
+        [ObservableProperty]
+        Section11ViewModel _Section11ViewModel;
+        [ObservableProperty]
+        Section12ViewModel _Section12ViewModel;
+        [ObservableProperty]
+        Section13ViewModel _Section13ViewModel;
+
         [ObservableProperty]
         bool isHomeVisible = true;
         //[ObservableProperty]
@@ -46,43 +60,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         [ObservableProperty]
         bool _isSyncVisible = true;
 
-
         [ObservableProperty]
-        bool _isSection1Visible = false;
-        [ObservableProperty]
-        bool _isSection2Visible = false;
-        [ObservableProperty]
-        bool _isSection3Visible = false;
-        [ObservableProperty]
-        bool _isSection4Visible = false;
-        [ObservableProperty]
-        bool _isSection5Visible = false;
-        [ObservableProperty]
-        bool _isSection6Visible = false;
-        [ObservableProperty]
-        bool _isExpanded1Visible = false;
-        [ObservableProperty]
-        bool _isExpanded2Visible = false;
-        [ObservableProperty]
-        bool _isExpanded3Visible = false;
-        [ObservableProperty]
-        bool _isExpanded4Visible = false;
-        [ObservableProperty]
-        bool _isExpanded5Visible = false;
-        [ObservableProperty]
-        bool _isExpanded6Visible = false;
-
-        public ICommand HomeCommand => new Command(HomeLoad);
-        public ICommand LoadCommand => new Command(OnLoad);
-        public ICommand LogoutCommand => new Command(OnLogOut);
-        public ICommand NotesPageCommand => new Command(OnNotesPageCommand);
-        public ICommand DraftPageCommand => new Command(OnDraftPageCommand);
-        public ICommand SyncPageCommand => new Command(OnSyncPageCommand);
-        public ICommand Section1Command => new Command(OnSection1Command);
-        public ICommand Section2Command => new Command(OnSection2Command);
-        public ICommand Section3Command => new Command(OnSection3Command);
-
-
+        public string _lastSyncDate = "FETCHING....";
 
         public SettingsModel Settings { get => _settings; set => SetProperty(ref _settings, value); }
         public bool IsStartVisible
@@ -105,12 +84,19 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             _permissionService.GpsStatusChanged += _permissionService_GpsStatusChanged;
             _permissionService.TimeZoneChanged += _permissionService_TimeZoneChanged;
             _permissionService.AutoDateChanged += _permissionService_AutoDateChanged;
-            _firstSectionViewModel = new FirstSectionViewModel();
-            _secondSectionViewModel = new SecondSectionViewModel();
-            _thirdSectionViewModel = new ThirdSectionViewModel();
-            _forthSectionViewModel = new ForthSectionViewModel();
-            _fifthSectionViewModel = new FifthSectionViewModel();
-            _sixthSectionViewModel = new SixthSectionViewModel();
+            _Section1ViewModel = new Section1ViewModel();
+            _Section2ViewModel = new Section2ViewModel();
+            _Section3ViewModel = new Section3ViewModel();
+            _Section4ViewModel = new Section4ViewModel();
+            _Section5ViewModel = new Section5ViewModel();
+            _Section6ViewModel = new Section6ViewModel();
+            _Section7ViewModel = new Section7ViewModel();
+            _Section8ViewModel = new Section8ViewModel();
+            _Section9ViewModel = new Section9ViewModel();
+            _Section10ViewModel = new Section10ViewModel();
+            _Section11ViewModel = new Section11ViewModel();
+            _Section12ViewModel = new Section12ViewModel();
+            _Section13ViewModel = new Section13ViewModel();
             _noteService = noteService;
             _childService = childService;
             InitializeData().ConfigureAwait(false);
@@ -130,7 +116,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + nameof(IChildService), JsonConvert.SerializeObject(children)).ConfigureAwait(false);
                 SessionManager.IsAuthSync = true;
             }
-            await _firstSectionViewModel.InitilizeData();
+            await _Section1ViewModel.InitilizeData();
         }
 
         private void _permissionService_AutoDateChanged(object? sender, bool? e)
@@ -149,26 +135,56 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             });
         }
 
-        private void OnSection1Command(object obj)
+        [RelayCommand]
+        private void ShowSection(int Section)
         {
             HideMenuAll();
-            IsSection2Visible = true;
-            IsExpanded2Visible = true;
+            switch (Section)
+            {
+                case 1:
+                    Section1ViewModel.IsOpen = true;
+                    break;
+                case 2:
+                    Section2ViewModel.IsOpen = true;
+                    break;
+                case 3:
+                    Section3ViewModel.IsOpen = true;
+                    break;
+                case 4:
+                    Section4ViewModel.IsOpen = true;
+                    break;
+                case 5:
+                    Section5ViewModel.IsOpen = true;
+                    break;
+                case 6:
+                    Section6ViewModel.IsOpen = true;
+                    break;
+                case 7:
+                    Section7ViewModel.IsOpen = true;
+                    break;
+                case 8:
+                    Section8ViewModel.IsOpen = true;
+                    break;
+                case 9:
+                    Section9ViewModel.IsOpen = true;
+                    break;
+                case 10:
+                    Section10ViewModel.IsOpen = true;
+                    break;
+                case 11:
+                    Section11ViewModel.IsOpen = true;
+                    break;
+                case 12:
+                    Section12ViewModel.IsOpen = true;
+                    break;
+                case 13:
+                    Section13ViewModel.IsOpen = true;
+                    break;
+            }
         }
 
-        private void OnSection2Command(object obj)
-        {
-            HideMenuAll();
-            IsSection3Visible = true;
-            IsExpanded3Visible = true;
-        }
-
-        private void OnSection3Command(object obj)
-        {
-            HideMenuAll();
-        }
-
-        private void HomeLoad(object obj)
+        [RelayCommand]
+        private void Home(object obj)
         {
             HideMenuAll();
             NavigateToShell("//ActionPage");
@@ -176,22 +192,26 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             IsContinueVisible = true;
             IsSyncVisible = true;
         }
-        private void OnNotesPageCommand(object obj)
+        [RelayCommand]
+        private void NotesPage(object obj)
         {
             HideMenuAll();
-            NavigateToShell("//BlankPage1");
+            NavigateToShell("//NotesPage");
         }
-        private void OnDraftPageCommand(object obj)
+        [RelayCommand]
+        private void DraftPage(object obj)
         {
             HideMenuAll();
             NavigateToShell("//BlankPage2");
         }
-        private void OnSyncPageCommand(object obj)
+        [RelayCommand]
+        private void SyncPage(object obj)
         {
             HideMenuAll();
             NavigateToShell("//SyncPage");
         }
-        private async void OnLogOut(object obj)
+        [RelayCommand]
+        private async void LogOut(object obj)
         {
             try
             {
@@ -226,17 +246,21 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             IsStartVisible = false;
             IsContinueVisible = false;
             IsSyncVisible = false;
-            _isSection1Visible = false;
-            _isSection2Visible = false;
-            _isSection3Visible = false;
-            _isSection4Visible = false;
-            _isSection5Visible = false;
-            _isSection6Visible = false;
+            Section1ViewModel.IsOpen = false;
+            Section2ViewModel.IsOpen = false;
+            Section3ViewModel.IsOpen = false;
+            Section4ViewModel.IsOpen = false;
+            Section5ViewModel.IsOpen = false;
+            Section6ViewModel.IsOpen = false;
+            Section7ViewModel.IsOpen = false;
+            Section8ViewModel.IsOpen = false;
+            Section9ViewModel.IsOpen = false;
+            
         }
 
-        private void NavigateToShell(string url)
+        private void NavigateToShell(string url,Dictionary<string, object>? parameters = null)
         {
-            Shell.Current.GoToAsync(url);
+            Shell.Current.GoToAsync(url, parameters);
             Shell.Current.FlyoutIsPresented = false;
         }
 
@@ -248,7 +272,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             _isBusy = true;
             try
             {
-
                 var gPSOn = await _permissionService.IsGpsEnabled();
                 var internetAccessAvailable = await _permissionService.IsInternetAvailable();
                 var developerToolsEnabled = await _permissionService.IsDeveloperModeEnabled();
@@ -266,7 +289,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 });
                 if (!IsValid())
                 {
-
+                    // Rerun the checks assuming the user has changed the settings
+                    CheckStatus();
                 }
             }
             catch (Exception ex)
@@ -276,7 +300,19 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
             _isBusy = false;
         }
-
+        [RelayCommand]
+        async Task UpdateLastSyncTime()
+        {
+            var SyncHistory = await DatabaseService.GetAllDataAsync<SyncRecord>();
+            if (SyncHistory.Count() > 0)
+            {
+                _lastSyncDate = SyncHistory.Last().SyncDate.ToString();
+            }
+            else
+            {
+                _lastSyncDate = "Never";
+            }
+        }
         private void _permissionService_GpsStatusChanged(object? sender, bool? e)
         {
             MainThread.BeginInvokeOnMainThread(async () =>
@@ -292,8 +328,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 Settings.AirplaneMode = e;
             });
         }
-
-        private async void OnLoad(object obj)
+        [RelayCommand]
+        private async void Load(object obj)
         {
         }
 

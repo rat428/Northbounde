@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels
 {
-    public class NotesViewModel:ObservableObject
+    public class NotesViewModel: BaseViewModel
     {
 
         public NotesViewModel()

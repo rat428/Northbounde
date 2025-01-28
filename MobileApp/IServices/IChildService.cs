@@ -9,7 +9,7 @@ namespace Northboundei.Mobile.IServices
 {
     public interface IChildService
     {
-        Task<IEnumerable<ServiceAuthResponse>> GetChildrenAsync();
+        Task<IEnumerable<ChildDataResponse>> GetChildrenAsync();
 
     }
 }

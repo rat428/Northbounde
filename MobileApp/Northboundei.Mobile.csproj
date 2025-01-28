@@ -55,7 +55,7 @@
 		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Images\logo.png" Color="#fff" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -94,6 +94,36 @@
 	  <Compile Update="Mvvm\Views\NotesPage.xaml.cs">
 	    <DependentUpon>NotesPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section8.xaml.cs">
+	    <DependentUpon>Section8.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section5.xaml.cs">
+	    <DependentUpon>Section5.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section4.xaml.cs">
+	    <DependentUpon>Section4.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section10.xaml.cs">
+	    <DependentUpon>Section10.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section9.xaml.cs">
+	    <DependentUpon>Section9.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section2.xaml.cs">
+	    <DependentUpon>Section2.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section1.xaml.cs">
+	    <DependentUpon>Section1.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section7.xaml.cs">
+	    <DependentUpon>Section7.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section6.xaml.cs">
+	    <DependentUpon>Section6.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Mvvm\Views\Sections\Section3.xaml.cs">
+	    <DependentUpon>Section3.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -112,22 +142,34 @@
 	  <MauiXaml Update="Mvvm\Views\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mvvm\Views\Sections\FifthSection.xaml">
+	  <MauiXaml Update="Mvvm\Views\Sections\Section8.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mvvm\Views\Sections\FirstSection.xaml">
+	  <MauiXaml Update="Mvvm\Views\Sections\Section5.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mvvm\Views\Sections\ForthSection.xaml">
+	  <MauiXaml Update="Mvvm\Views\Sections\Section1.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mvvm\Views\Sections\SecondSection.xaml">
+	  <MauiXaml Update="Mvvm\Views\Sections\Section4.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mvvm\Views\Sections\SixthSection.xaml">
+	  <MauiXaml Update="Mvvm\Views\Sections\Section10.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mvvm\Views\Sections\ThirdSection.xaml">
+	  <MauiXaml Update="Mvvm\Views\Sections\Section9.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Mvvm\Views\Sections\Section2.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Mvvm\Views\Sections\Section7.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Mvvm\Views\Sections\Section6.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Mvvm\Views\Sections\Section3.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Mvvm\Views\SplashScreenPage.xaml">

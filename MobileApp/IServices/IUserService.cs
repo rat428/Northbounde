@@ -10,7 +10,7 @@ namespace Northboundei.Mobile.IServices
     public interface IUserService
     {
         Task<LoginResponse> LoginAsync(LoginRequest login);
-        Task<LoginResponse> AuhtAsync(string token);
+        Task<LoginResponse> AuthAsync(string token);
         string AuthToken { get; }
     }
 }

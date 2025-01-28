@@ -15,7 +15,7 @@ namespace Northboundei.Mobile.Services
     public class UserService : IUserService
     {
         private readonly AuthAPI _myApi;
-        public string AuthToken { get; set; }
+        public string AuthToken { get; set; } = string.Empty;
 
         public UserService(IHttpClientFactory httpClientFactory)
         {
@@ -23,9 +23,7 @@ namespace Northboundei.Mobile.Services
             client.Timeout = TimeSpan.FromSeconds(10);
             _myApi = RestService.For<AuthAPI>(client);
         }
-
-
-        public async Task<LoginResponse> AuhtAsync(string token)
+        public async Task<LoginResponse> AuthAsync(string token)
         {
             return await _myApi.AuthAsync();
         }
@@ -33,7 +31,7 @@ namespace Northboundei.Mobile.Services
         public async Task<LoginResponse> LoginAsync(LoginRequest login)
         {
             var result= await _myApi.LoginAsync(login);
-            AuthToken =result.Token;
+            AuthToken = result.Token;
             return result;
         }
     }

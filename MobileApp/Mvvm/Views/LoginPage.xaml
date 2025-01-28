@@ -5,7 +5,7 @@
              xmlns:controls="clr-namespace:Northboundei.Mobile.Controls"
              Title="">
     <Grid>
-        <VerticalStackLayout Padding="20">
+        <VerticalStackLayout Padding="40">
             <Image
          Source="logo.png"
          HeightRequest="185"
@@ -14,24 +14,25 @@
 
             <Label Text="Welcome" HorizontalOptions="Center" TextColor="Black" FontSize="20" FontAttributes="Bold" />
 
-            <Frame CornerRadius="16" Padding="4,2" Margin="4">
+            <Border StrokeShape="RoundRectangle 16" Padding="4,2" Margin="4">
                 <Entry  Placeholder="User ID"  Text="{Binding Username}" PlaceholderColor="Gray" >
                     <Entry.Background>
                         <SolidColorBrush Color="#00000000"  />
                     </Entry.Background>
                 </Entry>
-            </Frame>
+            </Border>
 
-            <Frame CornerRadius="16" Padding="4,2" Margin="4">
-                <Entry  Placeholder="Password" Text="{Binding Password}" PlaceholderColor="Gray"  >
+            <Border StrokeShape="RoundRectangle 16" Padding="4,2" Margin="4">
+                <Entry  Placeholder="Password" Text="{Binding Password}" PlaceholderColor="Gray" IsPassword="True">
                     <Entry.Background>
                         <SolidColorBrush Color="#00000000"  />
                     </Entry.Background>
                 </Entry>
-            </Frame>
-
-            <Label Text="Keep me logged in" HorizontalOptions="Start" TextColor="Black"  />
-            <CheckBox IsChecked="{Binding KeepMeLogged}" HorizontalOptions="Start" />
+            </Border>
+            <Grid Padding="12,0" ColumnDefinitions="Auto,Auto">
+                <Label Text="Keep me logged in?" HorizontalOptions="Start" VerticalOptions="Center" TextColor="Black"  />
+                <CheckBox Grid.Column="1" IsChecked="{Binding KeepMeLogged}" HorizontalOptions="Start" />
+            </Grid>
             <Button Text="Login" Command="{Binding LoginCommand}" Background="#212529" Margin="4"  />
         </VerticalStackLayout>
         <ActivityIndicator x:Name="loadingIndicator"

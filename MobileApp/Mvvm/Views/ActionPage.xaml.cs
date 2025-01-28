@@ -6,4 +6,9 @@ public partial class ActionPage : ContentPage
 	{
 		InitializeComponent();
 	}
+
+    protected override void OnAppearing()
+    {
+        AppShell._publichomeviewModel.SyncPageCommand.Execute(null);
+    }
 }

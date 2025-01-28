@@ -4,79 +4,148 @@
              x:Class="Northboundei.Mobile.Mvvm.Views.NotesPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:sections="clr-namespace:Northboundei.Mobile.Mvvm.Views.Sections"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
-             Title=""
-             >
+             x:DataType="vms:HomeViewModel"
+             Title="">
     <ScrollView>
         <VerticalStackLayout x:Name="MainPanel" Margin="16">
- 
             <!--First Section-->
-            <Frame>
-                <toolkit:Expander IsExpanded="{Binding IsExpanded1Visible,Mode=TwoWay}">
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section1ViewModel.IsOpen,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text="Initial Selection" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:FirstSection  />
+                        <sections:Section1/>
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
+            </Border>
 
             <!--Second Section-->
-            <Frame>
-                <toolkit:Expander IsExpanded="{Binding IsExpanded2Visible,Mode=TwoWay}" >
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section2ViewModel.IsOpen,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text="Attendance Type" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:SecondSection   />
+                        <sections:Section2/>
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
+            </Border>
 
             <!--Third Section-->
-            <Frame>
-                <toolkit:Expander IsExpanded="{Binding IsExpanded3Visible,Mode=TwoWay}">
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section3ViewModel.IsOpen,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text="Missed" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:ThirdSection   />
+                        <sections:Section3/>
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
-            <Frame>
-                <toolkit:Expander IsExpanded="{Binding IsExpanded4Visible,Mode=TwoWay}">
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section4ViewModel.IsOpen,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text="Attendance" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:ForthSection/>
+                        <sections:Section4/>
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
-            <Frame>
-                <toolkit:Expander IsExpanded="{Binding IsExpanded5Visible,Mode=TwoWay}">
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section5ViewModel.IsOpen,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text="Session" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:FifthSection   />
+                        <sections:Section5/>
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
-            <Frame>
-                <toolkit:Expander IsExpanded="{Binding IsExpanded6Visible,Mode=TwoWay}">
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section6ViewModel.IsOpen,Mode=TwoWay}">
                     <toolkit:Expander.Header>
                         <Label Text="Diagnosis" FontSize="20" />
                     </toolkit:Expander.Header>
                     <toolkit:Expander.Content>
-                        <sections:SixthSection   />
+                        <sections:Section6   />
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
-            </Frame>
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section7ViewModel,Mode=TwoWay}">
+                    <toolkit:Expander.Header>
+                        <Label Text="CPT Codes" FontSize="20" />
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <sections:Section7  />
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section8ViewModel.IsOpen,Mode=TwoWay}">
+                    <toolkit:Expander.Header>
+                        <Label Text="Participants" FontSize="20" />
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <sections:Section8   />
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section9ViewModel.IsOpen,Mode=TwoWay}">
+                    <toolkit:Expander.Header>
+                        <Label Text="Outcomes / Objectives" FontSize="20" />
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <sections:Section9   />
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section10ViewModel.IsOpen,Mode=TwoWay}">
+                    <toolkit:Expander.Header>
+                        <Label Text="Description" FontSize="20" />
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <sections:Section10   />
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section11ViewModel.IsOpen,Mode=TwoWay}">
+                    <toolkit:Expander.Header>
+                        <Label Text="Collaboration" FontSize="20" />
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <sections:Section11 />
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section12ViewModel.IsOpen, Mode=TwoWay}">
+                    <toolkit:Expander.Header>
+                        <Label Text="Carry-Over" FontSize="20" />
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <sections:Section12 />
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Border>
+            <Border>
+                <toolkit:Expander IsExpanded="{Binding Section13ViewModel.IsOpen, Mode=TwoWay}">
+                    <toolkit:Expander.Header>
+                        <Label Text="Session Signature" FontSize="20" />
+                    </toolkit:Expander.Header>
+                    <toolkit:Expander.Content>
+                        <sections:Section13 />
+                    </toolkit:Expander.Content>
+                </toolkit:Expander>
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
-
 </ContentPage>

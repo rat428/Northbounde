@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section6">
+    <VerticalStackLayout Spacing="10">
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <CheckBox  IsChecked="{Binding LanguageDiorderChecked}"></CheckBox>
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Label Text="F80.2 - Mixed receptive-expressive language disorder" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+        </Grid>
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <CheckBox IsChecked="{Binding MuscleWeeknessChecked}"></CheckBox>
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Label Text="F62.81 - Muscle weekness (generalized)" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+        </Grid>
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <CheckBox  IsChecked="{Binding DelayedMilestoneChecked}"></CheckBox>
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
+                <Label Text="R62.0 - Delayed milestone in childhood" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+        </Grid>
+        <HorizontalStackLayout>
+            <Button Text="Back" Command="{Binding HomeCommand}" Margin="4" />
+            <Button Text="Save as Draft"  Command="{Binding SaveDraftCommand}"  Margin="4" />
+            <Button Text="Next" Command="{Binding Section1Command}" Margin="4" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentView>

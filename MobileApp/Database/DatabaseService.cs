@@ -17,6 +17,7 @@ namespace Northboundei.Mobile.Database
                 var databasePath = Path.Combine(FileSystem.AppDataDirectory, "north.db");
                 database = new SQLiteAsyncConnection(databasePath);
                 await database.CreateTableAsync<UserEntity>();
+                await database.CreateTableAsync<SyncRecord>();
             }
             return database;
         }
@@ -33,14 +34,16 @@ namespace Northboundei.Mobile.Database
             await db.UpdateAsync(data, typeof(T));
         }
 
+        public static async Task DeleteAsync<T>(T data) where T : class
+        {
+            var db = await GetDatabaseConnection();
+            await db.DeleteAsync(data);
+        }
+
         public static async Task<IEnumerable<T>> GetAllDataAsync<T>() where T : class, new()
         {
             var db = await GetDatabaseConnection();
             return await db.Table<T>().ToListAsync();
         }
-     
-
     }
-
-
 }
