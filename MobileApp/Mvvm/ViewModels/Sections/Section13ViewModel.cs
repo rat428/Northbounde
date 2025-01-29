@@ -8,6 +8,7 @@ using Microsoft.Maui.Controls;
 using System.Linq;
 using CommunityToolkit.Maui.Core;
 using Microsoft.Maui.Controls.Shapes;
+using Northboundei.Mobile.Services;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 {
@@ -86,7 +87,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
                 await Shell.Current.DisplayAlert("Missing Signatures", "Please sign both the parent/caregiver and the teacher.", "OK");
                 return;
             }
-            GpsLocation = GpsLocation ?? await GetGpsLocationAsync();
+            GpsLocation = GpsLocation ?? await GeoLocationService.GetGpsLocationAsync();
             SignDateTime = SignDateTime ?? DateTime.Now;
         }
 
@@ -164,16 +165,10 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         {
             if (UserSignatureImage != null && SignatureImage != null)
             {
-                GpsLocation = await GetGpsLocationAsync();
+                GpsLocation = await GeoLocationService.GetGpsLocationAsync();
                 SignDateTime = DateTime.Now;
                 SaveSignaturesAsync();
             }
-        }
-        // Todo: Implement A GeoLocation Service to get the GPS Location and Other Required Services
-        private async Task<string> GetGpsLocationAsync()
-        {
-            var location = await Geolocation.GetLocationAsync();
-            return location.Latitude.ToString() + ", " + location.Longitude.ToString() + ';';
         }
     }
 }

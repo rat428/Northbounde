@@ -146,6 +146,11 @@
                     </toolkit:Expander.Content>
                 </toolkit:Expander>
             </Border>
+
+            <!-- Final NoteActionsToolbar (Always Visible) -->
+            <Border>
+                <sections:NoteActionsToolbar />
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

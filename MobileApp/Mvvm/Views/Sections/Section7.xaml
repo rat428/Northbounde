@@ -49,5 +49,11 @@
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
+
+        <HorizontalStackLayout>
+            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="6" />
+            <!-- Removed Save as Draft button -->
+            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="8" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentView>

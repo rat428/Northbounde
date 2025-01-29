@@ -100,9 +100,9 @@
             </Grid>
         </VerticalStackLayout>
         <HorizontalStackLayout>
-            <Button Text="Back" Command="{Binding HomeCommand}" Margin="4" />
-            <Button Text="Save as Draft"  Command="{Binding SaveDraftCommand}"  Margin="4" />
-            <Button Text="Next" Command="{Binding Section1Command}" Margin="4" />
+            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="12" />
+            <!-- Removed Save as Draft button -->
+            <Button Text="Submit" Command="{Binding SubmitCommand}" />
         </HorizontalStackLayout>
 
     </VerticalStackLayout>

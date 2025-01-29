@@ -68,9 +68,8 @@
         </VerticalStackLayout>
 
         <HorizontalStackLayout>
-            <Button Text="Back" Command="{Binding HomeCommand}" Margin="4" />
-            <Button Text="Save as Draft"  Command="{Binding SaveDraftCommand}"  Margin="4" />
-            <Button Text="Next" Command="{Binding Section3Command}" Margin="4" />
+            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="2" />
+            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="4" />
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentView>

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NorthboundeiAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+558813d8ed074bb842380c76777d18880ce6518e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4fb550846d3fef35fd51f831aa8ec81cdcfdb3cb")]
 [assembly: System.Reflection.AssemblyProductAttribute("NorthboundeiAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NorthboundeiAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

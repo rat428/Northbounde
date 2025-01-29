@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
@@ -15,6 +15,12 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
     {
         [ObservableProperty]
         ObservableCollection<SyncRecord> _syncRecords;
+
+        public SyncViewModel()
+        {
+            FetchSyncHistory();
+        }
+
         [RelayCommand]
         async Task SyncNow()
         {
@@ -22,19 +28,30 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             {
                 IsBusy = true;
 
-                await Task.Delay(3000);
 
                 await DatabaseService.AddDataAsync<SyncRecord>(new SyncRecord
                 {
                     SyncDate = DateTime.Now
                 });
+                
+                await Task.Delay(3000);
 
-                var syncRecords = await DatabaseService.GetAllDataAsync<SyncRecord>();
-                _syncRecords = new ObservableCollection<SyncRecord>(syncRecords);
+                await FetchSyncHistory();
             }
             finally
             {
                 IsBusy = false;
+            }
+        }
+
+        private async Task FetchSyncHistory()
+        {
+            var syncRecords = await DatabaseService.GetAllDataAsync<SyncRecord>();
+            // TODO: Replace with Observable object filling logic (Clear then Replace)
+            SyncRecords.Clear();
+            foreach (var record in syncRecords)
+            {
+                SyncRecords.Add(record);
             }
         }
     }

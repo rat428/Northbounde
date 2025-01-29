@@ -20,6 +20,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         ISettingsService _settingsService;
         IServiceProvider _serviceProvider;
         HomeViewModel _homeViewModel;
+        SyncViewModel _syncViewModel;
 
         [ObservableProperty]
         bool _isLoading;
@@ -47,6 +48,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             _serviceProvider = serviceProvider;
             _locationPermissionService = locationPermissionService;
             _homeViewModel = _serviceProvider.GetService<HomeViewModel>();
+            _syncViewModel = _serviceProvider.GetService<SyncViewModel>();
 
             LoginCommand = new Command(OnLogin);
         }
@@ -123,6 +125,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
 
                 await StoreUserAsync(client);
+
+                await _syncViewModel.SyncNowCommand.ExecuteAsync(null);
 
                 App.Current.MainPage = _serviceProvider.GetService<AppShell>();
 

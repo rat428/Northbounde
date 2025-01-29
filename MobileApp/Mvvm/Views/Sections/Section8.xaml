@@ -53,12 +53,8 @@
 
         <!-- Navigation Buttons -->
         <HorizontalStackLayout Spacing="10" Margin="0,16">
-            <Button Text="Back"
-                            Command="{Binding BackCommand}" />
-            <Button Text="Save"
-                            Command="{Binding SaveCommand}" />
-            <Button Text="Next"
-                            Command="{Binding NextCommand}" />
+            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="7" />
+            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="9" />
         </HorizontalStackLayout>
 
     </VerticalStackLayout>

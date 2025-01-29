@@ -20,6 +20,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         IServiceProvider _serviceProvider;
         INoteService _noteService;
         IChildService _childService;
+        SyncViewModel _syncViewModel;
 
         private System.Timers.Timer _statusTimer;
         private bool _isBusy;
@@ -99,6 +100,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             _Section13ViewModel = new Section13ViewModel();
             _noteService = noteService;
             _childService = childService;
+            _syncViewModel = _serviceProvider.GetService<SyncViewModel>();
             InitializeData().ConfigureAwait(false);
         }
 
@@ -121,7 +123,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
         private void _permissionService_AutoDateChanged(object? sender, bool? e)
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
+            MainThread.BeginInvokeOnMainThread(() =>
             {
                 Settings.AutoDateTime = e;
             });
@@ -129,7 +131,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
         private void _permissionService_TimeZoneChanged(object? sender, bool? e)
         {
-            MainThread.BeginInvokeOnMainThread(async () =>
+            MainThread.BeginInvokeOnMainThread(() =>
             {
                 Settings.AutoDateTime = e;
             });
@@ -234,6 +236,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
         public async Task PerformLogout()
         {
+            await _syncViewModel.SyncNowCommand.ExecuteAsync(null);
+
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 var viewModel = _serviceProvider.GetRequiredService<LoginViewModel>();
@@ -255,12 +259,19 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             Section7ViewModel.IsOpen = false;
             Section8ViewModel.IsOpen = false;
             Section9ViewModel.IsOpen = false;
+            Section10ViewModel.IsOpen = false;
+            Section11ViewModel.IsOpen = false;
+            Section12ViewModel.IsOpen = false;
+            Section13ViewModel.IsOpen = false;
             
         }
 
         private void NavigateToShell(string url,Dictionary<string, object>? parameters = null)
         {
-            Shell.Current.GoToAsync(url, parameters);
+            if (parameters == null)
+                Shell.Current.GoToAsync(url);
+            else
+                Shell.Current.GoToAsync(url, parameters);
             Shell.Current.FlyoutIsPresented = false;
         }
 
@@ -369,5 +380,22 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             return true;
         }
 
+        [RelayCommand]
+        private void Discard()
+        {
+            // TODO: Discard any NoteActionsToolbar changes
+        }
+
+        [RelayCommand]
+        private async Task SaveDraftAsync()
+        {
+            // TODO: Save draft logic for NoteActionsToolbar
+        }
+
+        [RelayCommand]
+        private async Task SubmitAsync()
+        {
+            // TODO: Validate NoteActionsToolbar fields then submit
+        }
     }
 }

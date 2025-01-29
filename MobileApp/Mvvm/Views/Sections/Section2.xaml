@@ -106,9 +106,9 @@
 
             <!-- Buttons -->
             <HorizontalStackLayout>
-                <Button Text="Back" Command="{Binding Section2ViewModel.HomeCommand}" Margin="4" />
-                <Button Text="Save as Draft" Command="{Binding Section2ViewModel.SaveDraftCommand}" Margin="4" />
-                <Button Text="Next" Command="{Binding Section2ViewModel.Section1Command}" Margin="4" />
+                <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="1" />
+                <!-- Removed Save as Draft button -->
+                <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="3" />
             </HorizontalStackLayout>
         </VerticalStackLayout>
     </VerticalStackLayout>

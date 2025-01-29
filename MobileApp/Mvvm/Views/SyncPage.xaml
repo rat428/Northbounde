@@ -11,11 +11,20 @@
     <Grid RowDefinitions="Auto,Auto,*">
         <Button Text="Sync Data" HorizontalOptions="Center" VerticalOptions="Center" Command="{Binding SyncNowCommand}"/>
 
+        <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="Center"/>
+
         <!--CollectionView to display the Sync History-->
         <CollectionView Grid.Row="1" ItemsSource="{Binding SyncRecords}">
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:SyncRecord">
-                    <Label Grid.Column="1" Text="{Binding SyncDate}" />
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="Sync Date:" FontAttributes="Bold"/>
+                        <Label Grid.Column="1" Text="{Binding SyncDate, StringFormat='{0:MM/dd/yyyy HH:mm:ss}'}"/>
+                    </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>

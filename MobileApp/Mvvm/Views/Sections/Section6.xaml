@@ -30,9 +30,8 @@
             </Border>
         </Grid>
         <HorizontalStackLayout>
-            <Button Text="Back" Command="{Binding HomeCommand}" Margin="4" />
-            <Button Text="Save as Draft"  Command="{Binding SaveDraftCommand}"  Margin="4" />
-            <Button Text="Next" Command="{Binding Section1Command}" Margin="4" />
+            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="5" />
+            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="7" />
         </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentView>

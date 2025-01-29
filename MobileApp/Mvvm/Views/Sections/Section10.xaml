@@ -17,5 +17,10 @@
             TextColor="Red"
             IsVisible="False"
             Text="Description must be at least 100 characters." />
+        <HorizontalStackLayout>
+            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="9" />
+            <!-- Removed Save as Draft button -->
+            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="11" />
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentView>

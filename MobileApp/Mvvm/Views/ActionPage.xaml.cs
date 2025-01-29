@@ -7,8 +7,8 @@ public partial class ActionPage : ContentPage
 		InitializeComponent();
 	}
 
-    protected override void OnAppearing()
+    protected override void OnNavigatedTo(NavigatedToEventArgs e)
     {
-        AppShell._publichomeviewModel.SyncPageCommand.Execute(null);
+        AppShell._publichomeviewModel.UpdateLastSyncTimeCommand.Execute(null);
     }
 }
