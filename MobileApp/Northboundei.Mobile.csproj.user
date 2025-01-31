@@ -42,31 +42,34 @@
     <MauiXaml Update="Mvvm\Views\Sections\Section3Missed.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Mvvm\Views\Sections\Section8.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Mvvm\Views\Sections\Section5.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Mvvm\Views\Sections\Section1.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
     <MauiXaml Update="Mvvm\Views\Sections\Section4.xaml">
-      <SubType>Designer</SubType>
-    </MauiXaml>
-    <MauiXaml Update="Mvvm\Views\Sections\Section10.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Mvvm\Views\Sections\Section9.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
+    <MauiXaml Update="Mvvm\Views\Sections\Section6.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Mvvm\Views\Sections\Section1.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Mvvm\Views\Sections\Section5.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Mvvm\Views\Sections\Section11.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
+    <MauiXaml Update="Mvvm\Views\Sections\Section10.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Mvvm\Views\Sections\Section2.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Mvvm\Views\Sections\Section7.xaml">
+    <MauiXaml Update="Mvvm\Views\Sections\Section8.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Mvvm\Views\Sections\Section6.xaml">
+    <MauiXaml Update="Mvvm\Views\Sections\Section7.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Mvvm\Views\Sections\Section3CoVisit.xaml">

@@ -17,7 +17,7 @@ namespace Northboundei.Mobile.Database
                 var databasePath = Path.Combine(FileSystem.AppDataDirectory, "north.db");
                 database = new SQLiteAsyncConnection(databasePath);
                 await database.CreateTableAsync<UserEntity>();
-                await database.CreateTableAsync<SyncRecord>();
+                var syncTable = await database.CreateTableAsync<SyncRecord>();
             }
             return database;
         }

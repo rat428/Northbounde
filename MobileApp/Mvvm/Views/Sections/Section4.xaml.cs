@@ -11,11 +11,5 @@ namespace Northboundei.Mobile.Mvvm.Views.Sections
             InitializeComponent();
             BindingContext = _viewModel = viewModel;
         }
-
-        private void Clear_Clicked(object sender, EventArgs e)
-        {
-            _viewModel._signaturedrawingView = myDrawingView;
-            _viewModel._signaturedrawingView.Clear(); //We can directly call the signaturedrawing view from xaml just for taking the code from vm it was done :) 
-        }
     }
 }

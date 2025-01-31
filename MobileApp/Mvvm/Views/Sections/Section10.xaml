@@ -2,22 +2,40 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
-             x:DataType="vms:Section10ViewModel"
+                xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section10">
     <VerticalStackLayout>
-        <Label
-            Text="Describe what happened during today’s session and the progress made toward the IFSP outcome(s). Include the routine activity and the strategies used in the session. When available, include the parent/caregiver feedback on how they incorporated the strategies between sessions."
-            LineBreakMode="WordWrap"/>
-        <Editor
-            Text="{Binding SessionDescription}"
-            Placeholder="Enter description..."
-            HeightRequest="100"
-            TextChanged="OnEditorTextChanged" />
-        <Label
-            x:Name="ValidationLabel"
-            TextColor="Red"
-            IsVisible="False"
-            Text="Description must be at least 100 characters." />
+        <CollectionView ItemsSource="{Binding Section10ViewModel.Outcomes}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Spacing="8">
+                        <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                <CheckBox IsChecked="{Binding IsChecked}"></CheckBox>
+                                <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                            </HorizontalStackLayout>
+                            <CollectionView IsVisible="{Binding  IsObjectiveVisible}" Margin="10,0,0,0" ItemsSource="{Binding Objectives}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout>
+                                            <HorizontalStackLayout>
+                                                <CheckBox IsChecked="{Binding IsChecked}"></CheckBox>
+                                                <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"></Label>
+                                            </HorizontalStackLayout>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <HorizontalStackLayout>
+            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" />
+            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" />
+            <Button Text="Next Section" Command="{Binding NextSectionCommand}" />
+        </HorizontalStackLayout>
+        <Label Text="Stage 9 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
     </VerticalStackLayout>
 </ContentView>

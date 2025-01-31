@@ -11,7 +11,7 @@
                 <Label Text="Childs name" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                <Picker  ItemsSource="{Binding ChildName}"  ItemDisplayBinding="{Binding DisplayName}"  SelectedItem="{Binding SelectedChild}"  Title="Select Child Name" >
+                <Picker ItemsSource="{Binding ChildName}" ItemDisplayBinding="{Binding DisplayName}" SelectedItem="{Binding SelectedChild}" Title="Select Child Name" >
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior 
                                     EventName="SelectedIndexChanged" 

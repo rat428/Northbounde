@@ -8,24 +8,16 @@
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
              x:DataType="vms:NotesViewModel"
-             Title="">
-    <Grid RowDefinitions="Auto,*,Auto">
-        <!-- Header, Saving functions-->
-        <Border Grid.Row="0">
-            <Grid Margin="0,15" ColumnDefinitions="*,*,*">
-                <Button Text="Cancel" Command="{Binding CancelCommand}" HorizontalOptions="Start" />
-                <Button Text="Save As Draft" Grid.Column="1" Command="{Binding SaveAsDraftCommand}" HorizontalOptions="Center" />
-                <Button Text="Save" Grid.Column="2" Command="{Binding SaveCommand}" HorizontalOptions="End" />
-            </Grid>
-        </Border>
-
-        <ContentView Grid.Row="1" Content="{Binding CurrentPage}"/>
+             Title="{Binding CurrentSectionPage.BindingContext.SectionTitle}">
+    <Grid RowDefinitions="*,Auto">
+        <ContentView Content="{Binding CurrentSectionPage}"/>
         
         <!-- Footer, Navigation functions-->
-        <Border Grid.Row="2">
-            <Grid Margin="0,15" ColumnDefinitions="*,*">
-                <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" HorizontalOptions="Start" />
-                <Button Text="Next Section" Command="{Binding NextSectionCommand}" HorizontalOptions="End" />
+        <Border Grid.Row="1">
+            <Grid Margin="0,15" ColumnDefinitions="*,*,*">
+                <Button Text="{Binding PreviousButtonText}" Command="{Binding PreviousSectionCommand}" HorizontalOptions="Center" />
+                <Button Grid.Column="1" Text="Save Draft" Command="{Binding Save}" HorizontalOptions="Center" />
+                <Button Grid.Column="2" Text="{Binding NextButtonText}" Command="{Binding NextSectionCommand}" HorizontalOptions="Center" />
             </Grid>
         </Border>
     </Grid>

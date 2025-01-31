@@ -1,54 +1,97 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows.Input;
+using CommunityToolkit.Maui.Views;
+using Microsoft.Maui.Controls;
+using System.Linq;
+using CommunityToolkit.Maui.Core;
+using Microsoft.Maui.Controls.Shapes;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 {
     public partial class Section5ViewModel : SectionViewModelBase
     {
         [ObservableProperty]
-        private DateTime sessionStartTime;
+        private ImageSource? signatureImage;
 
         [ObservableProperty]
-        private DateTime sessionEndTime;
+        private bool isSignatureVisible;
 
         [ObservableProperty]
-        private ObservableCollection<string> sessionSpans;
+        private bool isRelationshipVisible;
 
         [ObservableProperty]
-        private string? selectedSessionSpan;
+        private bool isOtherRelationshipVisible;
 
-        public ICommand CalculateEndTimeCommand { get; }
+        [ObservableProperty]
+        private ObservableCollection<string> relationshipOptions;
 
-        public Section5ViewModel() : base("Session Span")
+        [ObservableProperty]
+        private ObservableCollection<IDrawingLine> _lines;
+
+        [ObservableProperty]
+        private string? selectedRelationship;
+
+        [ObservableProperty]
+        private string? otherRelationshipText;
+
+
+        public DrawingView _signaturedrawingView;
+
+        public Section5ViewModel() : base("Attendance Signature")
         {
-            SessionSpans = new ObservableCollection<string>
-            {
-                "15 Min",
-                "30 Min",
-                "45 Min",
-                "60 Min"
-            };
-            SessionStartTime = DateTime.Now;
-            SessionEndTime = SessionStartTime;
+            IsSignatureVisible = false;
+            IsRelationshipVisible = false;
+            IsOtherRelationshipVisible = false;
 
-            CalculateEndTimeCommand = new RelayCommand(OnCalculateEndTime);
+            RelationshipOptions = new ObservableCollection<string>
+            {
+                "Parent/Caregiver",
+                "Teacher",
+                "Other"
+            };
+            Lines = new ObservableCollection<IDrawingLine>();
         }
-        private void OnCalculateEndTime()
-        {
-            if (string.IsNullOrEmpty(SelectedSessionSpan)) return;
 
-            TimeSpan sessionDuration = SelectedSessionSpan switch
+        [RelayCommand]
+        private void SubmitSignature()
+        {
+
+            if (SignatureImage != null)
             {
-                "15 Min" => TimeSpan.FromMinutes(15),
-                "30 Min" => TimeSpan.FromMinutes(30),
-                "45 Min" => TimeSpan.FromMinutes(45),
-                "60 Min" => TimeSpan.FromMinutes(60),
-                _ => TimeSpan.Zero
-            };
-            SessionEndTime = SessionStartTime.Add(sessionDuration);
+
+            }
+        }
+        [RelayCommand]
+        private void Sign()
+        {
+            IsSignatureVisible = true;
+            IsRelationshipVisible = true;
+        }
+        [RelayCommand]
+        private void Resign()
+        {
+            SignatureImage = null;
+            IsSignatureVisible = false;
+            IsRelationshipVisible = false;
+        }
+        [RelayCommand]
+        async Task DrawLineCompleted(IDrawingLine line)
+        {
+            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+
+            var stream = await line.GetImageStream(800, 800, Colors.Gray.AsPaint(), cts.Token);
+            if (stream != null)
+            {
+                SignatureImage = ImageSource.FromStream(() => stream);
+            }
+        }
+
+        partial void OnSelectedRelationshipChanged(string? value)
+        {
+            IsOtherRelationshipVisible = value == "Other";
         }
     }
 }

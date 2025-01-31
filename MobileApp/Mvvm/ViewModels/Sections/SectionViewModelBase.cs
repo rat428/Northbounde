@@ -26,7 +26,6 @@ public partial class SectionViewModelBase : ObservableObject
 
     [ObservableProperty]
     bool _isBusy = false;
-    public virtual async Task InitilizeData() { }
 
     public SectionViewModelBase(string Title)
     {

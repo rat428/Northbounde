@@ -24,7 +24,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         Section3MakeUpViewModel _Section3MakeUpViewModel;
         [ObservableProperty]
         Section3MissedViewModel _Section3MissedViewModel;
-
         [ObservableProperty]
         Section4ViewModel _Section4ViewModel;
         [ObservableProperty]
@@ -45,6 +44,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         Section12ViewModel _Section12ViewModel;
         [ObservableProperty]
         Section13ViewModel _Section13ViewModel;
+        [ObservableProperty]
+        Section14ViewModel _Section14ViewModel;
 
 
         [ObservableProperty]
@@ -77,6 +78,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             _Section11ViewModel = new Section11ViewModel();
             _Section12ViewModel = new Section12ViewModel();
             _Section13ViewModel = new Section13ViewModel();
+            _Section14ViewModel = new Section14ViewModel();
         }
 
 
@@ -85,7 +87,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         {
             CurrentSection = Section;
             var Page = IntToSection(Section);
-            currentSectionPage = Page;
+            CurrentSectionPage = Page;
         }
 
         // Int to Section converter
@@ -106,7 +108,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                         _ => Enumerable.Range(0,1).Select((i) =>
                         {
                             CurrentSection = 4;
-                            return new Section4(_Section4ViewModel);
+                            return new Section5(_Section5ViewModel);
                         }).ElementAt(0)
                     }
                 ),
@@ -120,6 +122,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 11 => new Section11(_Section11ViewModel),
                 12 => new Section12(_Section12ViewModel),
                 13 => new Section13(_Section13ViewModel),
+                14 => new Section14(_Section14ViewModel, _Section4ViewModel.IsTelehealthSelected),
                 _ => new Section1(_Section1ViewModel),
             };
         }
@@ -147,6 +150,12 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         [RelayCommand]
         private async Task NextSection()
         {
+            // if the current section is less than 13, show the next section
+            if (CurrentSection < 13)
+            {
+                ShowSection(CurrentSection + 1);
+            }
+
             // Update the next button text
             if (CurrentSection == 13)
             {
@@ -157,17 +166,9 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 NextButtonText = "Next";
             }
 
-            // if the current section is less than 13, show the next section
-            if (CurrentSection < 13)
-            {
-                ShowSection(CurrentSection + 1);
-            }
-
             // if the current section is 13, submit the form
             if (CurrentSection == 13)
             {
-                // Ask the user if they want to submit the form
-                bool submit = await Shell.Current.DisplayAlert("Submit Form", "Are you sure you want to submit the form?", "Yes", "No");
 
                 // If there are invalid sections, inform the user and navigate to the first invalid section
                 var invalidSections = GetInvalidSections();
@@ -175,12 +176,14 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 {
                     await Shell.Current.DisplayAlert("Invalid Sections",
                         "Please ensure all sections are complete and valid before submitting the form.\n" +
-                        "The following sections are incomplete or have errors: " + string.Join(", ", invalidSections.Select(section => $"Section {section}: {((SectionViewModelBase)IntToSection(section).BindingContext).SectionTitle}")),
+                        "The following sections are incomplete or have errors: " + string.Join("\n-", invalidSections.Select(section => $"Section {section}: {((SectionViewModelBase)IntToSection(section).BindingContext).SectionTitle}")),
                         "Goto Section " + invalidSections[0]);
                     ShowSection(invalidSections[0]);
                 }
                 else
                 {
+                    // Ask the user if they want to submit the form
+                    bool submit = await Shell.Current.DisplayAlert("Submit Form", "Are you sure you want to submit the form?", "Yes", "No");
                     // If the user wants to submit the form, navigate back to the previous page
                     if (submit)
                     {
@@ -199,6 +202,12 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         [RelayCommand]
         private async Task PreviousSection()
         {
+            // if the current section is greater than 1, show the previous section
+            if (CurrentSection > 1)
+            {
+                ShowSection(CurrentSection - 1);
+            }
+
             // Update the previous button text
             if (CurrentSection == 1)
             {
@@ -209,11 +218,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 PreviousButtonText = "Previous";
             }
 
-            // if the current section is greater than 1, show the previous section
-            if (CurrentSection > 1)
-            {
-                ShowSection(CurrentSection - 1);
-            }
 
             // if the current section is 1, cancel the form
             if (CurrentSection == 1)
@@ -242,7 +246,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                     "Missed" => _Section3MissedViewModel,
                     _ => _Section3CoVisitViewModel,
                 },
-                _Section4ViewModel,
                 _Section5ViewModel,
                 _Section6ViewModel,
                 _Section7ViewModel,
@@ -251,7 +254,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 _Section10ViewModel,
                 _Section11ViewModel,
                 _Section12ViewModel,
-                _Section13ViewModel
+                _Section13ViewModel,
+                _Section14ViewModel
             ];
         }
     }

@@ -15,15 +15,22 @@
 
         <!--CollectionView to display the Sync History-->
         <CollectionView Grid.Row="1" ItemsSource="{Binding SyncRecords}">
+            <CollectionView.Header>
+                <Grid Padding="0,30,0,0" HorizontalOptions="Fill">
+                    <Border BackgroundColor="Gray">
+                        <Label Text="Sync Date" TextColor="White" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"/>
+                    </Border>
+                </Grid>
+            </CollectionView.Header>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="model:SyncRecord">
-                    <Grid Padding="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Label Grid.Column="0" Text="Sync Date:" FontAttributes="Bold"/>
-                        <Label Grid.Column="1" Text="{Binding SyncDate, StringFormat='{0:MM/dd/yyyy HH:mm:ss}'}"/>
+                    <Grid Padding="0,0,0,0" HorizontalOptions="Fill">
+                        <Border>
+                            <Label
+                                FontSize="Medium"
+                                HorizontalOptions="Center"
+                                Text="{Binding SyncDate, StringFormat='{0:MM/dd/yyyy HH:mm:ss}'}"/>
+                        </Border>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

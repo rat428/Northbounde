@@ -1,27 +1,25 @@
-using CommunityToolkit.Maui.Views;
+
 using Northboundei.Mobile.Mvvm.ViewModels.Sections;
 
-namespace Northboundei.Mobile.Mvvm.Views.Sections
+namespace Northboundei.Mobile.Mvvm.Views.Sections;
+
+public partial class Section13 : ContentView
 {
-    public partial class Section13 : ContentView
+    public Section13(Section13ViewModel viewModel)
     {
-        Section13ViewModel _viewModel;
-        public Section13(Section13ViewModel viewModel)
-        {
-            InitializeComponent();
-            BindingContext = _viewModel = viewModel;
-        }
+        InitializeComponent();
+        BindingContext = viewModel;
+    }
 
-        private void Clear_Clicked(object sender, EventArgs e)
+    private void OnEditorTextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (e.NewTextValue.Length < 100)
         {
-            _viewModel._signaturedrawingView = myDrawingView;
-            _viewModel._signaturedrawingView.Clear(); //We can directly call the signaturedrawing view from xaml just for taking the code from vm it was done :) 
+            ValidationLabel.IsVisible = true;
         }
-
-        private void ClearUser_Clicked(object sender, EventArgs e)
+        else
         {
-            _viewModel._signaturedrawingView = myUserDrawingView;
-            _viewModel._signaturedrawingView.Clear();
+            ValidationLabel.IsVisible = false;
         }
     }
 }

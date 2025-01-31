@@ -1,109 +1,23 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentView
-    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:mct="clr-namespace:CommunityToolkit.Maui.Views;assembly=CommunityToolkit.Maui"
-    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
-    x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section13">
-
-    <VerticalStackLayout Padding="16">
-        <!-- Attendance Signature Section -->
-        <Label Text="Attendance Signature"
-                    FontSize="16" 
-                    FontAttributes="Bold" 
-                    Margin="0,8" />
-
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-            <Button Text="Sign" 
-                         Command="{Binding Section13ViewModel.SignCommand}" 
-                         Margin="0,8" />
-
-            <Button Text="Resign" 
-                         Grid.Column="1"
-                         Command="{Binding Section13ViewModel.ResignCommand}" 
-                         IsVisible="{Binding Section13ViewModel.SignatureImage, Converter={StaticResource NullToBoolConverter}}" 
-                         Margin="0,8" />
-        </Grid>
-
-        <VerticalStackLayout IsVisible="{Binding Section13ViewModel.IsSignatureVisible}">
-            <VerticalStackLayout>
-                <Label Text="Signature" 
-                            FontSize="18" 
-                            FontAttributes="Bold" 
-                            HorizontalOptions="Center" 
-                            Margin="0,8" />
-                <Frame BorderColor="Black" 
-                            HeightRequest="200" Padding="2"
-                            BackgroundColor="LightGray">
-                    <mct:DrawingView x:Name="myDrawingView"   Lines="{Binding Section13ViewModel.MyLines}"
-                         DrawingLineCompletedCommand="{Binding Section13ViewModel.DrawingLineCompletedCommand}" 
-                         HorizontalOptions="FillAndExpand"
-                         VerticalOptions="FillAndExpand" 
-                         HeightRequest="250"
-                         IsMultiLineModeEnabled="True"
-                         BackgroundColor="LightGray" />
-
-                </Frame>
-                <Grid ColumnSpacing="10" ColumnDefinitions="*,*" Margin="0,8">
-                    <Button Text="Clear" x:Name="Clear" Clicked="Clear_Clicked"
-                                 Command="{Binding Section13ViewModel.ClearSignatureCommand}" 
-                                 HorizontalOptions="FillAndExpand" />
-                    <Button Text="Submit" 
-                                 Grid.Column="1"
-                                 x:Name="Submit" Command="{Binding Section13ViewModel.SubmitSignatureCommand}"
-                                 HorizontalOptions="FillAndExpand" />
-                </Grid>
-            </VerticalStackLayout>
-        </VerticalStackLayout>
-
-        <!-- Second Signature (User) -->
-        <Label Text="User Signature"
-               FontAttributes="Bold"
-               Margin="0,8" />
-        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-            <Button Text="Sign User"
-                    Command="{Binding Section13ViewModel.SignUserCommand}" />
-            <Button Text="Resign User"
-                    Grid.Column="1"
-                    Command="{Binding Section13ViewModel.ResignUserCommand}"
-                    IsVisible="{Binding Section13ViewModel.UserSignatureImage, Converter={StaticResource NullToBoolConverter}}" />
-        </Grid>
-
-        <VerticalStackLayout IsVisible="{Binding Section13ViewModel.IsUserSignatureVisible}">
-            <Frame HeightRequest="200" BackgroundColor="LightGray">
-                <mct:DrawingView x:Name="myUserDrawingView"
-                     Lines="{Binding Section13ViewModel.UserLines}"
-                     DrawingLineCompletedCommand="{Binding Section13ViewModel.DrawLineCompletedUserCommand}" />
-            </Frame>
-        </VerticalStackLayout>
-
-        <!-- Caregiver Relationship Section -->
-        <VerticalStackLayout Spacing="10" IsVisible="{Binding Section13ViewModel.IsRelationshipVisible}">
-            <Grid ColumnDefinitions="auto,*" Margin="0,8">
-                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
-                    <Label Text="Relationship" HorizontalOptions="Center" VerticalOptions="Center" />
-                </Border>
-                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                    <VerticalStackLayout>
-                        <Picker ItemsSource="{Binding Section13ViewModel.RelationshipOptions}" 
-                                        SelectedItem="{Binding Section13ViewModel.SelectedRelationship}" 
-                                        Title="Select Relationship" 
-                                        Margin="0,8" />
-
-                        <Entry Text="{Binding Section13ViewModel.OtherRelationshipText}" 
-                                       Placeholder="Specify if 'Other'" 
-                                       IsVisible="{Binding Section13ViewModel.IsOtherRelationshipVisible}" 
-                                       Margin="0,8" />
-                    </VerticalStackLayout>
-                </Border>
-            </Grid>
-        </VerticalStackLayout>
-        <HorizontalStackLayout>
-            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
-            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
-            <Button Text="Submit" Command="{Binding SubmitCommand}" Margin="4" />
-        </HorizontalStackLayout>
-        <Label Text="Stage 13 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:DataType="vms:Section13ViewModel"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section13">
+    <VerticalStackLayout>
+        <Label
+            Text="What strategies/activities did you and the parent/caregiver collaboratively agree to do to support their child's learning and development between visits?"
+            FontSize="Medium" />
+        <Editor
+            Text="{Binding CarryOverDescription}"
+            Placeholder="Enter strategies/activities..."
+            HeightRequest="100"
+            TextChanged="OnEditorTextChanged" />
+        <Label
+            x:Name="ValidationLabel"
+            TextColor="Red"
+            IsVisible="{Binding IsCarryOverValidationVisible}"
+            Text="Description must be at least 100 characters." />
     </VerticalStackLayout>
 </ContentView>

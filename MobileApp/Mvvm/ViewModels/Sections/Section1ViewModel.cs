@@ -35,9 +35,13 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         List<SessionNoteResponse> _sessionData;
         public Section1ViewModel() : base("Setup")
         {
+            MainThread.BeginInvokeOnMainThread(async () =>
+            {
+                await InitilizeData();
+            });
         }
 
-        public override async Task InitilizeData()
+        public async Task InitilizeData()
         {
             await LoadChildrenData();
             await LoadSessionData();
