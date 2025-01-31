@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,124 +16,57 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         [ObservableProperty]
         bool _isDraftEnabled;
 
+        [ObservableProperty]
         private string _selectedAttendanceType;
+        [ObservableProperty]
         private string _covisitWhoElse;
+        [ObservableProperty]
         private string _selectedMakeUpSession;
+        [ObservableProperty]
         private string _selectedMissedReason;
+        [ObservableProperty]
         private string _remainingUnitsAuthorization;
+        [ObservableProperty]
         private string _remainingUnitsWeek;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         // Attendance Types
-        public List<string> AttendanceTypeList { get; set; }
+        [ObservableProperty]
+        public List<string> _AttendanceTypeList = [ "Attended", "Make-up", "Covisit", "Missed" ];
 
         // Make-up sessions (fetched from the missed sessions list)
         public List<string> MissedSessions { get; set; }
 
         // Missed reasons for missed attendance
-        public List<string> MissedReasons { get; set; }
+        [ObservableProperty]
+        public List<string> MissedReasons = ["Illness", "Emergency", "Other"];
 
         // Boolean flags for visibility of the sections
-        public bool IsAttendedSectionVisible => SelectedAttendanceType == "Attended";
         public bool IsMakeUpSectionVisible => SelectedAttendanceType == "Make-up";
         public bool IsCovisitSectionVisible => SelectedAttendanceType == "Covisit";
         public bool IsMissedSectionVisible => SelectedAttendanceType == "Missed";
-        public ICommand OnChildSelectedCommand => new Command(OnChildSelected);
 
-        private void OnChildSelected(object obj)
+        [RelayCommand]
+        private void OnChildSelected()
         {
             IsDraftEnabled = true;
         }
 
-
-        // Properties for the text fields and dropdown selections
-        public string SelectedAttendanceType
-        {
-            get => _selectedAttendanceType;
-            set
-            {
-                if (_selectedAttendanceType != value)
-                {
-                    _selectedAttendanceType = value;
-                    OnPropertyChanged();
-                    OnAttendanceTypeChanged();
-                }
-            }
-        }
-
-        public string CovisitWhoElse
-        {
-            get => _covisitWhoElse;
-            set
-            {
-                if (_covisitWhoElse != value)
-                {
-                    _covisitWhoElse = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string SelectedMakeUpSession
-        {
-            get => _selectedMakeUpSession;
-            set
-            {
-                if (_selectedMakeUpSession != value)
-                {
-                    _selectedMakeUpSession = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string SelectedMissedReason
-        {
-            get => _selectedMissedReason;
-            set
-            {
-                if (_selectedMissedReason != value)
-                {
-                    _selectedMissedReason = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string RemainingUnitsAuthorization
-        {
-            get => _remainingUnitsAuthorization;
-            set
-            {
-                if (_remainingUnitsAuthorization != value)
-                {
-                    _remainingUnitsAuthorization = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
-        public string RemainingUnitsWeek
-        {
-            get => _remainingUnitsWeek;
-            set
-            {
-                if (_remainingUnitsWeek != value)
-                {
-                    _remainingUnitsWeek = value;
-                    OnPropertyChanged();
-                }
-            }
-        }
-
         // Constructor to initialize the lists and defaults
-        public Section2ViewModel()
+        public Section2ViewModel() : base("Attendance")
         {
             // Initialize dropdown lists with example data
-            AttendanceTypeList = new List<string> { "Attended", "Make-up", "Covisit", "Missed" };
             MissedSessions = new List<string>(); // Populate with actual missed sessions data from your database
-            MissedReasons = new List<string> { "Illness", "Emergency", "Other" }; // Example missed reasons
+        }
+
+        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.PropertyName == nameof(SelectedAttendanceType))
+            {
+                OnAttendanceTypeChanged();
+            }
         }
 
         // Method that gets triggered when AttendanceType changes
@@ -155,6 +89,9 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
             }
 
             // You can add additional logic to update Remaining Units calculations here as well
+
+            UpdateMenuVisibility();
+            UpdateSectionCompletionStatus();
         }
 
         // INotifyPropertyChanged implementation for binding updates
@@ -162,6 +99,17 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        // Adjust menu visibility based on the "Attendance Type" selected
+        private void UpdateMenuVisibility()
+        {
+            // Logic to adjust menu visibility based on the "Attendance Type" selected
+        }
+
+        // Change background colors of sections based on completion status
+        private void UpdateSectionCompletionStatus()
+        {
+            // Logic to change background colors of sections based on completion status
+        }
     }
 }
-

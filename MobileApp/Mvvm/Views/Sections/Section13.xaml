@@ -100,10 +100,10 @@
             </Grid>
         </VerticalStackLayout>
         <HorizontalStackLayout>
-            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="12" />
-            <!-- Removed Save as Draft button -->
-            <Button Text="Submit" Command="{Binding SubmitCommand}" />
+            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
+            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
+            <Button Text="Submit" Command="{Binding SubmitCommand}" Margin="4" />
         </HorizontalStackLayout>
-
+        <Label Text="Stage 13 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
     </VerticalStackLayout>
 </ContentView>

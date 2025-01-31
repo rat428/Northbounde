@@ -36,8 +36,8 @@
             <Button Text="Login" Command="{Binding LoginCommand}" Background="#212529" Margin="4"  />
         </VerticalStackLayout>
         <ActivityIndicator x:Name="loadingIndicator"
-                           IsRunning="{Binding IsLoading}" 
-                           IsVisible="{Binding IsLoading}"
+                           IsRunning="{Binding IsBusy}" 
+                           IsVisible="{Binding IsBusy}"
                            VerticalOptions="CenterAndExpand" 
                            HorizontalOptions="CenterAndExpand" />
     </Grid>

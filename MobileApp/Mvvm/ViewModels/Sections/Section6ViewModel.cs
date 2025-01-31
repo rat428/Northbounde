@@ -13,7 +13,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         [ObservableProperty]
         private bool delayedMilestoneChecked;
 
-        public Section6ViewModel()
+        public Section6ViewModel() : base("Diagnosis")
         {
 
         }

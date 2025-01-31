@@ -2,6 +2,7 @@
 using Android.Window;
 #endif
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
 using Northboundei.Mobile.Dto;
@@ -14,7 +15,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 {
     public partial class LoginViewModel : BaseViewModel
     {
-        private readonly INavigationService _navigationService;
         private readonly IUserService _userService;
         IPermissionService _locationPermissionService;
         ISettingsService _settingsService;
@@ -22,35 +22,25 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         HomeViewModel _homeViewModel;
         SyncViewModel _syncViewModel;
 
-        [ObservableProperty]
-        bool _isLoading;
-
-        private IList<string> _errors = new List<string>();
         private string _username;
         private string _password;
         private bool _keepMeLogged;
-        public ICommand LoginCommand { get; }
-        public ICommand LoadCommand { get; }
         public string Username { get => _username; set => SetProperty(ref _username, value); }
         public string Password { get => _password; set => SetProperty(ref _password, value); }
         public bool KeepMeLogged { get => _keepMeLogged; set => SetProperty(ref _keepMeLogged, value); }
 
         public LoginViewModel(
-            INavigationService navigationService,
             IUserService userService,
             IPermissionService locationPermissionService,
             ISettingsService settingsService,
             IServiceProvider serviceProvider)
         {
-            _navigationService = navigationService;
             _userService = userService;
             _settingsService = settingsService;
             _serviceProvider = serviceProvider;
             _locationPermissionService = locationPermissionService;
-            _homeViewModel = _serviceProvider.GetService<HomeViewModel>();
-            _syncViewModel = _serviceProvider.GetService<SyncViewModel>();
-
-            LoginCommand = new Command(OnLogin);
+            _homeViewModel = _serviceProvider.GetService<HomeViewModel>()!;
+            _syncViewModel = _serviceProvider.GetService<SyncViewModel>()!;
         }
 
         private async Task RequestPermissions()
@@ -71,7 +61,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 await _settingsService.OpenAirplaneModeSettings();
             }
 
-            if (_homeViewModel.Settings.GPSOn is false)
+            if (_homeViewModel.Settings.GpsOn is false)
             {
                 await App.Current.MainPage.DisplayAlert("", "Gps must be turned on", "OK");
                 await _settingsService.CurrentAppSettingsAsync();
@@ -96,9 +86,10 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             }
 
         }
-        private async void OnLogin()
+        [RelayCommand]
+        private async Task Login()
         {
-            IsLoading= true;
+            IsBusy = true;
             try
             {
                 var login = new LoginRequest
@@ -126,7 +117,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
                 await StoreUserAsync(client);
 
-                await _syncViewModel.SyncNowCommand.ExecuteAsync(null);
+                await _syncViewModel.SyncNow();
 
                 App.Current.MainPage = _serviceProvider.GetService<AppShell>();
 
@@ -137,10 +128,13 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             }
             catch (Exception ex)
             {
-                await App.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
+                // App.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
+                throw;
             }
-            IsLoading = false;
-
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
         private async Task<bool> CheckIfAnotherUserLoggedInBefore(string username)

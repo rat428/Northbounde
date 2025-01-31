@@ -2,11 +2,11 @@ using Northboundei.Mobile.Mvvm.ViewModels.Sections;
 
 namespace Northboundei.Mobile.Mvvm.Views.Sections;
 
-public partial class Section8 : ContentView
+public partial class Section3MakeUp : ContentView
 {
-	public Section8(Section8ViewModel viewModel)
+	public Section3MakeUp(Section3MakeUpViewModel section3)
     {
 		InitializeComponent();
-        BindingContext = viewModel;
+        BindingContext = section3;
     }
 }

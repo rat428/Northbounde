@@ -12,7 +12,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
     {
         [ObservableProperty]
         private ObservableCollection<Outcome> outcomes;
-        public Section9ViewModel() {
+        public Section9ViewModel() : base("Outcomes and Objectives")
+        {
             Outcomes = new ObservableCollection<Outcome>
             {
                 new Outcome
@@ -21,7 +22,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
                     IsChecked = false,
                     Objectives = new ObservableCollection<Objective>
                     {
-                        new Objective{IsChecked = false, Title = "TestInside"}
+                        new Objective{ IsChecked = false, Title = "TestInside"}
                     }
                 }
             };

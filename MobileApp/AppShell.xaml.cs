@@ -12,7 +12,5 @@ namespace Northboundei.Mobile
             InitializeComponent();
             BindingContext = _publichomeviewModel = viewModel;
         }
-
-  
     }
 }

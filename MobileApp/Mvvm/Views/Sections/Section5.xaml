@@ -37,9 +37,11 @@
             </Border>
         </Grid>
 
-        <HorizontalStackLayout HorizontalOptions="Start">
-            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="4" Margin="4" />
-            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="6" Margin="4" />
+        <HorizontalStackLayout>
+            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
+            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
+            <Button Text="Next Section" Command="{Binding NextSectionCommand}" Margin="4" />
         </HorizontalStackLayout>
+        <Label Text="Stage 5 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
     </VerticalStackLayout>
 </ContentView>

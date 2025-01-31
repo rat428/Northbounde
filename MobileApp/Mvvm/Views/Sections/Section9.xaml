@@ -32,9 +32,10 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
         <HorizontalStackLayout>
-            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="8" />
-            <!-- Removed Save as Draft button -->
-            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="10" />
+            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" />
+            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" />
+            <Button Text="Next Section" Command="{Binding NextSectionCommand}" />
         </HorizontalStackLayout>
+        <Label Text="Stage 9 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
     </VerticalStackLayout>
 </ContentView>

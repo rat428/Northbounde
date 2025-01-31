@@ -2,8 +2,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels"
-             x:DataType="vms:HomeViewModel"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:DataType="vms:Section1ViewModel"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section1">
     <VerticalStackLayout>
         <Grid ColumnDefinitions="auto,*" Margin="0,8">
@@ -11,11 +11,11 @@
                 <Label Text="Childs name" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                <Picker  ItemsSource="{Binding Section1ViewModel.ChildName}"  ItemDisplayBinding="{Binding DisplayName}"  SelectedItem="{Binding Section1ViewModel.SelectedChild}"  Title="Select Child Name" >
+                <Picker  ItemsSource="{Binding ChildName}"  ItemDisplayBinding="{Binding DisplayName}"  SelectedItem="{Binding SelectedChild}"  Title="Select Child Name" >
                     <Picker.Behaviors>
                         <toolkit:EventToCommandBehavior 
                                     EventName="SelectedIndexChanged" 
-                                    Command="{Binding Section1ViewModel.OnChildSelectedCommand}" />
+                                    Command="{Binding OnChildSelectedCommand}" />
                     </Picker.Behaviors>
                 </Picker>
             </Border>
@@ -26,7 +26,7 @@
                 <Label Text="Session date" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                <Entry  Text="{Binding Section1ViewModel.SessionDate}"  IsEnabled="False" />
+                <Entry  Text="{Binding SessionDate}"  IsEnabled="False" />
             </Border>
         </Grid>
 
@@ -72,9 +72,10 @@
             </Border>
         </Grid>
         <HorizontalStackLayout>
-            <Button Text="Discard" Command="{Binding DiscardCommand}" Margin="4" />
-            <!-- Removed Save as Draft button -->
-            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="2" Margin="4" />
+            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
+            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
+            <Button Text="Next Section" Command="{Binding NextSectionCommand}" Margin="4" />
         </HorizontalStackLayout>
+        <Label Text="Stage 1 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
     </VerticalStackLayout>
 </ContentView>

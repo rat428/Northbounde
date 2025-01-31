@@ -19,24 +19,35 @@
          Aspect="AspectFit"
          SemanticProperties.Description="Logo" />
     </Shell.FlyoutHeader>
- 
-   
+
     <!--Pages-->
-    <MenuItem Text="Home" Command="{Binding HomeCommand}"   Shell.FlyoutItemIsVisible="{Binding IsHomeVisible,Mode=TwoWay}" />
-    <MenuItem Text="Start Note" Command="{Binding NotesPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsStartVisible,Mode=TwoWay}" />
-    <MenuItem Text="Continue Note" Command="{Binding DraftPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsContinueVisible,Mode=TwoWay}" />
-    <MenuItem Text="Sync" Command="{Binding SyncPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsSyncVisible,Mode=TwoWay}" />
+    <MenuFlyoutItem Text="Home" Command="{Binding HomeCommand}"   Shell.FlyoutItemIsVisible="{Binding IsHomeVisible}" />
+    <MenuFlyoutItem Text="Start Note" Command="{Binding NotesPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsStartVisible}" />
+    <MenuFlyoutItem Text="Continue Note" Command="{Binding DraftPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsContinueVisible}" />
+    <MenuFlyoutItem Text="Sync" Command="{Binding SyncPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsSyncVisible}" />
 
     <!--Sections-->
-    <MenuItem Text="Section1" Command="{Binding Section1Command}"   Shell.FlyoutItemIsVisible="{Binding IsSection1Visible}" />
-    <MenuItem Text="Section2" Command="{Binding Section2Command}"  Shell.FlyoutItemIsVisible="{Binding IsSection2Visible}" />
-    <MenuItem Text="Section3" Command="{Binding Section3Command}"  Shell.FlyoutItemIsVisible="{Binding IsSection3Visible}" />
+    <MenuFlyoutSeparator Text="Sections"/>
+    
 
-    <MenuItem Text="Logout" Command="{Binding LogoutCommand}"  />
+    <MenuFlyoutSeparator Text="Account Options"/>
+    <MenuFlyoutItem Text="Logout" Command="{Binding LogOutCommand}"  />
+    
+    <!-- TODO: Implement Coloring Based On Section Completion Status
+    <Shell.ItemTemplate>
+        <DataTemplate x:DataType="FlyoutItem">
+            <Grid ColumnDefinitions="0.2*,0.8*">
+                <Ellipse Grid.Column="0" Fill="{Binding Converter}" />
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       VerticalTextAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    -->
 
     <ShellContent Route="ActionPage" ContentTemplate="{DataTemplate views:ActionPage}" FlyoutItemIsVisible="False" />
     <ShellContent Route="NotesPage" ContentTemplate="{DataTemplate views:NotesPage}" FlyoutItemIsVisible="False" />
-    <ShellContent Route="BlankPage2" ContentTemplate="{DataTemplate views:NotesDraftPage}" FlyoutItemIsVisible="False" />
     <ShellContent Route="SyncPage"   ContentTemplate="{DataTemplate views:SyncPage}" FlyoutItemIsVisible="False" />
 
 </Shell>

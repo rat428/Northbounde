@@ -26,7 +26,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
 
 
-        public Section8ViewModel()
+        public Section8ViewModel() : base("Participants")
         {
 
         }

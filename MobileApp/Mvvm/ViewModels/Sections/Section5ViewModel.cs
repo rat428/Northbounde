@@ -22,7 +22,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
         public ICommand CalculateEndTimeCommand { get; }
 
-        public Section5ViewModel()
+        public Section5ViewModel() : base("Session Span")
         {
             SessionSpans = new ObservableCollection<string>
             {

@@ -102,7 +102,7 @@ public partial class SplashScreenPage : ContentPage
 
         _homeViewModel!.Settings.LocationSharingAllowed = await _locationPermissionService.IsLocationPermissionGrantedAsync();
         _homeViewModel.Settings.AirplaneMode = await _locationPermissionService.IsAirplaneModeEnabled();
-        _homeViewModel.Settings.GPSOn = await _locationPermissionService.IsGpsEnabled();
+        _homeViewModel.Settings.GpsOn = await _locationPermissionService.IsGpsEnabled();
         _homeViewModel.Settings.DeveloperToolsEnabled = await _locationPermissionService.IsDeveloperModeEnabled();
         _homeViewModel.Settings.InternetAccessAvailable = await _locationPermissionService.IsInternetAvailable();
         _homeViewModel.Settings.AllowRunInBackground = await _locationPermissionService.CanRunInBackground();
@@ -125,7 +125,7 @@ public partial class SplashScreenPage : ContentPage
         if (_homeViewModel!.Settings.AirplaneMode is true)
             await DisplayAlert("", "Airplane mode must be turned off", "Done!");
 
-        if (_homeViewModel!.Settings.GPSOn is false)
+        if (_homeViewModel!.Settings.GpsOn is false)
             await DisplayAlert("", "Location(GPS) must be turned on", "Done!");
 
 #if !DEBUG

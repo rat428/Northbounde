@@ -4,10 +4,12 @@ using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
+using Northboundei.Mobile.Helpers.Converters;
 using Northboundei.Mobile.IServices;
 using Northboundei.Mobile.Mvvm.Models;
 using Northboundei.Mobile.Mvvm.ViewModels.Sections;
 using Northboundei.Mobile.Mvvm.Views;
+using Northboundei.Mobile.Mvvm.Views.Sections;
 using Northboundei.Mobile.Services;
 using System.Windows.Input;
 
@@ -15,7 +17,9 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 {
     public partial class HomeViewModel : BaseViewModel
     {
-        private SettingsModel _settings;
+        [ObservableProperty]
+        SettingsModel _settings;
+
         IPermissionService _permissionService;
         IServiceProvider _serviceProvider;
         INoteService _noteService;
@@ -26,35 +30,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         private bool _isBusy;
 
         [ObservableProperty]
-        Section1ViewModel _Section1ViewModel;
-        [ObservableProperty]
-        Section2ViewModel _Section2ViewModel;
-        [ObservableProperty]
-        Section3ViewModel _Section3ViewModel;
-        [ObservableProperty]
-        Section4ViewModel _Section4ViewModel;
-        [ObservableProperty]
-        Section5ViewModel _Section5ViewModel;
-        [ObservableProperty]
-        Section6ViewModel _Section6ViewModel;
-        [ObservableProperty]
-        Section7ViewModel _Section7ViewModel;
-        [ObservableProperty]
-        Section8ViewModel _Section8ViewModel;
-        [ObservableProperty]
-        Section9ViewModel _Section9ViewModel;
-        [ObservableProperty]
-        Section10ViewModel _Section10ViewModel;
-        [ObservableProperty]
-        Section11ViewModel _Section11ViewModel;
-        [ObservableProperty]
-        Section12ViewModel _Section12ViewModel;
-        [ObservableProperty]
-        Section13ViewModel _Section13ViewModel;
-
-        [ObservableProperty]
         bool isHomeVisible = true;
-        //[ObservableProperty]
+        [ObservableProperty]
         bool _isStartVisible = true;
         [ObservableProperty]
         bool _isContinueVisible = true;
@@ -64,12 +41,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         [ObservableProperty]
         public string _lastSyncDate = "FETCHING....";
 
-        public SettingsModel Settings { get => _settings; set => SetProperty(ref _settings, value); }
-        public bool IsStartVisible
-        {
-            get => _isStartVisible;
-            set => SetProperty(ref _isStartVisible, value);
-        }
 
         public HomeViewModel(
             IPermissionService permissionService,
@@ -81,26 +52,16 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             _serviceProvider = serviceProvider;
             _statusTimer = new System.Timers.Timer(1000); // Check every 5 seconds
             _statusTimer.Elapsed += (sender, e) => CheckStatus();
+
             _permissionService.AirplaneModeChanged += _permissionService_AirplaneModeChanged;
             _permissionService.GpsStatusChanged += _permissionService_GpsStatusChanged;
             _permissionService.TimeZoneChanged += _permissionService_TimeZoneChanged;
             _permissionService.AutoDateChanged += _permissionService_AutoDateChanged;
-            _Section1ViewModel = new Section1ViewModel();
-            _Section2ViewModel = new Section2ViewModel();
-            _Section3ViewModel = new Section3ViewModel();
-            _Section4ViewModel = new Section4ViewModel();
-            _Section5ViewModel = new Section5ViewModel();
-            _Section6ViewModel = new Section6ViewModel();
-            _Section7ViewModel = new Section7ViewModel();
-            _Section8ViewModel = new Section8ViewModel();
-            _Section9ViewModel = new Section9ViewModel();
-            _Section10ViewModel = new Section10ViewModel();
-            _Section11ViewModel = new Section11ViewModel();
-            _Section12ViewModel = new Section12ViewModel();
-            _Section13ViewModel = new Section13ViewModel();
+
+            
             _noteService = noteService;
             _childService = childService;
-            _syncViewModel = _serviceProvider.GetService<SyncViewModel>();
+            _syncViewModel = _serviceProvider.GetService<SyncViewModel>()!;
             InitializeData().ConfigureAwait(false);
         }
 
@@ -118,7 +79,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + nameof(IChildService), JsonConvert.SerializeObject(children)).ConfigureAwait(false);
                 SessionManager.IsAuthSync = true;
             }
-            await _Section1ViewModel.InitilizeData();
         }
 
         private void _permissionService_AutoDateChanged(object? sender, bool? e)
@@ -137,58 +97,13 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             });
         }
 
-        [RelayCommand]
-        private void ShowSection(int Section)
-        {
-            HideMenuAll();
-            switch (Section)
-            {
-                case 1:
-                    Section1ViewModel.IsOpen = true;
-                    break;
-                case 2:
-                    Section2ViewModel.IsOpen = true;
-                    break;
-                case 3:
-                    Section3ViewModel.IsOpen = true;
-                    break;
-                case 4:
-                    Section4ViewModel.IsOpen = true;
-                    break;
-                case 5:
-                    Section5ViewModel.IsOpen = true;
-                    break;
-                case 6:
-                    Section6ViewModel.IsOpen = true;
-                    break;
-                case 7:
-                    Section7ViewModel.IsOpen = true;
-                    break;
-                case 8:
-                    Section8ViewModel.IsOpen = true;
-                    break;
-                case 9:
-                    Section9ViewModel.IsOpen = true;
-                    break;
-                case 10:
-                    Section10ViewModel.IsOpen = true;
-                    break;
-                case 11:
-                    Section11ViewModel.IsOpen = true;
-                    break;
-                case 12:
-                    Section12ViewModel.IsOpen = true;
-                    break;
-                case 13:
-                    Section13ViewModel.IsOpen = true;
-                    break;
-            }
-        }
+
+        
 
         [RelayCommand]
         private void Home(object obj)
         {
-            HideMenuAll();
+            HideFlyoutAll();
             NavigateToShell("//ActionPage");
             IsStartVisible = true;
             IsContinueVisible = true;
@@ -197,19 +112,13 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         [RelayCommand]
         private void NotesPage(object obj)
         {
-            HideMenuAll();
+            HideFlyoutAll();
             NavigateToShell("//NotesPage");
-        }
-        [RelayCommand]
-        private void DraftPage(object obj)
-        {
-            HideMenuAll();
-            NavigateToShell("//BlankPage2");
         }
         [RelayCommand]
         private void SyncPage(object obj)
         {
-            HideMenuAll();
+            HideFlyoutAll();
             NavigateToShell("//SyncPage");
         }
         [RelayCommand]
@@ -228,15 +137,14 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             }
             catch (Exception ex)
             {
-                var xx = ex.Message;
-                // add  logs
+                await Shell.Current.DisplayAlert("Error", ex.Message, "OK");
             }
 
         }
 
         public async Task PerformLogout()
         {
-            await _syncViewModel.SyncNowCommand.ExecuteAsync(null);
+            await _syncViewModel.SyncNow();
 
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
@@ -245,25 +153,11 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             });
         }
 
-        private void HideMenuAll()
+        private void HideFlyoutAll()
         {
             IsStartVisible = false;
             IsContinueVisible = false;
             IsSyncVisible = false;
-            Section1ViewModel.IsOpen = false;
-            Section2ViewModel.IsOpen = false;
-            Section3ViewModel.IsOpen = false;
-            Section4ViewModel.IsOpen = false;
-            Section5ViewModel.IsOpen = false;
-            Section6ViewModel.IsOpen = false;
-            Section7ViewModel.IsOpen = false;
-            Section8ViewModel.IsOpen = false;
-            Section9ViewModel.IsOpen = false;
-            Section10ViewModel.IsOpen = false;
-            Section11ViewModel.IsOpen = false;
-            Section12ViewModel.IsOpen = false;
-            Section13ViewModel.IsOpen = false;
-            
         }
 
         private void NavigateToShell(string url,Dictionary<string, object>? parameters = null)
@@ -289,9 +183,9 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 var allowRunInBackground = await _permissionService.CanRunInBackground();
                 var locationSharingAllowed = await _permissionService.IsLocationPermissionGrantedAsync();
                 var airplane = await _permissionService.IsAirplaneModeEnabled();
-                MainThread.BeginInvokeOnMainThread(async () =>
+                MainThread.BeginInvokeOnMainThread(() =>
                 {
-                    Settings.GPSOn = gPSOn;
+                    Settings.GpsOn = gPSOn;
                     Settings.InternetAccessAvailable = internetAccessAvailable;
                     Settings.DeveloperToolsEnabled = developerToolsEnabled;
                     Settings.AllowRunInBackground = allowRunInBackground;
@@ -328,7 +222,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
-                Settings.GPSOn = e;
+                Settings.GpsOn = e;
             });
         }
 
@@ -361,7 +255,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             if (Settings.AirplaneMode is true)
                 return false;
 
-            if (Settings.GPSOn is false)
+            if (Settings.GpsOn is false)
                 return false;
 
             if (Settings.DeveloperToolsEnabled is false)
@@ -393,9 +287,21 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         }
 
         [RelayCommand]
-        private async Task SubmitAsync()
+        private async Task Submit()
         {
             // TODO: Validate NoteActionsToolbar fields then submit
+        }
+
+        [RelayCommand]
+        private void SaveAsDraft()
+        {
+            // Logic to save the current state as a draft
+        }
+
+        // Add an indicator on each page to show the current stage
+        private void AddStageIndicator()
+        {
+            // Logic to add an indicator on each page to show the current stage
         }
     }
 }

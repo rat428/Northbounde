@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
-namespace Northboundei.Mobile.Mvvm.ViewModels
+namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 {
-    public class NotesDraftViewModel : BaseViewModel
+    public partial class Section3MakeUpViewModel : SectionViewModelBase
     {
-        public NotesDraftViewModel()
+
+        public Section3MakeUpViewModel() : base("Make-Up Attendance")
         {
 
         }

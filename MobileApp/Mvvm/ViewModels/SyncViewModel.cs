@@ -22,7 +22,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         }
 
         [RelayCommand]
-        async Task SyncNow()
+        public async Task SyncNow()
         {
             try
             {
@@ -47,7 +47,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         private async Task FetchSyncHistory()
         {
             var syncRecords = await DatabaseService.GetAllDataAsync<SyncRecord>();
-            // TODO: Replace with Observable object filling logic (Clear then Replace)
             SyncRecords.Clear();
             foreach (var record in syncRecords)
             {

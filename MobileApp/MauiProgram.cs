@@ -23,7 +23,7 @@ namespace Northboundei.Mobile
 {
     public static class MauiProgram
     {
-        static Uri _apiUri = new Uri("https://10.0.2.2:5071");
+        static Uri _apiUri = new Uri("https://10.0.2.2:7254");
         public static MauiApp CreateMauiApp()
         {
             var builder = MauiApp.CreateBuilder();
@@ -36,11 +36,12 @@ namespace Northboundei.Mobile
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+            builder.Services.AddTransient<UserService>();
 
-            builder.Services.AddSingleton<INavigationService, NavigationService>();
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddSingleton<INoteService, NoteService>();
             builder.Services.AddSingleton<IChildService, ChildService>();
+
 
 #if ANDROID
             builder.Services.AddSingleton<ISettingsService, SettingsService>();
@@ -48,16 +49,9 @@ namespace Northboundei.Mobile
 #else
             builder.Services.AddSingleton<IPermissionService, PermissionService>();
 #endif
-            builder.Services.AddTransient<LoginViewModel>();
-            builder.Services.AddTransient<LoginPage>();
-            builder.Services.AddSingleton<HomeViewModel>();
-            builder.Services.AddSingleton<HomePage>();
-            builder.Services.AddSingleton<SplashScreenPage>();
-            builder.Services.AddSingleton<SyncViewModel>();
-            builder.Services.AddSingleton<SyncPage>();
+            
             builder.Services.AddSingleton<AuthHttpDelegatingHandler>();
 
-            builder.Services.AddSingleton<AppShell>();
 
             builder.Services.AddRefitClient<INoteAPI>()
                     .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
@@ -74,27 +68,43 @@ namespace Northboundei.Mobile
             })
             .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
 
+            // Add Pages and ViewModels
+            AddPagesVMs(builder);
 
-            builder.Services.AddTransient<UserService>();
+            builder.Services.AddSingleton<AppShell>();
 
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
+
             var serviceProvider = builder.Services.BuildServiceProvider();
             builder.Services.AddSingleton(serviceProvider);
 
             return builder.Build();
         }
 
+        private static void AddPagesVMs(MauiAppBuilder builder)
+        {
+            // Pages
+            builder.Services.AddTransient<SplashScreenPage>();
+            builder.Services.AddTransient<LoginPage>();
+
+            // ViewModels
+            builder.Services.AddSingleton<HomeViewModel>();
+            builder.Services.AddTransient<SyncViewModel>();
+            builder.Services.AddSingleton<NotesViewModel>();
+            builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddTransient<LoginViewModel>();
+        }
+
         private static HttpMessageHandler ConfigureHandler()
         {
 #if ANDROID
-
-                         var primaryHandler =new AndroidMessageHandler
-                         {
-                             ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
-                             AllowAutoRedirect = true
-                         };
+            var primaryHandler =new AndroidMessageHandler
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+                AllowAutoRedirect = true
+            };
 #else
             var primaryHandler = new HttpClientHandler
             {

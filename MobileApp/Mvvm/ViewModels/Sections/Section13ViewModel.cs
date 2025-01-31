@@ -59,7 +59,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
         public bool Complete {get; private set;}
 
-        public Section13ViewModel()
+        public Section13ViewModel() : base("Session Signature")
         {
             IsSignatureVisible = false;
             IsRelationshipVisible = false;

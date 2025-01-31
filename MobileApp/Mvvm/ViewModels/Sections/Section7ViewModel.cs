@@ -10,7 +10,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         [ObservableProperty]
         private ObservableCollection<CPTCodeRow> cptCodeRows;
 
-        public Section7ViewModel()
+        public Section7ViewModel() : base("CPT Codes")
         {
             CptCodeRows = new ObservableCollection<CPTCodeRow>
             {

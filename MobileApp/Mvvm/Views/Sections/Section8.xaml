@@ -53,9 +53,13 @@
 
         <!-- Navigation Buttons -->
         <HorizontalStackLayout Spacing="10" Margin="0,16">
-            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="7" />
-            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="9" />
+            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" />
+            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" />
+            <Button Text="Next Section" Command="{Binding NextSectionCommand}" />
         </HorizontalStackLayout>
+
+        <!-- Stage Indicator -->
+        <Label Text="Stage 8 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
 
     </VerticalStackLayout>
 </ContentView>

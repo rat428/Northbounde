@@ -4,10 +4,9 @@ namespace Northboundei.Mobile.Mvvm.Views;
 
 public partial class NotesPage : ContentPage
 {
-    HomeViewModel _viewmodel;
-    public NotesPage()
+    public NotesPage(NotesViewModel viewModel)
     {
         InitializeComponent();
-        BindingContext = _viewmodel = AppShell._publichomeviewModel;
+        BindingContext = viewModel;
     }
 }

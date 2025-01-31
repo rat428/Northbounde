@@ -2,7 +2,7 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section2">
     <VerticalStackLayout x:Name="AttendanceTypePanel" Margin="8">
         <VerticalStackLayout>
@@ -106,10 +106,11 @@
 
             <!-- Buttons -->
             <HorizontalStackLayout>
-                <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="1" />
-                <!-- Removed Save as Draft button -->
-                <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="3" />
+                <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
+                <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
+                <Button Text="Next Section" Command="{Binding NextSectionCommand}" Margin="4" />
             </HorizontalStackLayout>
+            <Label Text="Stage 2 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentView>

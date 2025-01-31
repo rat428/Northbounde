@@ -5,6 +5,7 @@ using Northboundei.Mobile.Dto;
 using Northboundei.Mobile.IServices;
 using Northboundei.Mobile.Services;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
@@ -12,12 +13,26 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
     public partial class Section10ViewModel : SectionViewModelBase
     {
         [ObservableProperty]
-        private string sessionDescription;
+        private string sessionDescription = string.Empty;
 
-        public bool IsDescriptionComplete => SessionDescription?.Length >= 100;
-
-        public Section10ViewModel()
+        [ObservableProperty]
+        bool isDescValidationVisible = false;
+        public Section10ViewModel() : base("Session Description")
         {
+        }
+
+        partial void OnSessionDescriptionChanged(string value)
+        {
+            if (SessionDescription.Length < 100)
+            {
+                HasError = true;
+                Complete = false;
+            }
+            else
+            {
+                HasError = false;
+                Complete = true;
+            }
         }
     }
 }

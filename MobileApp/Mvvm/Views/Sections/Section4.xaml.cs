@@ -5,15 +5,17 @@ namespace Northboundei.Mobile.Mvvm.Views.Sections
 {
     public partial class Section4 : ContentView
     {
-        public Section4()
+        Section4ViewModel _viewModel;
+        public Section4(Section4ViewModel viewModel)
         {
             InitializeComponent();
+            BindingContext = _viewModel = viewModel;
         }
 
         private void Clear_Clicked(object sender, EventArgs e)
         {
-            AppShell._publichomeviewModel.Section4ViewModel._signaturedrawingView = myDrawingView;
-            AppShell._publichomeviewModel.Section4ViewModel._signaturedrawingView.Clear(); //We can directly call the signaturedrawing view from xaml just for taking the code from vm it was done :) 
+            _viewModel._signaturedrawingView = myDrawingView;
+            _viewModel._signaturedrawingView.Clear(); //We can directly call the signaturedrawing view from xaml just for taking the code from vm it was done :) 
         }
     }
 }

@@ -40,7 +40,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
         public DrawingView _signaturedrawingView;
 
-        public Section4ViewModel()
+        public Section4ViewModel() : base("Attendance Signature")
         {
             IsSignatureVisible = false;
             IsRelationshipVisible = false;

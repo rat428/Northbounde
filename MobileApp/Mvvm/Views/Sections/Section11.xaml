@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:DataType="vms:Section11ViewModel"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section11">
     <VerticalStackLayout>
         <Label
@@ -38,8 +39,10 @@
             IsVisible="{Binding IsOtherValidationVisible}"
             Text="Other description is required." />
         <HorizontalStackLayout>
-            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="10" />
-            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="12" />
+            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
+            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
+            <Button Text="Next Section" Command="{Binding NextSectionCommand}" Margin="4" />
         </HorizontalStackLayout>
+        <Label Text="Stage 11 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
     </VerticalStackLayout>
 </ContentView>

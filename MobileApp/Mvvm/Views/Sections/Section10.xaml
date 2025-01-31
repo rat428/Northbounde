@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:DataType="vms:Section10ViewModel"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section10">
     <VerticalStackLayout>
         <Label
-            Text="Describe what happened during today’s session and the progress made toward the IFSP outcome(s). Include the routine activity and the strategies used in the session. When available, include the parent/caregiver feedback on how they incorporated the strategies between sessions." />
+            Text="Describe what happened during today’s session and the progress made toward the IFSP outcome(s). Include the routine activity and the strategies used in the session. When available, include the parent/caregiver feedback on how they incorporated the strategies between sessions."
+            LineBreakMode="WordWrap"/>
         <Editor
             Text="{Binding SessionDescription}"
             Placeholder="Enter description..."
@@ -17,10 +19,5 @@
             TextColor="Red"
             IsVisible="False"
             Text="Description must be at least 100 characters." />
-        <HorizontalStackLayout>
-            <Button Text="Back" Command="{Binding ShowSectionCommand}" CommandParameter="9" />
-            <!-- Removed Save as Draft button -->
-            <Button Text="Next" Command="{Binding ShowSectionCommand}" CommandParameter="11" />
-        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentView>
