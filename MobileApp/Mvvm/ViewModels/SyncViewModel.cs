@@ -14,7 +14,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
     public partial class SyncViewModel : BaseViewModel
     {
         [ObservableProperty]
-        ObservableCollection<SyncRecord> _syncRecords;
+        ObservableCollection<SyncRecord> _syncRecords = new();
 
         public SyncViewModel()
         {
@@ -50,7 +50,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             SyncRecords.Clear();
             foreach (var record in syncRecords)
             {
-                SyncRecords.Add(record);
+                SyncRecords.Insert(0,record);
             }
         }
     }

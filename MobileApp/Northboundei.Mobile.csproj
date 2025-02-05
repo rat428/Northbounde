@@ -52,7 +52,7 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\Images\logo.png" Color="#fff" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\Images\logo.png" Color="#fff" BaseSize="50,50"/>
 
 		<!-- Splash Screen -->
 		<MauiSplashScreen Include="Resources\Images\logo.png" Color="#fff" BaseSize="100,100" />
@@ -103,8 +103,8 @@
 	  <Compile Update="Mvvm\Views\Sections\Section8.xaml.cs">
 	    <DependentUpon>Section8.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Mvvm\Views\Sections\Section5.xaml.cs">
-	    <DependentUpon>Section5.xaml</DependentUpon>
+	  <Compile Update="Mvvm\Views\Sections\Section6.xaml.cs">
+	    <DependentUpon>Section6.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Mvvm\Views\Sections\Section4.xaml.cs">
 	    <DependentUpon>Section4.xaml</DependentUpon>
@@ -157,7 +157,7 @@
 	  <MauiXaml Update="Mvvm\Views\Sections\Section8.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mvvm\Views\Sections\Section5.xaml">
+	  <MauiXaml Update="Mvvm\Views\Sections\Section6.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Mvvm\Views\Sections\Section1.xaml">

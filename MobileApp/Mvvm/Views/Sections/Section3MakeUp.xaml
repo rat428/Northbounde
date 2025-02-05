@@ -3,69 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:DataType="vms:Section3MakeUpViewModel"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section3MakeUp">
     <VerticalStackLayout>
-        <VerticalStackLayout>
-            <Grid ColumnDefinitions="auto,*" Margin="0,8">
-                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
-                    <Label Text="Service Location" HorizontalOptions="Center" VerticalOptions="Center" />
-                </Border>
-                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
-                    <Picker ItemsSource="{Binding Section3ViewModel.ServiceLocations}" 
-                            SelectedItem="{Binding Section3ViewModel.SelectedServiceLocation}" 
-                            Title="Select Service Location">
-                        <Picker.Behaviors>
-                            <toolkit:EventToCommandBehavior 
-                                EventName="SelectedIndexChanged" 
-                                Command="{Binding Section3ViewModel.OnServiceLocationSelectedCommand}" />
-                        </Picker.Behaviors>
-                    </Picker>
-                </Border>
-            </Grid>
-
-            <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding Section3ViewModel.IsOtherLocationSelected}">
-                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
-                    <Label Text="Other Location" HorizontalOptions="Center" VerticalOptions="Center" />
-                </Border>
-                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
-                    <Entry Text="{Binding Section3ViewModel.OtherLocation}" Placeholder="Enter custom location" />
-                </Border>
-            </Grid>
-
-            <ContentView IsVisible="{Binding Section3ViewModel.IsTelehealthSelected}">
-                <Label Text="Telehealth Note: 2nd party signatures are not required." 
-                    FontAttributes="Italic" TextColor="Gray" Margin="0,8" />
-            </ContentView>
-
-            <StackLayout IsVisible="{Binding Section3ViewModel.IsNonTelehealthSelected}">
-                <Grid ColumnDefinitions="auto,*" Margin="0,8">
-                    <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
-                        <Label Text="Session Details" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
-                    <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
-                        <Entry Text="{Binding Section3ViewModel.SessionDetails}" Placeholder="Enter session details" />
-                    </Border>
-                </Grid>
-
-                <Grid ColumnDefinitions="auto,*" Margin="0,8">
-                    <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
-                        <Label Text="User Signature" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
-                    <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
-                        <Entry Text="{Binding Section3ViewModel.UserSignature}" Placeholder="Enter user signature" />
-                    </Border>
-                </Grid>
-                <Grid ColumnDefinitions="auto,*" Margin="0,8" IsVisible="{Binding Section3ViewModel.IsTelehealthSelectedUnSelected}">
-                    <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
-                        <Label Text="2nd Party Signature" HorizontalOptions="Center" VerticalOptions="Center" />
-                    </Border>
-                    <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
-                        <Entry Text="{Binding Section3ViewModel.SecondPartySignature}" Placeholder="Enter 2nd party signature" />
-                    </Border>
-                </Grid>
-            </StackLayout>
-
-        </VerticalStackLayout>
-        
+        <!-- Make-Up Section -->
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <Label Text="Make-Up Section" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                <Picker ItemsSource="{Binding AvailableMakeupNotes}" 
+                SelectedItem="{Binding SelectedMakeupNote}" 
+                Title="Select Missed Note" />
+            </Border>
+        </Grid>
+        <Grid ColumnDefinitions="auto,*" Margin="0,8">
+            <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
+                <Label Text="Authorized Make-Ups" HorizontalOptions="Center" VerticalOptions="Center" />
+            </Border>
+            <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
+                <Label Text="{Binding AuthorizedMakeups}" VerticalOptions="Center" HorizontalOptions="Start" />
+            </Border>
+        </Grid>
     </VerticalStackLayout>
 </ContentView>

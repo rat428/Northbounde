@@ -9,7 +9,12 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 {
     public partial class Section3CoVisitViewModel : SectionViewModelBase
     {
-
+        [ObservableProperty]
+        private string _covisitWhoElse;
+        [ObservableProperty]
+        private string _covisitWhoElseRelationship;
+        [ObservableProperty]
+        private string _authorizedCovisits;
         public Section3CoVisitViewModel() : base("Co-Visit Attendance")
         {
 

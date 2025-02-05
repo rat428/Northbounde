@@ -3,26 +3,40 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:DataType="vms:Section12ViewModel"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section12">
     <VerticalStackLayout>
         <Label
-            Text="What strategies/activities did you and the parent/caregiver collaboratively agree to do to support their child's learning and development between visits?"
-            FontSize="Medium" />
-        <Editor
-            Text="{Binding CarryOverDescription}"
-            Placeholder="Enter strategies/activities..."
-            HeightRequest="100"
-            TextChanged="OnEditorTextChanged" />
-        <Label
-            x:Name="ValidationLabel"
-            TextColor="Red"
-            IsVisible="False"
-            Text="Description must be at least 100 characters." />
+            Text="How did you work with the parent/caregiver?" />
         <HorizontalStackLayout>
-            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
-            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
-            <Button Text="Next Section" Command="{Binding NextSectionCommand}" Margin="4" />
+            <CheckBox IsChecked="{Binding IsObservedChecked}" />
+            <Label Text="Observed parent/Caregiver and the child during routines" />
         </HorizontalStackLayout>
-        <Label Text="Stage 12 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
+        <HorizontalStackLayout>
+            <CheckBox IsChecked="{Binding IsTriedActivityChecked}" />
+            <Label Text="Parent/Caregiver tried Activity, feedback exchanged" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <CheckBox IsChecked="{Binding IsDemonstratedChecked}" />
+            <Label Text="Demonstrated activity to parent/caregiver" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <CheckBox IsChecked="{Binding IsReviewedChecked}" />
+            <Label Text="Reviewed communication tool with parent/caregiver" />
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <CheckBox IsChecked="{Binding IsOtherChecked}" />
+            <Label Text="Other(s)" />
+        </HorizontalStackLayout>
+        <Editor
+            Text="{Binding OtherDescription}"
+            Placeholder="Enter other description..."
+            HeightRequest="100"
+            IsVisible="{Binding IsOtherChecked}" />
+        <Label
+            x:Name="OtherValidationLabel"
+            TextColor="Red"
+            IsVisible="{Binding IsOtherValidationVisible}"
+            Text="Other description is required." />
     </VerticalStackLayout>
 </ContentView>

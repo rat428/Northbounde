@@ -2,40 +2,55 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-                xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
-             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section9">
-    <VerticalStackLayout>
-        <CollectionView ItemsSource="{Binding Section9ViewModel.Outcomes}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <VerticalStackLayout Spacing="8">
-                        <VerticalStackLayout>
-                            <HorizontalStackLayout>
-                                <CheckBox IsChecked="{Binding IsChecked}"></CheckBox>
-                                <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                            </HorizontalStackLayout>
-                            <CollectionView IsVisible="{Binding  IsObjectiveVisible}" Margin="10,0,0,0" ItemsSource="{Binding Objectives}">
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate>
-                                        <VerticalStackLayout>
-                                            <HorizontalStackLayout>
-                                                <CheckBox IsChecked="{Binding IsChecked}"></CheckBox>
-                                                <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold" VerticalOptions="Center"></Label>
-                                            </HorizontalStackLayout>
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <HorizontalStackLayout>
-            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" />
-            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" />
-            <Button Text="Next Section" Command="{Binding NextSectionCommand}" />
-        </HorizontalStackLayout>
-        <Label Text="Stage 9 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section9"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
+             x:DataType="vms:Section9ViewModel"
+             x:Name="Section9View">
+    <VerticalStackLayout Padding="16" Spacing="12">
+
+        <!-- Participants Label -->
+        <Label Text="Participants"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       Margin="0,8" />
+
+        <!-- Checkbox List -->
+        <VerticalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox x:Name="ParentCaregiverCheckBox"
+            IsChecked="{Binding IsParentCaregiverSelected}" />
+                <Label Text="Parent/Caregiver"
+                               VerticalOptions="Center" 
+                               FontSize="14" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="true" IsEnabled="false" />
+                <Label Text="Child (Required)"
+                               VerticalOptions="Center" 
+                               FontSize="14" />
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding IsOtherSelected}" />
+                <Label Text="Other"
+                               VerticalOptions="Center" 
+                               FontSize="14" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+
+        <!-- Other Text Box -->
+        <Entry Placeholder="Please specify 'Other'"
+               IsVisible="{Binding  IsOtherTextBoxVisible}" 
+               Text="{Binding OtherText}" />
+
+        <!-- Communication Section -->
+        <VerticalStackLayout IsVisible="{Binding IsCommunicationSectionVisible}">
+            <Label Text="If the parent/caregiver was unavailable, how did you communicate with them about the session?"
+                           FontSize="14" />
+            <Entry Placeholder="Enter communication details (Required*)"
+                   Text="{Binding CommunicationDetails}" />
+        </VerticalStackLayout>
+
     </VerticalStackLayout>
 </ContentView>

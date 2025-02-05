@@ -1,25 +1,13 @@
-
 using Northboundei.Mobile.Mvvm.ViewModels.Sections;
 
-namespace Northboundei.Mobile.Mvvm.Views.Sections;
-
-public partial class Section12 : ContentView
+namespace Northboundei.Mobile.Mvvm.Views.Sections
 {
-    public Section12(Section12ViewModel viewModel)
+    public partial class Section12 : ContentView
     {
-        InitializeComponent();
-        BindingContext = viewModel;
-    }
-
-    private void OnEditorTextChanged(object sender, TextChangedEventArgs e)
-    {
-        if (e.NewTextValue.Length < 100)
+        public Section12(Section12ViewModel viewModel)
         {
-            ValidationLabel.IsVisible = true;
-        }
-        else
-        {
-            ValidationLabel.IsVisible = false;
+            InitializeComponent();
+            BindingContext = viewModel;
         }
     }
 }

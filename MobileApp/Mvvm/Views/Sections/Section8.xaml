@@ -2,64 +2,54 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section8"
              xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
-             x:Name="Section8View">
-    <VerticalStackLayout Padding="16" Spacing="12">
+             xmlns:model="clr-namespace:Northboundei.Mobile.Mvvm.Models"
+             x:DataType="vms:Section8ViewModel"
+             x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section8">
+    <VerticalStackLayout Padding="16" Spacing="8">
+        <Label 
+            Text="CPTcodes: Each Unit is 15 minutes in length" 
+            FontAttributes="Bold"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
 
-        <!-- Participants Label -->
-        <Label Text="Participants"
-                       FontSize="16"
-                       FontAttributes="Bold"
-                       Margin="0,8" />
+        <!-- CollectionView for CPT Codes -->
+        <CollectionView x:Name="CptCollection" 
+                        ItemsSource="{Binding CptCodeRows}" 
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="vms:CPTCodeRow">
+                    <Grid ColumnDefinitions="2*,1*,auto" Margin="0,4">
+                    <!-- CPT Code Picker -->
+                    <Picker ItemsSource="{Binding AvailableCPTCodes}" 
+                                ItemDisplayBinding="{Binding Unitname}" 
+                                SelectedItem="{Binding CptCode}" 
+                                Title="Select CPT Code" 
+                                Grid.Column="0" />
 
-        <!-- Checkbox List -->
-        <VerticalStackLayout>
-            <HorizontalStackLayout>
-                <CheckBox x:Name="ParentCaregiverCheckBox"
-            IsChecked="{Binding Section8ViewModel.IsParentCaregiverSelected}" />
-                <Label Text="Parent/Caregiver"
-                               VerticalOptions="Center" 
-                               FontSize="14" />
-            </HorizontalStackLayout>
+                    <!-- Units Picker -->
+                    <Picker ItemsSource="{Binding AvailableUnits}" 
+                                SelectedItem="{Binding Units}" 
+                                Title="Units" 
+                                Grid.Column="1" />
 
-            <HorizontalStackLayout>
-                <CheckBox IsChecked="true" IsEnabled="false" />
-                <Label Text="Child (Required)"
-                               VerticalOptions="Center" 
-                               FontSize="14" />
-            </HorizontalStackLayout>
+                    <Grid Grid.Column="2">
+                        <HorizontalStackLayout Spacing="5">
+                            <!-- Add Button -->
+                            <Button HeightRequest="30" WidthRequest="30" CornerRadius="20" FontSize="22" Padding="0" BackgroundColor="DarkGreen" Text="+" 
+                                        Command="{Binding Source={x:Reference CptCollection}, Path=BindingContext.Section8ViewModel.AddRowCommand}" 
+                                        CommandParameter="{Binding .}" />
 
-            <HorizontalStackLayout>
-                <CheckBox IsChecked="{Binding Section8ViewModel.IsOtherSelected}" />
-                <Label Text="Other"
-                               VerticalOptions="Center" 
-                               FontSize="14" />
-            </HorizontalStackLayout>
-        </VerticalStackLayout>
-
-        <!-- Other Text Box -->
-        <Entry Placeholder="Please specify 'Other'"
-               IsVisible="{Binding  Section8ViewModel.IsOtherTextBoxVisible}" 
-               Text="{Binding Section8ViewModel.OtherText}" />
-
-        <!-- Communication Section -->
-        <VerticalStackLayout IsVisible="{Binding Section8ViewModel.IsCommunicationSectionVisible}">
-            <Label Text="If the parent/caregiver was unavailable, how did you communicate with them about the session?"
-                           FontSize="14" />
-            <Entry Placeholder="Enter communication details (Required*)"
-                   Text="{Binding Section8ViewModel.CommunicationDetails}" />
-        </VerticalStackLayout>
-
-        <!-- Navigation Buttons -->
-        <HorizontalStackLayout Spacing="10" Margin="0,16">
-            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" />
-            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" />
-            <Button Text="Next Section" Command="{Binding NextSectionCommand}" />
-        </HorizontalStackLayout>
-
-        <!-- Stage Indicator -->
-        <Label Text="Stage 8 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
-
+                            <!-- Remove Button -->
+                            <Button HeightRequest="30" WidthRequest="30" CornerRadius="20" FontSize="22" Padding="0" BackgroundColor="Red" Text="-" 
+                                        Command="{Binding Source={x:Reference CptCollection}, Path=BindingContext.Section8ViewModel.RemoveRowCommand}" 
+                                        CommandParameter="{Binding .}" 
+                                        IsEnabled="{Binding Source={x:Reference CptCollection}, Path=BindingContext.Section8ViewModel.CanRemoveRows}" />
+                        </HorizontalStackLayout>
+                    </Grid>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentView>

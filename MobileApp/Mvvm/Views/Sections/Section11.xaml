@@ -7,42 +7,17 @@
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section11">
     <VerticalStackLayout>
         <Label
-            Text="How did you work with the parent/caregiver?" />
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsObservedChecked}" />
-            <Label Text="Observed parent/Caregiver and the child during routines" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsTriedActivityChecked}" />
-            <Label Text="Parent/Caregiver tried Activity, feedback exchanged" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsDemonstratedChecked}" />
-            <Label Text="Demonstrated activity to parent/caregiver" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsReviewedChecked}" />
-            <Label Text="Reviewed communication tool with parent/caregiver" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsOtherChecked}" />
-            <Label Text="Other(s)" />
-        </HorizontalStackLayout>
+            Text="Describe what happened during today’s session and the progress made toward the IFSP outcome(s). Include the routine activity and the strategies used in the session. When available, include the parent/caregiver feedback on how they incorporated the strategies between sessions."
+            LineBreakMode="WordWrap"/>
         <Editor
-            Text="{Binding OtherDescription}"
-            Placeholder="Enter other description..."
+            Text="{Binding SessionDescription}"
+            Placeholder="Enter description..."
             HeightRequest="100"
-            IsVisible="{Binding IsOtherChecked}" />
+            TextChanged="OnEditorTextChanged" />
         <Label
-            x:Name="OtherValidationLabel"
+            x:Name="ValidationLabel"
             TextColor="Red"
-            IsVisible="{Binding IsOtherValidationVisible}"
-            Text="Other description is required." />
-        <HorizontalStackLayout>
-            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
-            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
-            <Button Text="Next Section" Command="{Binding NextSectionCommand}" Margin="4" />
-        </HorizontalStackLayout>
-        <Label Text="Stage 11 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
+            IsVisible="{Binding IsDescValidationVisible}"
+            Text="Description must be at least 100 characters." />
     </VerticalStackLayout>
 </ContentView>

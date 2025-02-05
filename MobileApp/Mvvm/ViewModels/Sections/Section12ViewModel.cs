@@ -1,5 +1,5 @@
-
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System.ComponentModel;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
@@ -7,22 +7,38 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
     public partial class Section12ViewModel : SectionViewModelBase
     {
         [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(IsCarryOverComplete))]
-        private string carryOverDescription = string.Empty;
+        private bool isObservedChecked;
 
-        public bool IsCarryOverComplete => CarryOverDescription.Length >= 100;
+        [ObservableProperty]
+        private bool isTriedActivityChecked;
 
-        public Section12ViewModel() : base("Carry-Over")
+        [ObservableProperty]
+        private bool isDemonstratedChecked;
+
+        [ObservableProperty]
+        private bool isReviewedChecked;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsOtherValidationVisible))]
+        private bool isOtherChecked;
+
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsOtherValidationVisible))]
+        private string otherDescription = string.Empty;
+
+        public bool IsOtherValidationVisible => IsOtherChecked && string.IsNullOrWhiteSpace(OtherDescription);
+
+        public Section12ViewModel() : base("Collaboration")
         {
 
         }
 
         protected override void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            // Validate the carry-over description field
-            if (e.PropertyName == nameof(IsCarryOverComplete))
+            // Validate the other description field if the other checkbox is checked
+            if (e.PropertyName == nameof(IsOtherValidationVisible))
             {
-                if (IsCarryOverComplete)
+                if (IsOtherValidationVisible)
                 {
                     HasError = true;
                     Complete = false;

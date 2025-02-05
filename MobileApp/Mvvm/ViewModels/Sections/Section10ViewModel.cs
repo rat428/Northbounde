@@ -1,38 +1,58 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Newtonsoft.Json;
-using Northboundei.Mobile.Dto;
-using Northboundei.Mobile.IServices;
-using Northboundei.Mobile.Services;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Windows.Input;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 {
     public partial class Section10ViewModel : SectionViewModelBase
     {
         [ObservableProperty]
-        private string sessionDescription = string.Empty;
-
-        [ObservableProperty]
-        bool isDescValidationVisible = false;
-        public Section10ViewModel() : base("Session Description")
+        private ObservableCollection<Outcome> outcomes;
+        public Section10ViewModel() : base("Outcomes and Objectives")
         {
+            Outcomes = new ObservableCollection<Outcome>
+            {
+                new Outcome
+                {
+                    Title = "Test",
+                    IsChecked = false,
+                    Objectives = new ObservableCollection<Objective>
+                    {
+                        new Objective{ IsChecked = false, Title = "TestInside"}
+                    }
+                }
+            };
+        
+        }
+    }
+
+    public partial class Outcome : ObservableObject
+    {
+        private bool _isChecked;
+
+        public string Title { get; set; }
+        public ObservableCollection<Objective> Objectives { get; set; }
+
+        public bool IsChecked
+        {
+            get => _isChecked;
+            set
+            {
+                SetProperty(ref _isChecked, value);
+                OnPropertyChanged(nameof(IsObjectiveVisible));
+            }
         }
 
-        partial void OnSessionDescriptionChanged(string value)
-        {
-            if (SessionDescription.Length < 100)
-            {
-                HasError = true;
-                Complete = false;
-            }
-            else
-            {
-                HasError = false;
-                Complete = true;
-            }
-        }
+        public bool IsObjectiveVisible => IsChecked;
+    }
+
+    public class Objective : ObservableObject
+    {
+        public string Title { get; set; }
+        public bool IsChecked { get; set; }
     }
 }
