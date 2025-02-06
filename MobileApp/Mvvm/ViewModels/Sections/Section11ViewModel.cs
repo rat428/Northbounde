@@ -21,18 +21,9 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         {
         }
 
-        partial void OnSessionDescriptionChanged(string value)
+        public override void Validate()
         {
-            if (SessionDescription.Length < 100)
-            {
-                HasError = true;
-                Complete = false;
-            }
-            else
-            {
-                HasError = false;
-                Complete = true;
-            }
+            Complete = SessionDescription.Length >= 100;
         }
     }
 }

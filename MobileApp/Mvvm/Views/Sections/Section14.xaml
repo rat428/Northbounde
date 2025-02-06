@@ -10,7 +10,7 @@
 
     <VerticalStackLayout Padding="16">
         <!-- Attendance Signature Section -->
-        <Label Text="Attendance Signature"
+        <Label Text="Therapist Signature"
                     FontSize="16" 
                     FontAttributes="Bold" 
                     Margin="0,8" />
@@ -35,20 +35,19 @@
                             HorizontalOptions="Center" 
                             Margin="0,8" />
                 <Border Stroke="Black" 
-                            HeightRequest="200" Padding="2"
-                            BackgroundColor="LightGray">
-                    <mct:DrawingView x:Name="myDrawingView"   Lines="{Binding MyLines}"
-                         DrawingLineCompletedCommand="{Binding DrawLineCompletedCommand}" 
-                         HorizontalOptions="FillAndExpand"
-                         VerticalOptions="FillAndExpand" 
-                         HeightRequest="250"
-                         IsMultiLineModeEnabled="True"
-                         BackgroundColor="LightGray" />
+                        HeightRequest="200" Padding="2"
+                        BackgroundColor="LightGray">
+                    <mct:DrawingView x:Name="myDrawingView"
+                                     Lines="{Binding Lines}"
+                                     HorizontalOptions="FillAndExpand"
+                                     VerticalOptions="FillAndExpand" 
+                                     HeightRequest="250"
+                                     IsMultiLineModeEnabled="True"
+                                     BackgroundColor="LightGray" />
 
                 </Border>
                 <Grid ColumnSpacing="10" ColumnDefinitions="*,*" Margin="0,8">
                     <Button Text="Clear" x:Name="Clear" Clicked="Clear_Clicked"
-                                 Command="{Binding ClearSignatureCommand}" 
                                  HorizontalOptions="FillAndExpand" />
                     <Button Text="Submit" 
                                  Grid.Column="1"
@@ -56,51 +55,6 @@
                                  HorizontalOptions="FillAndExpand" />
                 </Grid>
             </VerticalStackLayout>
-        </VerticalStackLayout>
-
-        <!-- Second Signature (User) -->
-        <VerticalStackLayout IsVisible="{Binding AreSecondSignaturesVisible}">
-            <Label Text="User Signature"
-                   FontAttributes="Bold"
-                   Margin="0,8" />
-            <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
-                <Button Text="Sign User"
-                        Command="{Binding SignUserCommand}" />
-                <Button Text="Resign User"
-                        Grid.Column="1"
-                        Command="{Binding ResignUserCommand}"
-                        IsVisible="{Binding UserSignatureImage, Converter={StaticResource NullToBoolConverter}}" />
-            </Grid>
-
-            <VerticalStackLayout IsVisible="{Binding IsUserSignatureVisible}">
-                <Border HeightRequest="200" BackgroundColor="LightGray">
-                    <mct:DrawingView x:Name="myUserDrawingView"
-                         Lines="{Binding UserLines}"
-                         DrawingLineCompletedCommand="{Binding DrawLineCompletedUserCommand}" />
-                </Border>
-            </VerticalStackLayout>
-        </VerticalStackLayout>
-
-        <!-- Caregiver Relationship Section -->
-        <VerticalStackLayout Spacing="10" IsVisible="{Binding IsRelationshipVisible}">
-            <Grid ColumnDefinitions="auto,*" Margin="0,8">
-                <Border StrokeShape="RoundRectangle 8,0,8,0" Padding="2" BackgroundColor="{StaticResource Gray100}">
-                    <Label Text="Relationship" HorizontalOptions="Center" VerticalOptions="Center" />
-                </Border>
-                <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2"  Grid.Column="1" >
-                    <VerticalStackLayout>
-                        <Picker ItemsSource="{Binding RelationshipOptions}" 
-                                        SelectedItem="{Binding SelectedRelationship}" 
-                                        Title="Select Relationship" 
-                                        Margin="0,8" />
-
-                        <Entry Text="{Binding OtherRelationshipText}" 
-                                       Placeholder="Specify if 'Other'" 
-                                       IsVisible="{Binding IsOtherRelationshipVisible}" 
-                                       Margin="0,8" />
-                    </VerticalStackLayout>
-                </Border>
-            </Grid>
         </VerticalStackLayout>
     </VerticalStackLayout>
 </ContentView>

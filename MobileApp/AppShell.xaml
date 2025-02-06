@@ -23,15 +23,14 @@
     <!--Pages-->
     <MenuFlyoutItem Text="Home" Command="{Binding HomeCommand}"   Shell.FlyoutItemIsVisible="{Binding IsHomeVisible}" />
     <MenuFlyoutItem Text="Start Note" Command="{Binding NotesPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsStartVisible}" />
-    <MenuFlyoutItem Text="Continue Note" Command="{Binding DraftPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsContinueVisible}" />
+    <MenuFlyoutItem Text="Continue Note" Command="{Binding NotesDraftPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsContinueVisible}" />
     <MenuFlyoutItem Text="Sync" Command="{Binding SyncPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsSyncVisible}" />
 
     <!--Sections-->
     <MenuFlyoutSeparator Text="Sections"/>
-    
 
-    <MenuFlyoutSeparator Text="Account Options"/>
-    <MenuFlyoutItem Text="Logout" Command="{Binding LogOutCommand}"  />
+
+    
     
     <!-- TODO: Implement Coloring Based On Section Completion Status
     <Shell.ItemTemplate>
@@ -47,7 +46,8 @@
     -->
 
     <ShellContent Route="ActionPage" ContentTemplate="{DataTemplate views:ActionPage}" FlyoutItemIsVisible="False" />
-    <ShellContent Route="NotesPage" ContentTemplate="{DataTemplate views:NotesPage}" FlyoutItemIsVisible="False" />
-    <ShellContent Route="SyncPage"   ContentTemplate="{DataTemplate views:SyncPage}" FlyoutItemIsVisible="False" />
-
+    
+    <Shell.FlyoutFooter>
+        <Button CornerRadius="0" Text="Logout" Command="{Binding LogOutCommand}"  />
+    </Shell.FlyoutFooter>
 </Shell>

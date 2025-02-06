@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
+using Northboundei.Mobile.Helpers;
 using Northboundei.Mobile.Helpers.Converters;
 using Northboundei.Mobile.IServices;
 using Northboundei.Mobile.Mvvm.Models;
@@ -39,7 +40,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         bool _isSyncVisible = true;
 
         [ObservableProperty]
-        public string _lastSyncDate = "FETCHING....";
+        public DateTime? _lastSyncDate;
 
 
         public HomeViewModel(
@@ -101,10 +102,11 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         
 
         [RelayCommand]
-        private void Home(object obj)
+        private async void Home(object obj)
         {
             HideFlyoutAll();
             NavigateToShell("//ActionPage");
+            await UpdateLastSyncTime();
             IsStartVisible = true;
             IsContinueVisible = true;
             IsSyncVisible = true;
@@ -113,13 +115,19 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         private void NotesPage(object obj)
         {
             HideFlyoutAll();
-            NavigateToShell("//NotesPage");
+            NavigateToShell("NotesPage");
+        }
+        [RelayCommand]
+        private void NotesDraftPage(object obj)
+        {
+            HideFlyoutAll();
+            NavigateToShell("NotesDraftPage");
         }
         [RelayCommand]
         private void SyncPage(object obj)
         {
             HideFlyoutAll();
-            NavigateToShell("//SyncPage");
+            NavigateToShell("SyncPage");
         }
         [RelayCommand]
         private async void LogOut(object obj)
@@ -149,7 +157,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             await MainThread.InvokeOnMainThreadAsync(() =>
             {
                 var viewModel = _serviceProvider.GetRequiredService<LoginViewModel>();
-                Application.Current.MainPage = new LoginPage(viewModel);
+                App.Current!.Windows[0].Page = new LoginPage(viewModel);
             });
         }
 
@@ -211,11 +219,11 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             var SyncHistory = await DatabaseService.GetAllDataAsync<SyncRecord>();
             if (SyncHistory.Count() > 0)
             {
-                _lastSyncDate = SyncHistory.Last().SyncDate.ToString();
+                LastSyncDate = SyncHistory.Last().SyncDate;
             }
             else
             {
-                _lastSyncDate = "Never";
+                LastSyncDate = null;
             }
         }
         private void _permissionService_GpsStatusChanged(object? sender, bool? e)
@@ -272,36 +280,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 return false;
 
             return true;
-        }
-
-        [RelayCommand]
-        private void Discard()
-        {
-            // TODO: Discard any NoteActionsToolbar changes
-        }
-
-        [RelayCommand]
-        private async Task SaveDraftAsync()
-        {
-            // TODO: Save draft logic for NoteActionsToolbar
-        }
-
-        [RelayCommand]
-        private async Task Submit()
-        {
-            // TODO: Validate NoteActionsToolbar fields then submit
-        }
-
-        [RelayCommand]
-        private void SaveAsDraft()
-        {
-            // Logic to save the current state as a draft
-        }
-
-        // Add an indicator on each page to show the current stage
-        private void AddStageIndicator()
-        {
-            // Logic to add an indicator on each page to show the current stage
         }
     }
 }

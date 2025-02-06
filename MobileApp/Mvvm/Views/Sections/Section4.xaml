@@ -16,11 +16,6 @@
                     <Picker ItemsSource="{Binding ServiceLocations}" 
                             SelectedItem="{Binding SelectedServiceLocation}" 
                             Title="Select Service Location">
-                        <Picker.Behaviors>
-                            <toolkit:EventToCommandBehavior 
-                                EventName="SelectedIndexChanged" 
-                                Command="{Binding OnServiceLocationSelectedCommand}" />
-                        </Picker.Behaviors>
                     </Picker>
                 </Border>
             </Grid>
@@ -34,12 +29,12 @@
                 </Border>
             </Grid>
 
-            <ContentView IsVisible="{Binding IsTelehealthSelected}">
-                <Label Text="Telehealth Note: 2nd party signatures are not required." 
-                    FontAttributes="Italic" TextColor="Gray" Margin="0,8" />
-            </ContentView>
+            <Label
+                IsVisible="{Binding IsTelehealthSelected}"
+                Text="Telehealth Note: 2nd party signatures are not required." 
+                FontAttributes="Italic" TextColor="Gray" Margin="0,8" />
 
         </VerticalStackLayout>
-        
+
     </VerticalStackLayout>
 </ContentView>

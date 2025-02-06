@@ -16,9 +16,11 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
     public partial class LoginViewModel : BaseViewModel
     {
         private readonly IUserService _userService;
+        private readonly IUserInfoService _userInfoService; // added
         IPermissionService _locationPermissionService;
         ISettingsService _settingsService;
         IServiceProvider _serviceProvider;
+        
         HomeViewModel _homeViewModel;
         SyncViewModel _syncViewModel;
 
@@ -33,9 +35,11 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             IUserService userService,
             IPermissionService locationPermissionService,
             ISettingsService settingsService,
-            IServiceProvider serviceProvider)
+            IServiceProvider serviceProvider,
+            IUserInfoService userInfoService) // added parameter
         {
             _userService = userService;
+            _userInfoService = userInfoService; // assignment
             _settingsService = settingsService;
             _serviceProvider = serviceProvider;
             _locationPermissionService = locationPermissionService;
@@ -128,8 +132,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             }
             catch (Exception ex)
             {
-                // App.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
-                throw;
+                await App.Current.MainPage.DisplayAlert("ERROR", ex.Message, "OK");
             }
             finally
             {
@@ -163,6 +166,12 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             userEntity.KeepMeLoggedIn = KeepMeLogged;
             userEntity.IsLoggedIn = true;
             userEntity.EncryptionKey = user.Key ?? " DebugKey";
+
+            var usersInfos = await _userInfoService.GetUsersInfoAsync();
+
+            var userInfo = usersInfos.FirstOrDefault(x => x.ProviderId.Equals(user.Username))!;
+
+            userEntity.UserInfo = userInfo;
             SessionManager.UserContext = userEntity;
             try
             {

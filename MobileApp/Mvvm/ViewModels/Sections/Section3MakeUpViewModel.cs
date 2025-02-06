@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using Northboundei.Mobile.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,20 +14,32 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
         // Make-up sessions (fetched from the missed sessions list)
         [ObservableProperty]
-        ObservableCollection<string> _missedSessions;
+        ObservableCollection<DateOnly> _missedSessions = [];
 
         [ObservableProperty]
-        private string _selectedMakeUpSession;
+        private DateOnly _selectedMakeUpSession;
+
+        NoteService NoteService { get; set; }
+
         public Section3MakeUpViewModel() : base("Make-Up Attendance")
         {
-            MissedSessions = new();
+
         }
 
         // Method to load the missed sessions
         public async Task LoadMissedSessions()
         {
-            // Fetch the missed sessions from the database
-            // MissedSessions = await _service.GetMissedSessions();
+            var missedNotes = (await NoteService.GetNotesAsync()).Where(s => s.AttendanceType?.ToLower() == "missed");
+
+            MissedSessions.Clear();
+            foreach (var missedNote in missedNotes)
+            {
+                // Pattern Matched
+                if (missedNote is { } h && h.SessionDate != null)
+                {
+                    MissedSessions.Add(missedNote.SessionDate!.Value);
+                }
+            }
         }
     }
 }

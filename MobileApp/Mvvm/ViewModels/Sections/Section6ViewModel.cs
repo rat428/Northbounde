@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Input;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
@@ -9,19 +10,18 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
     public partial class Section6ViewModel : SectionViewModelBase
     {
         [ObservableProperty]
-        private DateTime sessionStartTime;
+        [NotifyPropertyChangedFor(nameof(SessionEndTime))]
+        private TimeSpan sessionStartTime;
 
         [ObservableProperty]
-        private DateTime sessionEndTime;
+        [NotifyPropertyChangedFor(nameof(SessionEndTime))]
+        private string? selectedSessionSpan;
+        
+        public TimeSpan SessionEndTime => SessionStartTime.Add(TimeSpan.FromMinutes(int.Parse(SelectedSessionSpan?.Split(' ')[0] ?? "0")));
+
 
         [ObservableProperty]
         private ObservableCollection<string> sessionSpans;
-
-        [ObservableProperty]
-        private string? selectedSessionSpan;
-
-        public ICommand CalculateEndTimeCommand { get; }
-
         public Section6ViewModel() : base("Session Span")
         {
             SessionSpans = new ObservableCollection<string>
@@ -31,24 +31,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
                 "45 Min",
                 "60 Min"
             };
-            SessionStartTime = DateTime.Now;
-            SessionEndTime = SessionStartTime;
-
-            CalculateEndTimeCommand = new RelayCommand(OnCalculateEndTime);
-        }
-        private void OnCalculateEndTime()
-        {
-            if (string.IsNullOrEmpty(SelectedSessionSpan)) return;
-
-            TimeSpan sessionDuration = SelectedSessionSpan switch
-            {
-                "15 Min" => TimeSpan.FromMinutes(15),
-                "30 Min" => TimeSpan.FromMinutes(30),
-                "45 Min" => TimeSpan.FromMinutes(45),
-                "60 Min" => TimeSpan.FromMinutes(60),
-                _ => TimeSpan.Zero
-            };
-            SessionEndTime = SessionStartTime.Add(sessionDuration);
+            SessionStartTime = DateTime.Now.TimeOfDay;
         }
     }
 }

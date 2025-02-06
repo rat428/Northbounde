@@ -32,7 +32,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         public ICommand OnChildSelectedCommand => new Command(OnChildSelected);
 
 
-        List<SessionNoteResponse> _sessionData;
+        List<SessionNoteData> _sessionData;
         public Section1ViewModel() : base("Setup")
         {
             MainThread.BeginInvokeOnMainThread(async () =>
@@ -63,7 +63,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
             string? secureNotes = await SecureStorage.Default.GetAsync(SessionManager.UserContext.EncryptionKey + nameof(INoteService));
             if (secureNotes is not null)
             {
-                _sessionData = JsonConvert.DeserializeObject<List<SessionNoteResponse>>(secureNotes);
+                _sessionData = JsonConvert.DeserializeObject<List<SessionNoteData>>(secureNotes);
             }
         }
 

@@ -21,7 +21,7 @@ namespace Northboundei.Mobile.Services
 
  
 
-        public async Task<IEnumerable<SessionNoteResponse>> GetNotesAsync()
+        public async Task<IEnumerable<SessionNoteData>> GetNotesAsync()
         {
             try
             {

@@ -3,9 +3,9 @@
   <PropertyGroup>
     <IsFirstTimeProjectOpen>False</IsFirstTimeProjectOpen>
     <ActiveDebugFramework>net9.0-android</ActiveDebugFramework>
-    <ActiveDebugProfile>Pixel 5 - API 34 (Android 14.0 - API 34)</ActiveDebugProfile>
+    <ActiveDebugProfile>Pixel 6 Pro - API 35 (Android 15.0 - API 35)</ActiveDebugProfile>
     <SelectedPlatformGroup>Emulator</SelectedPlatformGroup>
-    <DefaultDevice>pixel_5_-_api_34</DefaultDevice>
+    <DefaultDevice>Windows Subsystem for Android</DefaultDevice>
     <AndroidDesignerPreferredTheme>AppTheme.NoActionBar</AndroidDesignerPreferredTheme>
     <DeveloperId>6AWZGGHFCD</DeveloperId>
     <DevelopmentTeamId>6AWZGGHFCD</DevelopmentTeamId>

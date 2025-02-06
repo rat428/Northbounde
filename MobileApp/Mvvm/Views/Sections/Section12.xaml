@@ -5,38 +5,40 @@
              xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels.Sections"
              x:DataType="vms:Section12ViewModel"
              x:Class="Northboundei.Mobile.Mvvm.Views.Sections.Section12">
-    <VerticalStackLayout>
-        <Label
+    <Grid>
+        <VerticalStackLayout HorizontalOptions="Center">
+            <Label
             Text="How did you work with the parent/caregiver?" />
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsObservedChecked}" />
-            <Label Text="Observed parent/Caregiver and the child during routines" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsTriedActivityChecked}" />
-            <Label Text="Parent/Caregiver tried Activity, feedback exchanged" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsDemonstratedChecked}" />
-            <Label Text="Demonstrated activity to parent/caregiver" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsReviewedChecked}" />
-            <Label Text="Reviewed communication tool with parent/caregiver" />
-        </HorizontalStackLayout>
-        <HorizontalStackLayout>
-            <CheckBox IsChecked="{Binding IsOtherChecked}" />
-            <Label Text="Other(s)" />
-        </HorizontalStackLayout>
-        <Editor
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding IsObservedChecked}" />
+                <Label Text="Observed Parent/Caregiver &amp; child during routines" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding IsTriedActivityChecked}" />
+                <Label Text="Parent/Caregiver tried Activity, Feedback exchanged" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding IsDemonstratedChecked}" />
+                <Label Text="Demonstrated activity to Parent/Caregiver" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding IsReviewedChecked}" />
+                <Label Text="Reviewed communication tool with Parent/Caregiver" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <CheckBox IsChecked="{Binding IsOtherChecked}" />
+                <Label Text="Other(s)" VerticalTextAlignment="Center"/>
+            </HorizontalStackLayout>
+            <Editor
             Text="{Binding OtherDescription}"
             Placeholder="Enter other description..."
             HeightRequest="100"
             IsVisible="{Binding IsOtherChecked}" />
-        <Label
+            <Label
             x:Name="OtherValidationLabel"
             TextColor="Red"
             IsVisible="{Binding IsOtherValidationVisible}"
             Text="Other description is required." />
-    </VerticalStackLayout>
+        </VerticalStackLayout>
+    </Grid>
 </ContentView>

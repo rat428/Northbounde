@@ -6,7 +6,7 @@ namespace Northboundei.Mobile.APIs
     public interface INoteAPI
     {
         [Get("/Api/SessionNote/Notes")]
-        Task<IEnumerable<SessionNoteResponse>> GetNotesAsync();
+        Task<IEnumerable<SessionNoteData>> GetNotesAsync();
     }
 
 }

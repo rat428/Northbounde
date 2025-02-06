@@ -7,11 +7,11 @@ namespace Northboundei.Mobile.Helpers.Converters
 
     public class BoolToNullableConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             bool? currentValue = value as bool?;
 
-            string targetState = parameter as string;
+            string? targetState = parameter as string;
 
             return targetState switch
             {
@@ -22,7 +22,7 @@ namespace Northboundei.Mobile.Helpers.Converters
             };
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
         {
             // Only proceed if the RadioButton is checked (value is true)
             if (value is bool isChecked && isChecked && parameter is string targetState)

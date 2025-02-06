@@ -18,9 +18,6 @@ public partial class SectionViewModelBase : ObservableObject
     [ObservableProperty]
     string _sectionTitle = string.Empty;
 
-    // Has Error and Is Complete
-    [ObservableProperty]
-    bool _hasError = false;
     [ObservableProperty]
     bool _complete = false;
 
@@ -30,6 +27,12 @@ public partial class SectionViewModelBase : ObservableObject
     public SectionViewModelBase(string Title)
     {
         SectionTitle = Title;
+    }
+
+    // Override this method to validate the section
+    public virtual void Validate()
+    {
+        // Default implementation does nothing
     }
 }
 
@@ -48,14 +51,14 @@ public class SectionStatusColorConverter : IValueConverter
                 {
                     return Colors.GreenYellow;
                 }
-                else if (viewModel.HasError)
+                else
                 {
                     return Colors.OrangeRed;
                 }
             }
         }
 
-        return Colors.YellowGreen;
+        return Colors.Transparent;
     }
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
     {

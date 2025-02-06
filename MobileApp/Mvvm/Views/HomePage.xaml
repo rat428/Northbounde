@@ -16,7 +16,7 @@
     <ScrollView>
         <VerticalStackLayout Padding="20">
             <Label Text="Location Sharing Allowed" FontSize="16" Margin="0,10,0,5" />
-            <Frame CornerRadius="6" Padding="0" BorderColor="Gray" Margin="0,0,0,10" >
+            <Border StrokeShape="RoundRectangle 6" Padding="0" Stroke="Gray" Margin="0,0,0,10" >
                 <VerticalStackLayout>
                     <RadioButton Content="True" GroupName="LocationSharing"
                                  IsChecked="{Binding Settings.LocationSharingAllowed, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=True}" />
@@ -25,10 +25,10 @@
                     <RadioButton Content="Not Available" GroupName="LocationSharing"
                                  IsChecked="{Binding Settings.LocationSharingAllowed, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=null}" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <Label Text="Airplane Mode" FontSize="16" Margin="0,10,0,5" />
-            <Frame CornerRadius="6" Padding="0" BorderColor="Gray" Margin="0,0,0,10">
+            <Border StrokeShape="RoundRectangle 6" Padding="0" Stroke="Gray" Margin="0,0,0,10" >
                 <VerticalStackLayout>
                     <RadioButton Content="True" GroupName="AirplaneMode"
                                  IsChecked="{Binding Settings.AirplaneMode, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=True}" />
@@ -37,10 +37,10 @@
                     <RadioButton Content="Not Available" GroupName="AirplaneMode"
                                  IsChecked="{Binding Settings.AirplaneMode, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=null}" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <Label Text="GPS On" FontSize="16" Margin="0,10,0,5" />
-            <Frame CornerRadius="6" Padding="0" BorderColor="Gray" Margin="0,0,0,10">
+            <Border StrokeShape="RoundRectangle 6" Padding="0" Stroke="Gray" Margin="0,0,0,10" >
                 <VerticalStackLayout>
                     <RadioButton Content="True" GroupName="GPSOn"
                                  IsChecked="{Binding Settings.GPSOn, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=True}" />
@@ -49,10 +49,10 @@
                     <RadioButton Content="Not Available" GroupName="GPSOn"
                                  IsChecked="{Binding Settings.GPSOn, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=null}" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <Label Text="Developer Tools Enabled" FontSize="16" Margin="0,10,0,5" />
-            <Frame CornerRadius="6" Padding="0" BorderColor="Gray" Margin="0,0,0,10">
+            <Border StrokeShape="RoundRectangle 6" Padding="0" Stroke="Gray" Margin="0,0,0,10" >
                 <VerticalStackLayout>
                     <RadioButton Content="True" GroupName="DeveloperTools"
                                  IsChecked="{Binding Settings.DeveloperToolsEnabled, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=True}" />
@@ -61,10 +61,10 @@
                     <RadioButton Content="Not Available" GroupName="DeveloperTools"
                                  IsChecked="{Binding Settings.DeveloperToolsEnabled, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=null}" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <Label Text="Allow Run in Background" FontSize="16" Margin="0,10,0,5" />
-            <Frame CornerRadius="6" Padding="0" BorderColor="Gray" Margin="0,0,0,10">
+            <Border StrokeShape="RoundRectangle 6" Padding="0" Stroke="Gray" Margin="0,0,0,10" >
                 <VerticalStackLayout>
                     <RadioButton Content="True" GroupName="BackgroundRun"
                                  IsChecked="{Binding Settings.AllowRunInBackground, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=True}" />
@@ -73,18 +73,18 @@
                     <RadioButton Content="Not Available" GroupName="BackgroundRun"
                                  IsChecked="{Binding Settings.AllowRunInBackground, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=null}" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <Label Text="Internet Access Available" FontSize="16" Margin="0,10,0,5" />
-            <Frame CornerRadius="6" Padding="0" BorderColor="Gray" Margin="0,0,0,10">
+            <Border StrokeShape="RoundRectangle 6" Padding="0" Stroke="Gray" Margin="0,0,0,10" >
                 <VerticalStackLayout>
                     <RadioButton Content="Yes" GroupName="InternetAccess"
                                  IsChecked="{Binding Settings.InternetAccessAvailable, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=True}" />
                     <RadioButton Content="No" GroupName="InternetAccess"
                                  IsChecked="{Binding Settings.InternetAccessAvailable, Converter={StaticResource BoolToNullableConverter}, ConverterParameter=False}" />
                 </VerticalStackLayout>
-            </Frame>
-
+            </Border>
+            
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

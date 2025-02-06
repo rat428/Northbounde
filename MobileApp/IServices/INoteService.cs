@@ -9,6 +9,6 @@ namespace Northboundei.Mobile.IServices
 {
     public interface INoteService
     {
-        Task<IEnumerable<SessionNoteResponse>> GetNotesAsync();
+        Task<IEnumerable<SessionNoteData>> GetNotesAsync();
     }
 }

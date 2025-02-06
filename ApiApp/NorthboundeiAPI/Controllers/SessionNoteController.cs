@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NorthboundeiAPI.Models;
 using NorthboundeiAPI.Services;
 
 namespace NorthboundeiAPI.Controllers
@@ -16,7 +17,7 @@ namespace NorthboundeiAPI.Controllers
         }
 
         [HttpGet("Notes")]
-        //[Authorize]
+        [Authorize]
         public async Task<IActionResult> Notes()
         {
             try

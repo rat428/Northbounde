@@ -28,6 +28,12 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
             };
         
         }
+
+        override public void Validate()
+        {
+            // Always complete
+            Complete = true;
+        }
     }
 
     public partial class Outcome : ObservableObject

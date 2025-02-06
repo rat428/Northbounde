@@ -39,12 +39,12 @@ public partial class SplashScreenPage : ContentPage
     {
         if (await CanLogin())
         {
-            App.Current.MainPage = _serviceProvider.GetService<AppShell>();
+            App.Current!.Windows[0].Page = _serviceProvider.GetService<AppShell>();
         }
         else
         {
             var loginPage = _serviceProvider.GetService<LoginPage>();
-            App.Current.MainPage = loginPage;
+            App.Current!.Windows[0].Page = loginPage;
         }
     }
 
@@ -129,7 +129,7 @@ public partial class SplashScreenPage : ContentPage
             await DisplayAlert("", "Location(GPS) must be turned on", "Done!");
 
 #if !DEBUG
-        if (_homeViewModel!.Settings.DeveloperToolsEnabled is false)
+        if (_homeViewModel!.Settings.DeveloperToolsEnabled is true)
             await DisplayAlert("", "Developer mode must be turned off", "Done!");
 #endif
         if (_homeViewModel!.Settings.AllowRunInBackground is false)

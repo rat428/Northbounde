@@ -27,18 +27,19 @@
                             FontAttributes="Bold" 
                             HorizontalOptions="Center" 
                             Margin="0,8" />
-                <Frame BorderColor="Black" 
+                <Border Stroke="Black" 
                             HeightRequest="200" Padding="2"
                             BackgroundColor="LightGray">
-                    <mct:DrawingView x:Name="myDrawingView"   Lines="{Binding MyLines}"
-                         DrawingLineCompletedCommand="{Binding DrawingLineCompletedCommand}" 
+                    <!--Bind to SignatureDrawingView-->
+                    <mct:DrawingView x:Name="myDrawingView"
+                                     Lines="{Binding Lines}"
                          HorizontalOptions="FillAndExpand"
                          VerticalOptions="FillAndExpand" 
                          HeightRequest="250"
                          IsMultiLineModeEnabled="True"
                          BackgroundColor="LightGray" />
 
-                </Frame>
+                </Border>
                 <Grid ColumnSpacing="10" ColumnDefinitions="*,*" Margin="0,8">
                     <Button Text="Clear" x:Name="Clear" Clicked="Clear_Clicked"
                                  Command="{Binding ClearSignatureCommand}" 
@@ -48,6 +49,7 @@
                                  x:Name="Submit" Command="{Binding SubmitSignatureCommand}"
                                  HorizontalOptions="FillAndExpand" />
                 </Grid>
+                <Image Source="{Binding SignatureImage}"/>
             </VerticalStackLayout>
         </VerticalStackLayout>
 
@@ -66,17 +68,11 @@
 
                         <Entry Text="{Binding OtherRelationshipText}" 
                                        Placeholder="Specify if 'Other'" 
-                                       IsVisible="{Binding IsOtherRelationshipVisible}" 
+                                       IsVisible="{Binding IsOtherRelationship}"
                                        Margin="0,8" />
                     </VerticalStackLayout>
                 </Border>
             </Grid>
         </VerticalStackLayout>
-        <HorizontalStackLayout>
-            <Button Text="Previous Section" Command="{Binding PreviousSectionCommand}" Margin="4" />
-            <Button Text="Save as Draft" Command="{Binding SaveAsDraftCommand}" Margin="4" />
-            <Button Text="Next Section" Command="{Binding NextSectionCommand}" Margin="4" />
-        </HorizontalStackLayout>
-        <Label Text="Stage 4 of 13" HorizontalOptions="Center" VerticalOptions="Center" Margin="8" />
     </VerticalStackLayout>
 </ContentView>

@@ -31,6 +31,8 @@ namespace Northboundei.Mobile
                 .UseMauiApp<App>()
                 .UseMauiCommunityToolkit()
                 .ConfigureSyncfusionCore()
+                .RegisterViews()
+                .RegisterViewModels()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -41,7 +43,7 @@ namespace Northboundei.Mobile
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddSingleton<INoteService, NoteService>();
             builder.Services.AddSingleton<IChildService, ChildService>();
-
+            builder.Services.AddSingleton<IUserInfoService, UserInfoService>();
 
 #if ANDROID
             builder.Services.AddSingleton<ISettingsService, SettingsService>();
@@ -68,8 +70,8 @@ namespace Northboundei.Mobile
             })
             .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
 
-            // Add Pages and ViewModels
-            AddPagesVMs(builder);
+            // Register Routes
+            RegisterRoutes();
 
             builder.Services.AddSingleton<AppShell>();
 
@@ -82,19 +84,32 @@ namespace Northboundei.Mobile
 
             return builder.Build();
         }
-
-        private static void AddPagesVMs(MauiAppBuilder builder)
+        static void RegisterRoutes()
+        {
+            Routing.RegisterRoute("NotesPage", typeof(NotesPage));
+            Routing.RegisterRoute("NotesDraftPage", typeof(NotesDraftPage));
+            Routing.RegisterRoute("SyncPage", typeof(SyncPage));
+        }
+        public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
         {
             // Pages
             builder.Services.AddTransient<SplashScreenPage>();
             builder.Services.AddTransient<LoginPage>();
+            builder.Services.AddTransient<NotesPage>();
+            builder.Services.AddTransient<NotesDraftPage>();
+            builder.Services.AddTransient<SyncPage>();
 
+            return builder;
+        }
+        public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder)
+        {
             // ViewModels
             builder.Services.AddSingleton<HomeViewModel>();
-            builder.Services.AddTransient<SyncViewModel>();
             builder.Services.AddSingleton<NotesViewModel>();
-            builder.Services.AddTransient<SettingsViewModel>();
+            builder.Services.AddSingleton<SyncViewModel>();
+
             builder.Services.AddTransient<LoginViewModel>();
+            return builder;
         }
 
         private static HttpMessageHandler ConfigureHandler()

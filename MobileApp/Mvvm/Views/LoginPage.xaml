@@ -7,21 +7,20 @@
     <Grid>
         <VerticalStackLayout Padding="40">
             <Image
-         Source="logo.png"
-         HeightRequest="185"
-         Aspect="AspectFit"
-         SemanticProperties.Description="Logo" />
+                 Source="logo.png"
+                 HeightRequest="185"
+                 Aspect="AspectFit"
+                 SemanticProperties.Description="Logo" />
 
             <Label Text="Welcome" HorizontalOptions="Center" TextColor="Black" FontSize="20" FontAttributes="Bold" />
 
             <Border StrokeShape="RoundRectangle 16" Padding="4,2" Margin="4">
                 <Entry  Placeholder="User ID"  Text="{Binding Username}" PlaceholderColor="Gray" >
                     <Entry.Background>
-                        <SolidColorBrush Color="#00000000"  />
+                        <SolidColorBrush Color="#00000000"/>
                     </Entry.Background>
                 </Entry>
             </Border>
-
             <Border StrokeShape="RoundRectangle 16" Padding="4,2" Margin="4">
                 <Entry  Placeholder="Password" Text="{Binding Password}" PlaceholderColor="Gray" IsPassword="True">
                     <Entry.Background>

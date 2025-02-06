@@ -1,6 +1,6 @@
 ﻿namespace Northboundei.Mobile.Dto
 {
-    public partial class SessionNoteResponse
+    public partial class SessionNoteData
     {
         /// <summary>
         /// SessionID (hiddenfield)
@@ -35,9 +35,7 @@
         public string? SessionCpt4Units { get; set; }
 
         /// <summary>
-        /// Attendance Type Dropdown
-        /// Value of Attenedance Type Selected
-        /// </summary>
+        /// 
         public string? SessionSection { get; set; }
 
         /// <summary>

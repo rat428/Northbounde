@@ -8,13 +8,16 @@ using Microsoft.Maui.Controls;
 using System.Linq;
 using CommunityToolkit.Maui.Core;
 using Microsoft.Maui.Controls.Shapes;
+using CommunityToolkit.Maui.Core.Extensions;
+using Microsoft.Maui.Devices.Sensors;
+using Northboundei.Mobile.Services;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 {
     public partial class Section5ViewModel : SectionViewModelBase
     {
         [ObservableProperty]
-        private ImageSource? signatureImage;
+        private string? signatureImage;
 
         [ObservableProperty]
         private bool isSignatureVisible;
@@ -23,10 +26,15 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         private bool isRelationshipVisible;
 
         [ObservableProperty]
-        private bool isOtherRelationshipVisible;
+        private bool isOtherRelationship;
 
         [ObservableProperty]
-        private ObservableCollection<string> relationshipOptions;
+        private ObservableCollection<string> relationshipOptions =
+            [
+                "Parent/Caregiver",
+                "Teacher",
+                "Other"
+            ];
 
         [ObservableProperty]
         private ObservableCollection<IDrawingLine> _lines;
@@ -37,31 +45,41 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         [ObservableProperty]
         private string? otherRelationshipText;
 
+        public DrawingView? _signatureDrawingView;
 
-        public DrawingView _signaturedrawingView;
+        [ObservableProperty]
+        private string? _gpsLocation;
+
+        [ObservableProperty]
+        private DateTime? _signDateTime;
 
         public Section5ViewModel() : base("Attendance Signature")
         {
             IsSignatureVisible = false;
             IsRelationshipVisible = false;
-            IsOtherRelationshipVisible = false;
+            IsOtherRelationship = false;
 
-            RelationshipOptions = new ObservableCollection<string>
-            {
-                "Parent/Caregiver",
-                "Teacher",
-                "Other"
-            };
-            Lines = new ObservableCollection<IDrawingLine>();
+            Lines = [];
         }
 
         [RelayCommand]
-        private void SubmitSignature()
+        private async Task SubmitSignature()
         {
-
-            if (SignatureImage != null)
+            if (!IsSignatureVisible)
             {
+                await Shell.Current.DisplayAlert("Missing Signature", "Please sign the form.", "OK");
+                return;
+            }
+            GpsLocation = await GeoLocationService.GetGpsLocationAsync();
+            SignDateTime = DateTime.Now;
 
+            var stream = await _signatureDrawingView!.GetImageStream(800, 800);
+            if (stream != null)
+            {
+                // Base64
+                var memoryStream = new MemoryStream();
+                await stream.CopyToAsync(memoryStream);
+                SignatureImage = Convert.ToBase64String(memoryStream.ToArray());
             }
         }
         [RelayCommand]
@@ -76,22 +94,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
             SignatureImage = null;
             IsSignatureVisible = false;
             IsRelationshipVisible = false;
-        }
-        [RelayCommand]
-        async Task DrawLineCompleted(IDrawingLine line)
-        {
-            var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
-
-            var stream = await line.GetImageStream(800, 800, Colors.Gray.AsPaint(), cts.Token);
-            if (stream != null)
-            {
-                SignatureImage = ImageSource.FromStream(() => stream);
-            }
-        }
-
-        partial void OnSelectedRelationshipChanged(string? value)
-        {
-            IsOtherRelationshipVisible = value == "Other";
         }
     }
 }

@@ -17,22 +17,9 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
         }
 
-        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        public override void Validate()
         {
-            // Validate the carry-over description field
-            if (e.PropertyName == nameof(IsCarryOverValidationVisible))
-            {
-                if (IsCarryOverValidationVisible)
-                {
-                    HasError = true;
-                    Complete = false;
-                }
-                else
-                {
-                    HasError = false;
-                    Complete = true;
-                }
-            }
+            Complete = !IsCarryOverValidationVisible;
         }
     }
 }

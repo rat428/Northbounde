@@ -19,5 +19,10 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         {
 
         }
+
+        public override void Validate()
+        {
+            Complete = !string.IsNullOrEmpty(CovisitWhoElse) && AuthorizedCovisits != "0";
+        }
     }
 }

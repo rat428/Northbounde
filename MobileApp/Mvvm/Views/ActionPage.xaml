@@ -3,12 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels"
              x:Class="Northboundei.Mobile.Mvvm.Views.ActionPage"
+             xmlns:converters="clr-namespace:Northboundei.Mobile.Helpers.Converters"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              NavigationPage.HasNavigationBar="False"
              NavigationPage.HasBackButton="False"
-             x:DataType="vms:HomeViewModel"
-             Title="">
+             x:DataType="vms:HomeViewModel">
     <ContentPage.Resources>
+        <converters:TimeAgoConverter x:Key="TimeAgoConverter" />
+
         <Style TargetType="Border" x:Key="ButtonGridStyle">
             <Setter Property="BackgroundColor" Value="#007bff" />
             <Setter Property="Padding" Value="12,20" />
@@ -48,7 +50,7 @@
 
             <Grid RowDefinitions="*,Auto">
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding DraftPageCommand}"/>
+                    <TapGestureRecognizer Command="{Binding NotesDraftPageCommand}"/>
                 </Grid.GestureRecognizers>
                 <Image Source="edit_note.png" Style="{StaticResource ButtonIconStyle}" />
                 <Label Text="Continue Note" Style="{StaticResource ButtonTextStyle}" Grid.Row="1" />
@@ -68,7 +70,7 @@
         <Border Style="{StaticResource ButtonGridStyle}" Grid.Row="1" Grid.Column="1">
             <Grid RowDefinitions="*,Auto">
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+                    <TapGestureRecognizer Command="{Binding LogOutCommand}"/>
                 </Grid.GestureRecognizers>
                 <Image Source="logout.png" Style="{StaticResource ButtonIconStyle}" />
                 <Label Text="Logout" Style="{StaticResource ButtonTextStyle}" Grid.Row="1" />
@@ -88,7 +90,8 @@
                 LineBreakMode="WordWrap"/>
             <Label
                 Grid.Column="1"
-                Text="{Binding LastSyncDate}"
+                FontAttributes="Bold"
+                Text="{Binding LastSyncDate,Converter={StaticResource TimeAgoConverter}}"
                 LineBreakMode="WordWrap"/>
         </Grid>
     </Grid>

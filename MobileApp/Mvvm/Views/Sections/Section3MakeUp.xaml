@@ -12,7 +12,7 @@
                 <Label Text="Make-Up Section" HorizontalOptions="Center" VerticalOptions="Center" />
             </Border>
             <Border StrokeShape="RoundRectangle 0,8,0,8" Padding="2" Grid.Column="1">
-                <Picker ItemsSource="{Binding AvailableMakeupNotes}" 
+                <Picker ItemsSource="{Binding AvailableMakeupNotes}"
                 SelectedItem="{Binding SelectedMakeupNote}" 
                 Title="Select Missed Note" />
             </Border>

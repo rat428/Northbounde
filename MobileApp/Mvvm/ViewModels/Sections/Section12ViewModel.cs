@@ -28,27 +28,23 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
         public bool IsOtherValidationVisible => IsOtherChecked && string.IsNullOrWhiteSpace(OtherDescription);
 
+        public string SelectedStrategies => string.Join(", ",
+        [
+            IsObservedChecked ? "Observed" : null,
+            IsTriedActivityChecked ? "Tried Activity" : null,
+            IsDemonstratedChecked ? "Demonstrated" : null,
+            IsReviewedChecked ? "Reviewed" : null,
+            IsOtherChecked ? OtherDescription : null
+        ]);
+
         public Section12ViewModel() : base("Collaboration")
         {
 
         }
 
-        protected override void OnPropertyChanged(PropertyChangedEventArgs e)
+        public override void Validate()
         {
-            // Validate the other description field if the other checkbox is checked
-            if (e.PropertyName == nameof(IsOtherValidationVisible))
-            {
-                if (IsOtherValidationVisible)
-                {
-                    HasError = true;
-                    Complete = false;
-                }
-                else
-                {
-                    HasError = false;
-                    Complete = true;
-                }
-            }
+            Complete = !IsOtherValidationVisible;
         }
     }
 }

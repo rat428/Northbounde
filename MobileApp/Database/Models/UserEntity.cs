@@ -1,4 +1,5 @@
-﻿using SQLite;
+﻿using Northboundei.Mobile.Dto;
+using SQLite;
 
 namespace Northboundei.Mobile.Database.Models
 {
@@ -18,5 +19,7 @@ namespace Northboundei.Mobile.Database.Models
         public bool KeepMeLoggedIn { get; set; }
         public bool IsLoggedIn { get; set; }
         public string DeviceInfo { get; set; }
+
+        public UserInfoData UserInfo { get; set; }
     }
 }

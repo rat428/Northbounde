@@ -29,6 +29,11 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         [ObservableProperty]
         public List<string> _AttendanceTypeList = [ "Attended", "Make-up", "Covisit", "Missed" ];
 
+        public bool IsAttended => SelectedAttendanceType == "Attended";
+        public bool IsMakeUp => SelectedAttendanceType == "Make-up";
+        public bool IsCoVisit => SelectedAttendanceType == "Covisit";
+        public bool IsMissed => SelectedAttendanceType == "Missed";
+
         // Constructor to initialize the lists and defaults
         public Section2ViewModel() : base("Attendance")
         {
