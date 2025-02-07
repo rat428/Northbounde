@@ -110,7 +110,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                         // - Section2ViewModel.SelectedAttendanceType
                         // - CurrentSection
                         _ =>
-                         CurrentSection switch {
+                         CurrentSection switch
+                         {
                              2 => Enumerable.Range(0, 1).Select((i) =>
                              {
                                  CurrentSection = 4;
@@ -192,7 +193,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 PreviousButtonText = "Previous";
             }
 
-            
+
         }
 
         [RelayCommand]
@@ -288,48 +289,54 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
         public SessionNoteData SessionNoteData(bool isDraft = false)
         {
-            return new SessionNoteData
+            var sessionNoteData = new SessionNoteData
             {
                 SessionId = $"{_Section1ViewModel.SelectedChild.NyeisId}-{_Section4ViewModel.ServiceLocations}",
                 SessionNoteType = "App",
-                Describe = _Section11ViewModel.SessionDescription,
-                AttendanceType = _Section2ViewModel.SelectedAttendanceType switch
-                {
-                    "Attended" => "CV1",
-                    "Make-up" => "CV2",
-                    "Covisit" => "CV3",
-                    "Missed" => "Missed",
-                    _ => ""
-                },
+                TherapistImg = _Section14ViewModel.SignatureImage,
                 SessionCancelled = _Section2ViewModel.IsMissed ? "Yes" : "No",
+                EiNumber = _Section1ViewModel.SelectedChild.NyeisId,
                 MakeUpSession = _Section2ViewModel.IsMakeUp ? "Yes" : "No",
                 CoVisitPresent = _Section2ViewModel.IsCoVisit ? _Section3CoVisitViewModel.CovisitWhoElse : null,
-                Relationship = _Section5ViewModel.IsOtherRelationship ? _Section5ViewModel.OtherRelationshipText : _Section5ViewModel.SelectedRelationship,
-                ParentImg = _Section5ViewModel.SignatureImage,
-                TherapistImg = _Section14ViewModel.SignatureImage,
-                ServiceType = _Section1ViewModel.SelectedServiceType,
-                SessionDate = DateOnly.FromDateTime(_Section1ViewModel.SessionDate),
-                SessionMadeupBy = _Section2ViewModel.IsMissed ? DateOnly.FromDateTime(_Section1ViewModel.SessionDate).AddDays(14).ToString() : null,
-                TherapistTimeStamp = _Section14ViewModel.SignDateTime?.ToString("MM-dd-yyyy HH:mm:ss tt"),
                 TherapistDate = _Section14ViewModel.SignDateTime?.ToString("MM-dd-yyyy HH:mm:ss tt"),
                 TherapistGps = _Section14ViewModel.GpsLocation,
-                ParentTimeStamp = _Section5ViewModel.SignDateTime?.ToString("MM-dd-yyyy HH:mm:ss tt"),
-                ParentDate = _Section5ViewModel.SignDateTime?.ToString("MM-dd-yyyy HH:mm:ss tt"),
-                ParentGps = _Section5ViewModel.GpsLocation,
-                EiNumber = _Section1ViewModel.SelectedChild.NyeisId,
-                DateNoteWritten = DateOnly.FromDateTime(DateTime.Now),
-                Section6 = _Section13ViewModel.CarryOverDescription,
-                TimeTo = TimeOnly.FromDateTime(_Section14ViewModel.SessionEndTime),
-                MakeUpFor = _Section2ViewModel.IsMakeUp ? _Section3MakeUpViewModel.SelectedMakeUpSession.ToString("yyyy-MM-dd") : null,
-                ServiceLogGps = _Section14ViewModel.GpsLocation,
-                ServiceLogImg = _Section14ViewModel.SignatureImage,
-                ServiceLogTimestamp = _Section14ViewModel.SignDateTime,
-                HowWork = _Section12ViewModel.SelectedStrategies,
-                HowWorkOther = _Section12ViewModel.OtherDescription,
-                Npi = SessionManager.UserContext.UserInfo.NpiNo,
-                ServiceLocation = _Section4ViewModel.IsOtherLocationSelected ? _Section4ViewModel.OtherLocation : _Section4ViewModel.SelectedServiceLocation,
-                DraftFinal = isDraft ? "Draft" : "Final",
             };
+
+            sessionNoteData.SessionSection = sessionNoteData.AttendanceType = _Section2ViewModel.SelectedAttendanceType switch
+            {
+                "Attended" => "CV1",
+                "Make-up" => "CV2",
+                "Covisit" => "CV3",
+                "Missed" => "Missed",
+                _ => "",
+            };
+
+            sessionNoteData.Describe = _Section11ViewModel.SessionDescription;
+            sessionNoteData.Relationship = _Section5ViewModel.IsOtherRelationship ? _Section5ViewModel.OtherRelationshipText : _Section5ViewModel.SelectedRelationship;
+            sessionNoteData.ParentImg = _Section5ViewModel.SignatureImage;
+            sessionNoteData.ServiceType = _Section1ViewModel.SelectedServiceType;
+            sessionNoteData.SessionDate = DateOnly.FromDateTime(_Section1ViewModel.SessionDate);
+            sessionNoteData.SessionMadeupBy = _Section2ViewModel.IsMissed ? DateOnly.FromDateTime(_Section1ViewModel.SessionDate).AddDays(14).ToString() : null;
+            sessionNoteData.TherapistTimeStamp = _Section14ViewModel.SignDateTime?.ToString("MM-dd-yyyy HH:mm:ss tt");
+
+            sessionNoteData.ParentTimeStamp = _Section5ViewModel.SignDateTime?.ToString("MM-dd-yyyy HH:mm:ss tt");
+            sessionNoteData.ParentDate = _Section5ViewModel.SignDateTime?.ToString("MM-dd-yyyy HH:mm:ss tt");
+            sessionNoteData.ParentGps = _Section5ViewModel.GpsLocation;
+            sessionNoteData.License = SessionManager.UserInfo.LicenseNo;
+            sessionNoteData.DateNoteWritten = DateOnly.FromDateTime(DateTime.Now);
+            sessionNoteData.Section6 = _Section13ViewModel.CarryOverDescription;
+            sessionNoteData.TimeTo = TimeOnly.FromDateTime(_Section14ViewModel.SessionEndTime);
+            sessionNoteData.MakeUpFor = _Section2ViewModel.IsMakeUp ? _Section3MakeUpViewModel.SelectedMakeUpSession.ToString("yyyy-MM-dd") : null;
+            sessionNoteData.ServiceLogGps = _Section14ViewModel.GpsLocation;
+            sessionNoteData.ServiceLogImg = _Section14ViewModel.SignatureImage;
+            sessionNoteData.ServiceLogTimestamp = _Section14ViewModel.SignDateTime;
+            sessionNoteData.HowWork = _Section12ViewModel.SelectedStrategies;
+            sessionNoteData.HowWorkOther = _Section12ViewModel.OtherDescription;
+            sessionNoteData.Npi = SessionManager.UserInfo.NpiNo;
+            sessionNoteData.ServiceLocation = _Section4ViewModel.IsOtherLocationSelected ? _Section4ViewModel.OtherLocation : _Section4ViewModel.SelectedServiceLocation;
+            sessionNoteData.DraftFinal = isDraft ? "Draft" : "Final";
+
+            return sessionNoteData;
         }
 
         private Task SubmitFormAsync()

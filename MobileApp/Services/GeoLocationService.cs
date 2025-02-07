@@ -7,7 +7,7 @@ namespace Northboundei.Mobile.Services
     {
         public static async Task<string> GetGpsLocationAsync()
         {
-            var location = await Geolocation.GetLocationAsync();
+            var location = await Geolocation.Default.GetLocationAsync();
             return location!.Latitude.ToString() + ", " + location.Longitude.ToString() + ';';
         }
     }

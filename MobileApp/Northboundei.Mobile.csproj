@@ -88,9 +88,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Mvvm\Views\NotesDraftPage.xaml.cs">
-	    <DependentUpon>NotesDraftPage.xaml</DependentUpon>
-	  </Compile>
 	  <Compile Update="Mvvm\Views\NotesPage.xaml.cs">
 	    <DependentUpon>NotesPage.xaml</DependentUpon>
 	  </Compile>
@@ -140,7 +137,7 @@
 	  <MauiXaml Update="Mvvm\Views\NotesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Mvvm\Views\NotesDraftPage.xaml">
+	  <MauiXaml Update="Mvvm\Views\AllNotesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Mvvm\Views\HomePage.xaml">

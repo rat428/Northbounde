@@ -2,7 +2,7 @@
 
 namespace Northboundei.Mobile.Dto
 {
-    public partial class ChildDataResponse
+    public class ChildData
     {
         public string? NyeisId { get; set; }
 

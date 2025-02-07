@@ -1,6 +1,6 @@
 ﻿namespace Northboundei.Mobile.Dto
 {
-    public partial class SessionNoteData
+    public class SessionNoteData
     {
         /// <summary>
         /// SessionID (hiddenfield)

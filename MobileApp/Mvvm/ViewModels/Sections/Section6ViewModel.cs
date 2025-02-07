@@ -21,16 +21,14 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
 
         [ObservableProperty]
-        private ObservableCollection<string> sessionSpans;
-        public Section6ViewModel() : base("Session Span")
-        {
-            SessionSpans = new ObservableCollection<string>
-            {
+        private ObservableCollection<string> sessionSpans = [
                 "15 Min",
                 "30 Min",
                 "45 Min",
                 "60 Min"
-            };
+            ];
+        public Section6ViewModel() : base("Session Span")
+        {
             SessionStartTime = DateTime.Now.TimeOfDay;
         }
     }

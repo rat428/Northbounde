@@ -166,13 +166,13 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             userEntity.KeepMeLoggedIn = KeepMeLogged;
             userEntity.IsLoggedIn = true;
             userEntity.EncryptionKey = user.Key ?? " DebugKey";
-
-            var usersInfos = await _userInfoService.GetUsersInfoAsync();
-
-            var userInfo = usersInfos.FirstOrDefault(x => x.ProviderId.Equals(user.Username))!;
-
-            userEntity.UserInfo = userInfo;
+            
             SessionManager.UserContext = userEntity;
+
+            var userInfo = (await _userInfoService.GetUsersInfoAsync())?.First();
+            
+            SessionManager.UserInfo = userInfo;
+
             try
             {
                 IEnumerable<UserEntity> users = await DatabaseService.GetAllDataAsync<UserEntity>();

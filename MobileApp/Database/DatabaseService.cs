@@ -12,12 +12,15 @@ namespace Northboundei.Mobile.Database
 
         public static async Task<SQLiteAsyncConnection> GetDatabaseConnection()
         {
+            // in debug mode, we want to recreate the database each time so we can iterate on the schema
+#if !DEBUG
             if (database == null)
+#endif
             {
                 var databasePath = Path.Combine(FileSystem.AppDataDirectory, "north.db");
                 database = new SQLiteAsyncConnection(databasePath);
                 await database.CreateTableAsync<UserEntity>();
-                var syncTable = await database.CreateTableAsync<SyncRecord>();
+                await database.CreateTableAsync<SyncRecord>();
             }
             return database;
         }

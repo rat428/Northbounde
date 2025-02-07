@@ -13,12 +13,12 @@ namespace Northboundei.Mobile.Services
             _serviceAuth = service;
         }
 
-        public async Task<IEnumerable<ChildDataResponse>?> GetChildrenAsync()
+        public async Task<IEnumerable<ChildData>?> GetChildrenAsync()
         {
             try
             {
                 var result = await _serviceAuth.GetServicesAsync();
-                return result.Where(c => c.ProviderNpi == SessionManager.UserContext.UserInfo.NpiNo);
+                return result.Where(c => c.ProviderNpi == SessionManager.UserInfo.NpiNo);
             }
             catch (Exception ex)
             {

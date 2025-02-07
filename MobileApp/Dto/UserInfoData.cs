@@ -1,7 +1,8 @@
 ﻿namespace Northboundei.Mobile.Dto
 {
-    public partial class UserInfoData
+    public class UserInfoData
     {
+
         public string ProviderId { get; set; } = null!;
 
         public string? FirstName { get; set; }

@@ -4,6 +4,6 @@ using Refit;
 namespace Northboundei.Mobile.APIs;
 public interface IUserInfoAPI
 {
-    [Get("api/Users")]
+    [Get("/Api/UserInfo/Users")]
     Task<IEnumerable<UserInfoData>> GetUsersInfo();
 }

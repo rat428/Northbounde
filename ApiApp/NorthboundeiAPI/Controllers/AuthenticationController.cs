@@ -7,6 +7,8 @@ using NorthboundeiAPI.IServices;
 using NorthboundeiAPI.Models;
 using NorthboundeiAPI.Services;
 using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace NorthboundeiAPI.Controllers;
 
@@ -77,7 +79,7 @@ public class AuthenticationController : ControllerBase
         var user = await _userManager.FindByNameAsync(loginDto.Username);
         if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.Password))
         {
-            return Unauthorized("Wrong Password & Username combination ");
+            return Unauthorized("Wrong Password & Username combination");
         }
 
         var expiration = user.PasswordExpirationDate - DateTime.UtcNow;
@@ -88,6 +90,8 @@ public class AuthenticationController : ControllerBase
                 Token = _jwtGenerator.GenerateToken(user),
                 Username = user.UserName,
                 ExpirationDate = user.PasswordExpirationDate,
+                // First 6 characters of the MD5 hash of the user's ID
+                Key = Convert.ToHexString(MD5.HashData(Encoding.UTF8.GetBytes(user.Id)).Take(6).ToArray()),
                 Warning = $"Your password will expire in less than {expiration.Days} days."
             });
         }

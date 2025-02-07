@@ -12,7 +12,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
     public partial class Section1ViewModel : SectionViewModelBase
     {
         [ObservableProperty]
-        ObservableCollection<ChildDataResponse> _childName;
+        ObservableCollection<ChildData> _childName;
         [ObservableProperty]
         DateTime _sessionDate;
         [ObservableProperty]
@@ -25,7 +25,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
         double childAge;
 
         [ObservableProperty]
-        ChildDataResponse _selectedChild;
+        ChildData _selectedChild;
 
         [ObservableProperty]
         string _selectedServiceType;
@@ -52,8 +52,8 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
             string? secureChildrenData = await SecureStorage.Default.GetAsync(SessionManager.UserContext.EncryptionKey + nameof(IChildService));
             if (secureChildrenData is not null)
             {
-                List<ChildDataResponse>? childrenData = JsonConvert.DeserializeObject<List<ChildDataResponse>>(secureChildrenData);
-                ChildName = new ObservableCollection<ChildDataResponse>(childrenData);
+                List<ChildData>? childrenData = JsonConvert.DeserializeObject<List<ChildData>>(secureChildrenData);
+                ChildName = new ObservableCollection<ChildData>(childrenData);
                 SessionDate = DateTime.Now;
             }
         }

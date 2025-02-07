@@ -8,9 +8,9 @@ using System.Windows.Input;
 
 namespace Northboundei.Mobile.Mvvm.ViewModels
 {
-    public class NotesDraftViewModel : BaseViewModel
+    public class AllNotesViewModel : BaseViewModel
     {
-        public NotesDraftViewModel()
+        public AllNotesViewModel()
         {
 
         }

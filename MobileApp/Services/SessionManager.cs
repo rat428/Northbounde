@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Northboundei.Mobile.Database.Models;
+using Northboundei.Mobile.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,11 @@ namespace Northboundei.Mobile.Services
     static public class SessionManager
     {
         static public UserEntity UserContext { get; set; } = new UserEntity();
-        static public bool IsNotesSync { get => GetSecure(nameof(IsNotesSync)); set => SetSecure(nameof(IsNotesSync), value); }
+        static public UserInfoData UserInfo { get => GetSecure<UserInfoData>(nameof(UserInfo)); set => SetSecure(nameof(UserInfo), value); }
+        static public bool IsNotesSync { get => GetSecure<bool>(nameof(IsNotesSync)); set => SetSecure(nameof(IsNotesSync), value); }
 
-        static public bool IsAuthSync { get => GetSecure(nameof(IsAuthSync)); set => SetSecure(nameof(IsAuthSync), value); }
-        static public bool IsUserSync { get => GetSecure(nameof(IsUserSync)); set => SetSecure(nameof(IsUserSync), value); }
+        static public bool IsAuthSync { get => GetSecure<bool>(nameof(IsAuthSync)); set => SetSecure(nameof(IsAuthSync), value); }
+        static public bool IsUserSync { get => GetSecure<bool>(nameof(IsUserSync)); set => SetSecure(nameof(IsUserSync), value); }
 
         static public void ClearSession()
         {
@@ -24,12 +26,12 @@ namespace Northboundei.Mobile.Services
             IsUserSync = false;
         }
 
-        private static async void SetSecure(string v, bool value)
+        private static async void SetSecure(string v, object value)
         {
             await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + v, JsonConvert.SerializeObject(value)).ConfigureAwait(false);
         }
 
-        private static bool GetSecure(string v)
+        private static T GetSecure<T>(string v)
         {
 
             var result = SecureStorage.Default.GetAsync(SessionManager.UserContext.EncryptionKey + v);
@@ -37,10 +39,9 @@ namespace Northboundei.Mobile.Services
             result.Wait();
             if (result.Result is null)
             {
-                return false;
+                return default;
             }
-            return bool.Parse(result.Result);
+            return JsonConvert.DeserializeObject<T>(result.Result);
         }
-
     }
 }

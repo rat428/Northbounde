@@ -21,14 +21,14 @@
                 <DataTemplate x:DataType="vms:CPTCodeRow">
                     <Grid ColumnDefinitions="2*,1*,auto" Margin="0,4">
                     <!-- CPT Code Picker -->
-                    <Picker ItemsSource="{Binding AvailableCPTCodes}" 
-                                ItemDisplayBinding="{Binding Unitname}" 
+                    <Picker ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type vms:Section8ViewModel}}, Path=AvailableCodes}" 
+                                ItemDisplayBinding="{Binding CptCode}" 
                                 SelectedItem="{Binding CptCode}" 
                                 Title="Select CPT Code" 
                                 Grid.Column="0" />
 
                     <!-- Units Picker -->
-                    <Picker ItemsSource="{Binding AvailableUnits}" 
+                    <Picker ItemsSource="{Binding Source={RelativeSource AncestorType={x:Type vms:Section8ViewModel}}, Path=AvailableUnits}" 
                                 SelectedItem="{Binding Units}" 
                                 Title="Units" 
                                 Grid.Column="1" />
@@ -37,14 +37,14 @@
                         <HorizontalStackLayout Spacing="5">
                             <!-- Add Button -->
                             <Button HeightRequest="30" WidthRequest="30" CornerRadius="20" FontSize="22" Padding="0" BackgroundColor="DarkGreen" Text="+" 
-                                        Command="{Binding Source={x:Reference CptCollection}, Path=BindingContext.Section8ViewModel.AddRowCommand}" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vms:Section8ViewModel}}, Path=AddRowCommand}" 
                                         CommandParameter="{Binding .}" />
 
                             <!-- Remove Button -->
                             <Button HeightRequest="30" WidthRequest="30" CornerRadius="20" FontSize="22" Padding="0" BackgroundColor="Red" Text="-" 
-                                        Command="{Binding Source={x:Reference CptCollection}, Path=BindingContext.Section8ViewModel.RemoveRowCommand}" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type vms:Section8ViewModel}}, Path=RemoveRowCommand}" 
                                         CommandParameter="{Binding .}" 
-                                        IsEnabled="{Binding Source={x:Reference CptCollection}, Path=BindingContext.Section8ViewModel.CanRemoveRows}" />
+                                        IsEnabled="{Binding Source={RelativeSource AncestorType={x:Type vms:Section8ViewModel}}, Path=CanRemoveRows}" />
                         </HorizontalStackLayout>
                     </Grid>
                     </Grid>

@@ -59,16 +59,19 @@ namespace Northboundei.Mobile
                     .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
                     .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
 
-             builder.Services.AddRefitClient<ServiceAuthAPI>()
+
+            builder.Services.AddRefitClient<ServiceAuthAPI>()
                     .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
                     .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
  
+            builder.Services.AddRefitClient<IUserInfoAPI>()
+                    .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
+                    .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
 
             builder.Services.AddHttpClient(nameof(AuthAPI), client =>
             {
                 client.BaseAddress = _apiUri;
-            })
-            .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
+            }).ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
 
             // Register Routes
             RegisterRoutes();
@@ -87,7 +90,7 @@ namespace Northboundei.Mobile
         static void RegisterRoutes()
         {
             Routing.RegisterRoute("NotesPage", typeof(NotesPage));
-            Routing.RegisterRoute("NotesDraftPage", typeof(NotesDraftPage));
+            Routing.RegisterRoute("AllNotesPage", typeof(AllNotesPage));
             Routing.RegisterRoute("SyncPage", typeof(SyncPage));
         }
         public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
@@ -96,7 +99,7 @@ namespace Northboundei.Mobile
             builder.Services.AddTransient<SplashScreenPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<NotesPage>();
-            builder.Services.AddTransient<NotesDraftPage>();
+            builder.Services.AddTransient<AllNotesPage>();
             builder.Services.AddTransient<SyncPage>();
 
             return builder;
@@ -115,7 +118,7 @@ namespace Northboundei.Mobile
         private static HttpMessageHandler ConfigureHandler()
         {
 #if ANDROID
-            var primaryHandler =new AndroidMessageHandler
+            var primaryHandler = new AndroidMessageHandler
             {
                 ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
                 AllowAutoRedirect = true
@@ -128,15 +131,9 @@ namespace Northboundei.Mobile
             };
 #endif
 
-            var authenticatedHandler = new AuthenticatedHttpClientHandler(async () =>
+            var authenticatedHandler = new AuthenticatedHttpClientHandler(static () =>
             {
-                IEnumerable<UserEntity> users = await DatabaseService.GetAllDataAsync<UserEntity>();
-                if (users.Any())
-                {
-                    var currentUser = users.Last();
-                    return currentUser?.Token;
-                }
-                return null;
+                return Task.FromResult(UserService.AuthToken);
             });
 
             // Chain the primary handler

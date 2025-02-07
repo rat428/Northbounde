@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\controllers\\sessionnotecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:controllers\\sessionnotecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:controllers\\authenticationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\controllers\\statuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:controllers\\statuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\dto\\statusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:dto\\statusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\dto\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:dto\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:dto\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\migrations\\20250128193955_initialcreate.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:migrations\\20250128193955_initialcreate.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\migrations\\20250128193955_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:migrations\\20250128193955_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\models\\sessionnotetbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -13,6 +37,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\controllers\\userinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:controllers\\userinfocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\controllers\\sessionnotecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:controllers\\sessionnotecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -25,10 +57,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\models\\userinfotbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:models\\userinfotbl.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|c:\\users\\kerod\\desktop\\work\\northbounde\\apiapp\\northboundeiapi\\controllers\\statuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{43DC82EC-B19F-4F5D-A50D-386E9E3A91D5}|NorthboundeiAPI.csproj|solutionrelative:controllers\\statuscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -55,31 +83,110 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AuthenticationController.cs",
+              "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Controllers\\AuthenticationController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AuthenticationController.cs",
+              "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Controllers\\AuthenticationController.cs",
+              "RelativeToolTip": "Controllers\\AuthenticationController.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAowFsAAAA9AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T20:26:18.867Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "StatusDTO.cs",
+              "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\DTO\\StatusDTO.cs",
+              "RelativeDocumentMoniker": "DTO\\StatusDTO.cs",
+              "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\DTO\\StatusDTO.cs",
+              "RelativeToolTip": "DTO\\StatusDTO.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T20:23:58.099Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "RegisterDto.cs",
+              "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\DTO\\RegisterDto.cs",
+              "RelativeDocumentMoniker": "DTO\\RegisterDto.cs",
+              "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\DTO\\RegisterDto.cs",
+              "RelativeToolTip": "DTO\\RegisterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T20:23:55.036Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\DTO\\LoginDto.cs",
+              "RelativeDocumentMoniker": "DTO\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\DTO\\LoginDto.cs",
+              "RelativeToolTip": "DTO\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T20:23:28.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "20250128193955_InitialCreate.Designer.cs",
+              "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Migrations\\20250128193955_InitialCreate.Designer.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250128193955_InitialCreate.Designer.cs",
+              "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Migrations\\20250128193955_InitialCreate.Designer.cs",
+              "RelativeToolTip": "Migrations\\20250128193955_InitialCreate.Designer.cs",
+              "ViewState": "AgIAAPUCAAAAAAAAAAAAALMAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T20:08:58.718Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "20250128193955_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Migrations\\20250128193955_InitialCreate.cs",
+              "RelativeDocumentMoniker": "Migrations\\20250128193955_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Migrations\\20250128193955_InitialCreate.cs",
+              "RelativeToolTip": "Migrations\\20250128193955_InitialCreate.cs",
+              "ViewState": "AgIAAGUAAAAAAAAAAAA3wHMAAABSAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-07T20:08:48.349Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
               "Title": "SessionNoteController.cs",
               "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Controllers\\SessionNoteController.cs",
               "RelativeDocumentMoniker": "Controllers\\SessionNoteController.cs",
               "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Controllers\\SessionNoteController.cs",
               "RelativeToolTip": "Controllers\\SessionNoteController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAB0AAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-06T13:06:00.034Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "SessionNoteTbl.cs",
               "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Models\\SessionNoteTbl.cs",
               "RelativeDocumentMoniker": "Models\\SessionNoteTbl.cs",
               "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Models\\SessionNoteTbl.cs",
               "RelativeToolTip": "Models\\SessionNoteTbl.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAAwHYAAAATAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-06T13:05:57.205Z"
+              "WhenOpened": "2025-02-06T13:05:57.205Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 11,
               "Title": "UserService.cs",
               "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Services\\UserService.cs",
               "RelativeDocumentMoniker": "Services\\UserService.cs",
@@ -91,7 +198,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 12,
               "Title": "IUserService.cs",
               "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Services\\IServices\\IUserService.cs",
               "RelativeDocumentMoniker": "Services\\IServices\\IUserService.cs",
@@ -103,7 +210,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "UserInfoTbl.cs",
               "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Models\\UserInfoTbl.cs",
               "RelativeDocumentMoniker": "Models\\UserInfoTbl.cs",
@@ -115,27 +222,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "StatusController.cs",
               "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Controllers\\StatusController.cs",
               "RelativeDocumentMoniker": "Controllers\\StatusController.cs",
               "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Controllers\\StatusController.cs",
               "RelativeToolTip": "Controllers\\StatusController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-06T06:26:03.661Z"
+              "WhenOpened": "2025-02-06T06:26:03.661Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-02-07T10:43:09.898Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "UserInfoController.cs",
               "DocumentMoniker": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Controllers\\UserInfoController.cs",
               "RelativeDocumentMoniker": "Controllers\\UserInfoController.cs",
               "ToolTip": "C:\\Users\\Kerod\\Desktop\\Work\\Northbounde\\ApiApp\\NorthboundeiAPI\\Controllers\\UserInfoController.cs",
               "RelativeToolTip": "Controllers\\UserInfoController.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAAAJAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABkAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-06T04:23:43.139Z"
+              "WhenOpened": "2025-02-06T04:23:43.139Z",
+              "EditorCaption": ""
             }
           ]
         }

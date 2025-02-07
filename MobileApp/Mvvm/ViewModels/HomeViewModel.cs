@@ -63,23 +63,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             _noteService = noteService;
             _childService = childService;
             _syncViewModel = _serviceProvider.GetService<SyncViewModel>()!;
-            InitializeData().ConfigureAwait(false);
-        }
-
-        private async Task InitializeData()
-        {
-            if (!SessionManager.IsNotesSync)
-            {
-                var notes = await _noteService.GetNotesAsync();
-                await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + nameof(INoteService), JsonConvert.SerializeObject(notes)).ConfigureAwait(false); ;
-                SessionManager.IsNotesSync = true;
-            }
-            if (!SessionManager.IsAuthSync)
-            {
-                var children = await _childService.GetChildrenAsync();
-                await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + nameof(IChildService), JsonConvert.SerializeObject(children)).ConfigureAwait(false);
-                SessionManager.IsAuthSync = true;
-            }
         }
 
         private void _permissionService_AutoDateChanged(object? sender, bool? e)
@@ -118,10 +101,10 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             NavigateToShell("NotesPage");
         }
         [RelayCommand]
-        private void NotesDraftPage(object obj)
+        private void AllNotesPage(object obj)
         {
             HideFlyoutAll();
-            NavigateToShell("NotesDraftPage");
+            NavigateToShell("AllNotesPage");
         }
         [RelayCommand]
         private void SyncPage(object obj)

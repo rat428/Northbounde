@@ -1,5 +1,6 @@
 using Northboundei.Mobile.APIs;
 using Northboundei.Mobile.Dto;
+using Refit;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

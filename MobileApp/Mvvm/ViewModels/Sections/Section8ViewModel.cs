@@ -8,44 +8,44 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
     public partial class Section8ViewModel : SectionViewModelBase
     {
         [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(CanRemoveRows))]
+        [NotifyPropertyChangedFor(nameof(AvailableCodes))]
         private ObservableCollection<CPTCodeRow> cptCodeRows;
+
+        List<CPTCode> AllCodes =>
+        [
+            new CPTCode { Code = "97110 Therapeutic Procedure", Uid = 1 },
+            new CPTCode { Code = "97112 Neuromuscular Reeducation", Uid = 2 },
+            new CPTCode { Code = "97129 Therapeutic Interventions", Uid = 3 },
+            new CPTCode { Code = "97530 Therapeutic Activities", Uid = 4 },
+            new CPTCode { Code = "97533 Sensory Integrative Techniques", Uid = 5 },
+            new CPTCode { Code = "97535 Self-Care/Home Management Training", Uid = 6 },
+            new CPTCode { Code = "T1027 Family Training and Counseling", Uid = 7 }
+        ];
+
+        public List<CPTCode> AvailableCodes => AllCodes.Except(cptCodeRows.Select(x => x.CptCode)).ToList();
+        public bool CanRemoveRows => CptCodeRows.Count > 1;
 
         public Section8ViewModel() : base("CPT Codes")
         {
             CptCodeRows = new ObservableCollection<CPTCodeRow>
             {
-                new CPTCodeRow
-                {
-                    CptCode = "97110 Therapeutic Procedure",
-                    Units = 1,
-                    AvailableCPTCodes = new List<AvailableUnit>
-                    {
-                        new AvailableUnit { Unitname = "97110 Therapeutic Procedure", Uid = 1 },
-                        new AvailableUnit { Unitname = "97530 Therapeutic Activities", Uid = 2 },
-                        new AvailableUnit { Unitname = "97012 Mechanical Traction", Uid = 3 }
-                    },
-                    AvailableUnits = new List<int> { 1, 2, 3, 4 }
-                }
+
             };
         }
 
         [RelayCommand]
         private void AddRow(CPTCodeRow row = null)
         {
-            CptCodeRows.Add(new CPTCodeRow
+            // if there are AvailableCodes, add a new row with the first available code
+            if (AvailableCodes.Any())
             {
-                CptCode = "97110 Therapeutic Procedure",
-                Units = 1,
-                AvailableCPTCodes = new List<AvailableUnit>
+                CptCodeRows.Add(new CPTCodeRow
                 {
-                    new AvailableUnit { Unitname = "97110 Therapeutic Procedure", Uid = 1 },
-                    new AvailableUnit { Unitname = "97530 Therapeutic Activities", Uid = 2 },
-                    new AvailableUnit { Unitname = "97012 Mechanical Traction", Uid = 3 }
-                },
-                AvailableUnits = new List<int> { 1, 2, 3, 4 }
-            });
-
-            OnPropertyChanged(nameof(CanRemoveRows));
+                    CptCode = AvailableCodes.First(),
+                    Units = 1
+                });
+            }
         }
 
         [RelayCommand]
@@ -54,32 +54,24 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
             if (CptCodeRows.Count > 1 && row != null)
             {
                 CptCodeRows.Remove(row);
-                OnPropertyChanged(nameof(CanRemoveRows));
             }
         }
 
-        public bool CanRemoveRows => CptCodeRows.Count > 1;
     }
 
     public partial class CPTCodeRow : ObservableObject
     {
         [ObservableProperty]
-        private string cptCode;
+        private CPTCode cptCode;
 
         [ObservableProperty]
         private int? units;
-
-        [ObservableProperty]
-        private List<AvailableUnit> availableCPTCodes;
-
-        [ObservableProperty]
-        private List<int> availableUnits; // Now inside CPTCodeRow
     }
 
-    public partial class AvailableUnit : ObservableObject
+    public partial class CPTCode : ObservableObject
     {
         [ObservableProperty]
-        private string unitname;
+        private string code;
 
         [ObservableProperty]
         private int? uid;
