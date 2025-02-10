@@ -121,8 +121,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
 
                 await StoreUserAsync(client);
 
-                await _syncViewModel.SyncNow();
-
                 App.Current.MainPage = _serviceProvider.GetService<AppShell>();
 
             }
@@ -169,9 +167,6 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             
             SessionManager.UserContext = userEntity;
 
-            var userInfo = (await _userInfoService.GetUsersInfoAsync())?.First();
-            
-            SessionManager.UserInfo = userInfo;
 
             try
             {
@@ -194,6 +189,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
                 await DatabaseService.AddDataAsync(userEntity);
             }
 
+            SessionManager.UserInfo = (await _userInfoService.GetUsersInfoAsync())?.FirstOrDefault(u => u.ProviderId == user.Username);
         }
 
 

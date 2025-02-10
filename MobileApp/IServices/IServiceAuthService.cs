@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Northboundei.Mobile.IServices
 {
-    public interface IChildService
+    public interface IServiceAuthService
     {
-        Task<IEnumerable<ChildData>?> GetChildrenAsync();
+        Task<IEnumerable<ServiceAuthData>?> GetServiceAuthDataAsync(bool Offline = true);
     }
 }

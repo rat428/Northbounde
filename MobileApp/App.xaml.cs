@@ -12,12 +12,11 @@ namespace Northboundei.Mobile
         SplashScreenPage _splashScreen;
         public App(IServiceProvider serviceProvider)
         {
-            Current.UserAppTheme = AppTheme.Light;
+            UserAppTheme = AppTheme.Light;
 
             InitializeComponent();
-            _splashScreen = serviceProvider.GetService<SplashScreenPage>();
+            _splashScreen = serviceProvider.GetService<SplashScreenPage>()!;
             MainPage = _splashScreen;
-            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NMaF5cXmBCf1FpR2VGfV5ycEVEalhVTnRWUj0eQnxTdEFiW35XcXBRQmJVWUFxXA==");
         }
          protected async override void OnStart()
         {

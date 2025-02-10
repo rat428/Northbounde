@@ -22,11 +22,20 @@ namespace NorthboundeiAPI.Controllers
         [HttpGet("userstatus")]
         public async Task<IActionResult> GetUserStatus(string username)
         {
-            var user = await _userManager.FindByNameAsync(username);
-            StatusDTO usertStatus= new StatusDTO();
-            usertStatus.IsOnline = user.IsOnline;
-            usertStatus.Username = user.UserName;
-            return Ok(usertStatus);
+            try
+            {
+                var user = await _userManager.FindByNameAsync(username);
+                StatusDTO usertStatus = new()
+                {
+                    IsOnline = user.IsOnline,
+                    Username = user.UserName
+                };
+                return Ok(usertStatus);
+            }
+            catch (Exception ex)
+            {
+                return NotFound("User not found!");
+            }
         }
     }
 }

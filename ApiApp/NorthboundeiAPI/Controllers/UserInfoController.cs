@@ -16,7 +16,7 @@ namespace NorthboundeiAPI.Controllers
         }
 
         [HttpGet("Users")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Users()
         {
             try

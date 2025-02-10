@@ -12,36 +12,30 @@ namespace Northboundei.Mobile.Services
     static public class SessionManager
     {
         static public UserEntity UserContext { get; set; } = new UserEntity();
-        static public UserInfoData UserInfo { get => GetSecure<UserInfoData>(nameof(UserInfo)); set => SetSecure(nameof(UserInfo), value); }
-        static public bool IsNotesSync { get => GetSecure<bool>(nameof(IsNotesSync)); set => SetSecure(nameof(IsNotesSync), value); }
+        static public UserInfoData UserInfo { get => GetSecure<UserInfoData>(UserInfoKey); set => SetSecure(UserInfoKey, value); }
 
-        static public bool IsAuthSync { get => GetSecure<bool>(nameof(IsAuthSync)); set => SetSecure(nameof(IsAuthSync), value); }
-        static public bool IsUserSync { get => GetSecure<bool>(nameof(IsUserSync)); set => SetSecure(nameof(IsUserSync), value); }
+        static string UserInfoKey => $"{UserContext.EncryptionKey}-{nameof(UserInfo)}";
 
         static public void ClearSession()
         {
             UserContext = new UserEntity();
-            IsNotesSync = false;
-            IsAuthSync = false;
-            IsUserSync = false;
+            SecureStorage.Default.RemoveAll();
         }
 
         private static async void SetSecure(string v, object value)
         {
-            await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + v, JsonConvert.SerializeObject(value)).ConfigureAwait(false);
+            await SecureStorage.Default.SetAsync(v, JsonConvert.SerializeObject(value)).ConfigureAwait(false);
         }
 
-        private static T GetSecure<T>(string v)
+        private static T GetSecure<T>(string v) where T : class, new()
         {
-
-            var result = SecureStorage.Default.GetAsync(SessionManager.UserContext.EncryptionKey + v);
-
+            var result = SecureStorage.Default.GetAsync(v);
             result.Wait();
             if (result.Result is null)
             {
-                return default;
+                return new T();
             }
-            return JsonConvert.DeserializeObject<T>(result.Result);
+            return JsonConvert.DeserializeObject<T>(result.Result)!;
         }
     }
 }

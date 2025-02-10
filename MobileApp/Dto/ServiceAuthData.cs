@@ -2,7 +2,7 @@
 
 namespace Northboundei.Mobile.Dto
 {
-    public class ChildData
+    public class ServiceAuthData
     {
         public string? NyeisId { get; set; }
 
@@ -14,9 +14,9 @@ namespace Northboundei.Mobile.Dto
 
         public string? CaseReference { get; set; }
 
-        public DateOnly? StartDate { get; set; }
+        public string? StartDate { get; set; }
 
-        public DateOnly? EndDate { get; set; }
+        public string? EndDate { get; set; }
 
         public string? Outcomes { get; set; }
 
@@ -32,9 +32,9 @@ namespace Northboundei.Mobile.Dto
 
         public string? ServiceAuthorization { get; set; }
 
-        public DateOnly? ServiceAuthStart { get; set; }
+        public string? ServiceAuthStart { get; set; }
 
-        public DateOnly? ServiceAuthEnd { get; set; }
+        public string? ServiceAuthEnd { get; set; }
 
         public string? AuthorizationStatus { get; set; }
 

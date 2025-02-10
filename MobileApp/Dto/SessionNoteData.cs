@@ -12,7 +12,7 @@
         /// Session date
         /// yyyy-MM-dd
         /// </summary>
-        public DateOnly? SessionDate { get; set; }
+        public string? SessionDate { get; set; }
 
         /// <summary>
         /// CPT Codes/Units CheckBoxList
@@ -77,19 +77,19 @@
         /// Date the note was written
         /// Date.now.tostring("yyyy-MM-dd")
         /// </summary>
-        public DateOnly? DateNoteWritten { get; set; }
+        public string? DateNoteWritten { get; set; }
 
         /// <summary>
         /// Start time Text
         /// HH:mm
         /// </summary>
-        public TimeOnly? TimeFrom { get; set; }
+        public string? TimeFrom { get; set; }
 
         /// <summary>
         /// End time Text
         /// HH:mm
         /// </summary>
-        public TimeOnly? TimeTo { get; set; }
+        public string? TimeTo { get; set; }
 
         /// <summary>
         /// ICD10 CheckBoxList
@@ -260,7 +260,7 @@
         /// </summary>
         public DateTime? ServiceLogTimestamp { get; set; }
 
-        public TimeOnly? TimeSpent { get; set; }
+        public string? TimeSpent { get; set; }
 
         /// <summary>
         /// From the user data that is originally obtained from the "user_info_tbl"

@@ -9,8 +9,9 @@ using System.Security;
 using Microsoft.Extensions.DependencyInjection;
 using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
-using Syncfusion.Maui.Core.Hosting;
 using Refit;
+using DevExpress.Maui;
+
 
 
 #if ANDROID
@@ -29,8 +30,12 @@ namespace Northboundei.Mobile
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseDevExpress(useLocalization: false)
+                .UseDevExpressCollectionView()
+                .UseDevExpressControls()
+                .UseDevExpressEditors()
+                .UseDevExpressDataGrid()
                 .UseMauiCommunityToolkit()
-                .ConfigureSyncfusionCore()
                 .RegisterViews()
                 .RegisterViewModels()
                 .ConfigureFonts(fonts =>
@@ -42,7 +47,7 @@ namespace Northboundei.Mobile
 
             builder.Services.AddSingleton<IUserService, UserService>();
             builder.Services.AddSingleton<INoteService, NoteService>();
-            builder.Services.AddSingleton<IChildService, ChildService>();
+            builder.Services.AddSingleton<IServiceAuthService, ServiceAuthService>();
             builder.Services.AddSingleton<IUserInfoService, UserInfoService>();
 
 #if ANDROID
@@ -51,27 +56,34 @@ namespace Northboundei.Mobile
 #else
             builder.Services.AddSingleton<IPermissionService, PermissionService>();
 #endif
-            
+
             builder.Services.AddSingleton<AuthHttpDelegatingHandler>();
 
 
-            builder.Services.AddRefitClient<INoteAPI>()
-                    .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
-                    .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
-
-
-            builder.Services.AddRefitClient<ServiceAuthAPI>()
-                    .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
-                    .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
- 
-            builder.Services.AddRefitClient<IUserInfoAPI>()
-                    .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
-                    .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
-
-            builder.Services.AddHttpClient(nameof(AuthAPI), client =>
+            builder.Services.AddRefitClient<INoteAPI>(new RefitSettings()
             {
-                client.BaseAddress = _apiUri;
-            }).ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
+                AuthorizationHeaderValueGetter = (_, _) => Task.FromResult("Bearer " + SessionManager.UserContext.Token),
+            })
+                    .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
+                    .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
+
+
+            builder.Services.AddRefitClient<ServiceAuthAPI>(new RefitSettings()
+            {
+                AuthorizationHeaderValueGetter = (_, _) => Task.FromResult("Bearer " + SessionManager.UserContext.Token)
+            })
+                    .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
+                    .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
+
+            builder.Services.AddRefitClient<IUserInfoAPI>(new RefitSettings()
+            {
+                AuthorizationHeaderValueGetter = (_, _) => Task.FromResult("Bearer " + SessionManager.UserContext.Token)
+            })
+                    .ConfigureHttpClient(c => c.BaseAddress = _apiUri)
+                    .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
+
+            builder.Services.AddHttpClient<AuthAPI>(client => client.BaseAddress = _apiUri)
+                .ConfigurePrimaryHttpMessageHandler(ConfigureHandler);
 
             // Register Routes
             RegisterRoutes();
@@ -90,7 +102,7 @@ namespace Northboundei.Mobile
         static void RegisterRoutes()
         {
             Routing.RegisterRoute("NotesPage", typeof(NotesPage));
-            Routing.RegisterRoute("AllNotesPage", typeof(AllNotesPage));
+            Routing.RegisterRoute("DraftNotesPage", typeof(DraftNotesPage));
             Routing.RegisterRoute("SyncPage", typeof(SyncPage));
         }
         public static MauiAppBuilder RegisterViews(this MauiAppBuilder builder)
@@ -99,7 +111,7 @@ namespace Northboundei.Mobile
             builder.Services.AddTransient<SplashScreenPage>();
             builder.Services.AddTransient<LoginPage>();
             builder.Services.AddTransient<NotesPage>();
-            builder.Services.AddTransient<AllNotesPage>();
+            builder.Services.AddTransient<DraftNotesPage>();
             builder.Services.AddTransient<SyncPage>();
 
             return builder;
@@ -131,9 +143,15 @@ namespace Northboundei.Mobile
             };
 #endif
 
-            var authenticatedHandler = new AuthenticatedHttpClientHandler(static () =>
+            var authenticatedHandler = new AuthenticatedHttpClientHandler(async () =>
             {
-                return Task.FromResult(UserService.AuthToken);
+                IEnumerable<UserEntity> users = await DatabaseService.GetAllDataAsync<UserEntity>();
+                if (users.Any())
+                {
+                    var currentUser = users.Last();
+                    return currentUser?.Token;
+                }
+                return null;
             });
 
             // Chain the primary handler

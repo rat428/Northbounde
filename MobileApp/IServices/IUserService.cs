@@ -11,6 +11,6 @@ namespace Northboundei.Mobile.IServices
     {
         Task<LoginResponse> LoginAsync(LoginRequest login);
         Task<LoginResponse> AuthAsync(string token);
-        string AuthToken { get; }
+        string AuthToken { get; set; }
     }
 }

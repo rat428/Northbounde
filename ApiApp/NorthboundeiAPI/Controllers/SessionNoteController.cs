@@ -17,7 +17,7 @@ namespace NorthboundeiAPI.Controllers
         }
 
         [HttpGet("Notes")]
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Notes()
         {
             try

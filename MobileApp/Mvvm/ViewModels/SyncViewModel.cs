@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Newtonsoft.Json;
 using Northboundei.Mobile.Database;
 using Northboundei.Mobile.Database.Models;
+using Northboundei.Mobile.Dto;
 using Northboundei.Mobile.IServices;
 using Northboundei.Mobile.Services;
 using System;
@@ -17,15 +18,14 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
     public partial class SyncViewModel : BaseViewModel
     {
         private readonly INoteService _noteService;
-        private readonly IChildService _childService;
+        private readonly IServiceAuthService _serviceAuthService;
 
         [ObservableProperty]
         ObservableCollection<SyncRecord> _syncRecords = new();
-
-        public SyncViewModel(INoteService noteService, IChildService childService)
+        public SyncViewModel(INoteService noteService, IServiceAuthService childService)
         {
             _noteService = noteService;
-            _childService = childService;
+            _serviceAuthService = childService;
 
             FetchSyncHistory().ConfigureAwait(false);
         }
@@ -33,12 +33,18 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         [RelayCommand]
         public async Task SyncNow()
         {
+            // Internet connection check
+            if (!Connectivity.NetworkAccess.Equals(NetworkAccess.Internet))
+            {
+                await Shell.Current.DisplayAlert("No Internet Connection", "Please check your internet connection and try again.", "OK!");
+                return;
+            }
+
             try
             {
                 IsBusy = true;
 
-                await InitializeData();
-
+                await SyncData();
 
                 // Will reach this part if the sync is successful
                 await DatabaseService.AddDataAsync(new SyncRecord
@@ -63,20 +69,41 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             }
         }
 
-        private async Task InitializeData()
+        private async Task SyncData()
         {
-            if (!SessionManager.IsNotesSync)
+            await Push();
+
+            await Pull();
+        }
+
+        private async Task Push()
+        {
+            var notes = await _noteService.GetNotesAsync(Offline: false);
+            var serviceAuths = await _serviceAuthService.GetServiceAuthDataAsync(Offline: false);
+            var notesDiff = notes.Except(await DatabaseService.GetAllDataAsync<SessionNoteData>());
+            if (notesDiff.Any())
             {
-                var notes = await _noteService.GetNotesAsync();
-                await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + nameof(INoteService), JsonConvert.SerializeObject(notes)).ConfigureAwait(false); ;
-                SessionManager.IsNotesSync = true;
+                // TODO: Push notes to server
+                
+                // foreach (var note in notesDiff)
+                // {
+                //     await _noteService.AddNoteAsync(note);
+                // }
             }
-            if (!SessionManager.IsAuthSync)
-            {
-                var children = await _childService.GetChildrenAsync();
-                await SecureStorage.Default.SetAsync(SessionManager.UserContext.EncryptionKey + nameof(IChildService), JsonConvert.SerializeObject(children)).ConfigureAwait(false);
-                SessionManager.IsAuthSync = true;
-            }
+        }
+
+        private async Task Pull()
+        {
+            // Clear Sync Tables
+            await DatabaseService.ClearSyncTables();
+
+            // Notes
+            var notes = await _noteService.GetNotesAsync(Offline: false);
+            await DatabaseService.AddAllAsync(notes!);
+
+            // ServiceAuths
+            var serviceAuths = await _serviceAuthService.GetServiceAuthDataAsync(Offline: false);
+            await DatabaseService.AddAllAsync(serviceAuths!);
         }
     }
 }

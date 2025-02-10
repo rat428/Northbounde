@@ -1,4 +1,5 @@
 ﻿using Northboundei.Mobile.IServices;
+using Northboundei.Mobile.Services;
 using System.Net.Http.Headers;
 
 namespace Northboundei.Mobile.APIs
@@ -35,9 +36,9 @@ namespace Northboundei.Mobile.APIs
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            if (IUserService.AuthToken != null)
+            if (_userService.AuthToken != null)
             {
-                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", IUserService.AuthToken);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", _userService.AuthToken);
             }
             return await base.SendAsync(request, cancellationToken);
         }

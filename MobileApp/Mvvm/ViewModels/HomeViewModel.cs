@@ -24,7 +24,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         IPermissionService _permissionService;
         IServiceProvider _serviceProvider;
         INoteService _noteService;
-        IChildService _childService;
+        IServiceAuthService _childService;
         SyncViewModel _syncViewModel;
 
         private System.Timers.Timer _statusTimer;
@@ -46,7 +46,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
         public HomeViewModel(
             IPermissionService permissionService,
             INoteService noteService,
-            IChildService childService,
+            IServiceAuthService childService,
             IServiceProvider serviceProvider)
         {
             _permissionService = permissionService;
@@ -101,10 +101,10 @@ namespace Northboundei.Mobile.Mvvm.ViewModels
             NavigateToShell("NotesPage");
         }
         [RelayCommand]
-        private void AllNotesPage(object obj)
+        private void DraftNotesPage(object obj)
         {
             HideFlyoutAll();
-            NavigateToShell("AllNotesPage");
+            NavigateToShell("DraftNotesPage");
         }
         [RelayCommand]
         private void SyncPage(object obj)

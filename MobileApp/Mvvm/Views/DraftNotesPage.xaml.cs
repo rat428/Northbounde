@@ -1,8 +1,8 @@
 namespace Northboundei.Mobile.Mvvm.Views;
 
-public partial class AllNotesPage : ContentPage
+public partial class DraftNotesPage : ContentPage
 {
-	public AllNotesPage()
+	public DraftNotesPage()
 	{
 		InitializeComponent();
 	}

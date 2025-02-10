@@ -32,6 +32,7 @@ namespace Northboundei.Mobile.Services
         {
             var result= await _myApi.LoginAsync(login);
             AuthToken = result.Token;
+
             return result;
         }
     }

@@ -14,10 +14,10 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
 
         // Make-up sessions (fetched from the missed sessions list)
         [ObservableProperty]
-        ObservableCollection<DateOnly> _missedSessions = [];
+        ObservableCollection<string> _missedSessions = [];
 
         [ObservableProperty]
-        private DateOnly _selectedMakeUpSession;
+        private string _selectedMakeUpSession;
 
         NoteService NoteService { get; set; }
 
@@ -37,7 +37,7 @@ namespace Northboundei.Mobile.Mvvm.ViewModels.Sections
                 // Pattern Matched
                 if (missedNote is { } h && h.SessionDate != null)
                 {
-                    MissedSessions.Add(missedNote.SessionDate!.Value);
+                    MissedSessions.Add(missedNote.SessionDate);
                 }
             }
         }

@@ -27,7 +27,7 @@
     <MauiXaml Update="Mvvm\Views\NotesPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
-    <MauiXaml Update="Mvvm\Views\AllNotesPage.xaml">
+    <MauiXaml Update="Mvvm\Views\DraftNotesPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>
     <MauiXaml Update="Mvvm\Views\HomePage.xaml">

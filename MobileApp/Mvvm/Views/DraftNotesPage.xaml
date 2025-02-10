@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Northboundei.Mobile.Mvvm.Views.DraftNotesPage"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vms="clr-namespace:Northboundei.Mobile.Mvvm.ViewModels"
+             xmlns:dx="clr-namespace:DevExpress.Maui.DataGrid;assembly=DevExpress.Maui.DataGrid"
+             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasBackButton="False"
+             x:DataType="vms:DraftNotesViewModel"
+             FlyoutItem.IsVisible="True"
+             Title="">
+    <dx:DataGridView ItemsSource="{Binding SessionNoteData}">
+        <dx:DataGridView.Columns>
+            <dx:TextColumn FieldName="EiNumber"/>
+            <dx:DateColumn FieldName="SessionDate"/>
+            <dx:TextColumn FieldName="SessionType"/>
+            <dx:TemplateColumn>
+                <dx:TemplateColumn.DisplayTemplate>
+                    <DataTemplate>
+                        <Button Text="Edit" Command="{Binding EditCommand}" CommandParameter="{Binding .}"/>
+                    </DataTemplate>
+                </dx:TemplateColumn.DisplayTemplate>
+            </dx:TemplateColumn>
+        </dx:DataGridView.Columns>
+    </dx:DataGridView>
+</ContentPage>

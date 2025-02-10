@@ -81,7 +81,6 @@ public class AuthenticationController : ControllerBase
         {
             return Unauthorized("Wrong Password & Username combination");
         }
-
         var expiration = user.PasswordExpirationDate - DateTime.UtcNow;
         if (expiration.Days > 0)
         {
@@ -107,8 +106,7 @@ public class AuthenticationController : ControllerBase
     [Authorize]
     public async Task<IActionResult> Auth()
     {
-        var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value;
-        var user = await _userManager.FindByNameAsync(userId);
+        var user = await _userManager.GetUserAsync(User);
 
         if (user == null)
         {
@@ -170,8 +168,8 @@ public class AuthenticationController : ControllerBase
     /// </summary>
     /// <returns>An <see cref="IActionResult"/> representing the result of the action.</returns>
     [HttpGet("service-auth")]
-    [Authorize]
-    public async Task<IActionResult> ServieAuth()
+    //[Authorize]
+    public async Task<IActionResult> ServiceAuth()
     {
         try
         {

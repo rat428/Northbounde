@@ -23,7 +23,7 @@
     <!--Pages-->
     <MenuFlyoutItem Text="Home" Command="{Binding HomeCommand}"   Shell.FlyoutItemIsVisible="{Binding IsHomeVisible}" />
     <MenuFlyoutItem Text="Start Note" Command="{Binding NotesPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsStartVisible}" />
-    <MenuFlyoutItem Text="Continue Note" Command="{Binding AllNotesPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsContinueVisible}" />
+    <MenuFlyoutItem Text="Continue Note" Command="{Binding DraftNotesPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsContinueVisible}" />
     <MenuFlyoutItem Text="Sync" Command="{Binding SyncPageCommand}"  Shell.FlyoutItemIsVisible="{Binding IsSyncVisible}" />
 
     <!--Sections-->

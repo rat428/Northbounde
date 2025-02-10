@@ -50,7 +50,7 @@
 
             <Grid RowDefinitions="*,Auto">
                 <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Command="{Binding AllNotesPageCommand}"/>
+                    <TapGestureRecognizer Command="{Binding DraftNotesPageCommand}"/>
                 </Grid.GestureRecognizers>
                 <Image Source="edit_note.png" Style="{StaticResource ButtonIconStyle}" />
                 <Label Text="View Notes and Drafts" Style="{StaticResource ButtonTextStyle}" Grid.Row="1" />
